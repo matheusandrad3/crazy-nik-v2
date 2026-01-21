@@ -39,40 +39,40 @@ html {
 .hero-mobile {
   max-width: 430px;
   margin: 0 auto;
-  /* Base dimensions from Figma: 430px x 655px */
+  /* Base dimensions from Figma: 430px x 932px */
   /* Using aspect ratio to maintain proportions */
-  aspect-ratio: 430 / 655;
+  aspect-ratio: 430 / 932;
   height: auto;
 }
 
-/* Mobile hero typography - positioned based on Figma: left: -42px, top: 165px, 515x290 */
+/* Mobile hero typography - positioned based on Figma: left: -49px, top: 269px, 528x297 */
 .hero-mobile-text {
-  left: -9.77%; /* -42/430 */
-  top: 25.19%; /* 165/655 */
-  width: 119.77%; /* 515/430 */
-  height: 44.27%; /* 290/655 */
+  left: -11.40%; /* -49/430 */
+  top: 28.86%; /* 269/932 */
+  width: 122.79%; /* 528/430 */
+  height: 31.87%; /* 297/932 */
 }
 
-/* Mobile hero yellow band - top: 513px, height: 142px */
+/* Mobile hero yellow band - top: 721px, height: 211px */
 .hero-mobile-yellow {
-  top: 78.32%; /* 513/655 */
-  height: 21.68%; /* 142/655 */
+  top: 77.36%; /* 721/932 */
+  height: 22.64%; /* 211/932 */
 }
 
-/* Mobile hero green band - left: -7px, top: 605px, height: 50px */
+/* Mobile hero green band - top: 862px, height: 70px */
 .hero-mobile-green {
-  left: -1.63%; /* -7/430 */
-  right: -1.63%;
-  top: 92.37%; /* 605/655 */
-  height: 7.63%; /* 50/655 */
+  left: 0;
+  right: 0;
+  top: 92.49%; /* 862/932 */
+  height: 7.51%; /* 70/932 */
 }
 
-/* Mobile hero photo - left: 140px, top: 289px, 287x316 */
+/* Mobile hero photo - left: 48px, top: 418px, 403.67x443.55 */
 .hero-mobile-photo {
-  left: 32.56%; /* 140/430 */
-  top: 44.12%; /* 289/655 */
-  width: 66.74%; /* 287/430 */
-  height: 48.24%; /* 316/655 */
+  left: 11.16%; /* 48/430 */
+  top: 44.85%; /* 418/932 */
+  width: 93.88%; /* 403.67/430 */
+  height: 47.59%; /* 443.55/932 */
 }
 
 /* Button Hover Effect */
