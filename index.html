@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nikolas Ferreira - Deputado Federal">
+  <title>Nikolas Ferreira - Deputado Federal</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-blue': '#2458A4',
+            'brand-yellow': '#FBD216',
+            'brand-green': '#22A651',
+          },
+          fontFamily: {
+            'unbounded': ['Unbounded', 'sans-serif'],
+            'script': ['Dancing Script', 'cursive'],
+          },
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-black font-unbounded overflow-x-hidden">
+  
+  <!-- Header -->
+  <header class="absolute top-0 left-0 w-full z-50">
+    <div class="max-w-[1920px] mx-auto px-6 lg:px-[108px] py-5">
+      <div class="flex items-center justify-between lg:justify-start">
+        
+        <!-- Logo -->
+        <a href="/" class="flex-shrink-0">
+          <img 
+            src="assets/images/logo.png" 
+            alt="Nikolas Ferreira - Deputado Federal" 
+            class="h-[80px] lg:h-[117px] w-auto"
+          >
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center justify-center flex-1">
+          <ul class="flex items-center gap-12">
+            <li>
+              <a href="#sobre" class="text-white text-sm font-bold uppercase tracking-[1.12px] hover:text-brand-yellow transition-colors duration-300">
+                Sobre mim
+              </a>
+            </li>
+            <li>
+              <a href="#noticias" class="text-white text-sm font-bold uppercase tracking-[1.12px] hover:text-brand-yellow transition-colors duration-300">
+                Notícias
+              </a>
+            </li>
+            <li>
+              <a href="#projetos" class="text-white text-sm font-bold uppercase tracking-[1.12px] hover:text-brand-yellow transition-colors duration-300">
+                Projetos de Lei
+              </a>
+            </li>
+            <li>
+              <a href="#emendas" class="text-white text-sm font-bold uppercase tracking-[1.12px] hover:text-brand-yellow transition-colors duration-300">
+                Emendas
+              </a>
+            </li>
+          </ul>
+        </nav>
+        
+        <!-- Mobile Menu Button -->
+        <button 
+          id="mobile-menu-btn"
+          class="lg:hidden flex flex-col gap-1.5 p-2"
+          aria-label="Abrir menu"
+        >
+          <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Header Separator Line -->
+    <div class="w-full h-px bg-white/10"></div>
+  </header>
+  
+  <!-- Mobile Menu Drawer -->
+  <div 
+    id="mobile-menu"
+    class="fixed inset-0 z-[100] pointer-events-none opacity-0 transition-opacity duration-300"
+  >
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/80" id="mobile-menu-overlay"></div>
+    
+    <!-- Drawer -->
+    <div class="absolute top-0 right-0 h-full w-[280px] bg-brand-blue transform translate-x-full transition-transform duration-300" id="mobile-drawer">
+      <div class="p-6">
+        <!-- Close Button -->
+        <button 
+          id="mobile-menu-close"
+          class="absolute top-4 right-4 text-white p-2"
+          aria-label="Fechar menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+        
+        <!-- Mobile Nav -->
+        <nav class="mt-16">
+          <ul class="flex flex-col gap-6">
+            <li>
+              <a href="#sobre" class="text-white text-base font-bold uppercase tracking-wider hover:text-brand-yellow transition-colors">
+                Sobre mim
+              </a>
+            </li>
+            <li>
+              <a href="#noticias" class="text-white text-base font-bold uppercase tracking-wider hover:text-brand-yellow transition-colors">
+                Notícias
+              </a>
+            </li>
+            <li>
+              <a href="#projetos" class="text-white text-base font-bold uppercase tracking-wider hover:text-brand-yellow transition-colors">
+                Projetos de Lei
+              </a>
+            </li>
+            <li>
+              <a href="#emendas" class="text-white text-base font-bold uppercase tracking-wider hover:text-brand-yellow transition-colors">
+                Emendas
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Hero Section - Desktop -->
+  <section class="hero-desktop hidden lg:block relative w-full h-screen max-h-[950px] overflow-hidden">
+    
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img 
+        src="assets/images/background.jpg" 
+        alt="" 
+        class="w-full h-full object-cover object-center"
+      >
+    </div>
+    
+    <!-- Main Photo of Nikolas -->
+    <div class="absolute top-[-2px] left-[5.625%] h-full w-auto">
+      <img 
+        src="assets/images/nikolas.png" 
+        alt="Nikolas Ferreira" 
+        class="h-full w-auto object-contain object-bottom"
+      >
+    </div>
+    
+    <!-- Yellow Band -->
+    <div class="absolute left-0 right-0 bottom-[7.6%] h-[13.4%] bg-brand-yellow"></div>
+    
+    <!-- Green Band -->
+    <div class="absolute left-0 right-0 bottom-0 h-[7.6%] bg-brand-green"></div>
+    
+    <!-- Typography Layer - "Nikolas Ferreira" -->
+    <div class="absolute left-[47.1%] top-[28.9%] z-10">
+      <img 
+        src="assets/images/nikolas-ferreira.png" 
+        alt="Nikolas Ferreira" 
+        class="w-[612px] h-auto"
+      >
+    </div>
+    
+    <!-- CTA Button -->
+    <div class="absolute left-[20.9%] bottom-[10.8%] z-20">
+      <a 
+        href="#sobre"
+        class="inline-flex items-center justify-center w-[254px] h-[58px] bg-brand-blue border border-white rounded-full text-white text-[14px] font-semibold uppercase tracking-wide hover:bg-brand-blue/90 transition-colors duration-300"
+      >
+        Veja mais
+      </a>
+    </div>
+    
+  </section>
+
+  <!-- Hero Section - Mobile -->
+  <section class="hero-mobile lg:hidden relative w-full overflow-hidden">
+    
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img 
+        src="assets/images/background-mobile.jpg" 
+        alt="" 
+        class="w-full h-full object-cover object-center"
+      >
+    </div>
+    
+    <!-- Typography Layer - "Nikolas Ferreira" -->
+    <div class="hero-mobile-text absolute z-10">
+      <img 
+        src="assets/images/nikolas-mobile-text.png" 
+        alt="Nikolas Ferreira" 
+        class="w-full h-full object-contain"
+      >
+    </div>
+    
+    <!-- Yellow Band -->
+    <div class="hero-mobile-yellow absolute left-0 right-0 bg-brand-yellow"></div>
+    
+    <!-- Green Band -->
+    <div class="hero-mobile-green absolute bg-brand-green"></div>
+    
+    <!-- Photo of Nikolas -->
+    <div class="hero-mobile-photo absolute z-20">
+      <img 
+        src="assets/images/nikolas-mobile-photo.png" 
+        alt="Nikolas Ferreira" 
+        class="w-full h-full object-contain object-bottom"
+      >
+    </div>
+    
+  </section>
+  
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>

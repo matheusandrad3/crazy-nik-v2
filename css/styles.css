@@ -1,0 +1,199 @@
+/* Custom Styles for Nikolas Ferreira Website */
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Mobile Menu Active States */
+#mobile-menu.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#mobile-menu.active #mobile-drawer {
+  transform: translateX(0);
+}
+
+/* Hamburger Menu Animation */
+#mobile-menu-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+#mobile-menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+#mobile-menu-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Hero Section Enhancements */
+@media (max-width: 1023px) {
+  .hero-nikolas-photo {
+    max-height: 60vh;
+  }
+}
+
+/* Mobile Hero Section */
+.hero-mobile {
+  max-width: 430px;
+  margin: 0 auto;
+  /* Base dimensions from Figma: 430px x 655px */
+  /* Using aspect ratio to maintain proportions */
+  aspect-ratio: 430 / 655;
+  height: auto;
+}
+
+/* Mobile hero typography - positioned based on Figma: left: -42px, top: 165px, 515x290 */
+.hero-mobile-text {
+  left: -9.77%; /* -42/430 */
+  top: 25.19%; /* 165/655 */
+  width: 119.77%; /* 515/430 */
+  height: 44.27%; /* 290/655 */
+}
+
+/* Mobile hero yellow band - top: 513px, height: 142px */
+.hero-mobile-yellow {
+  top: 78.32%; /* 513/655 */
+  height: 21.68%; /* 142/655 */
+}
+
+/* Mobile hero green band - left: -7px, top: 605px, height: 50px */
+.hero-mobile-green {
+  left: -1.63%; /* -7/430 */
+  right: -1.63%;
+  top: 92.37%; /* 605/655 */
+  height: 7.63%; /* 50/655 */
+}
+
+/* Mobile hero photo - left: 140px, top: 289px, 287x316 */
+.hero-mobile-photo {
+  left: 32.56%; /* 140/430 */
+  top: 44.12%; /* 289/655 */
+  width: 66.74%; /* 287/430 */
+  height: 48.24%; /* 316/655 */
+}
+
+/* Button Hover Effect */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+/* Navigation Link Underline Effect */
+nav a {
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #FBD216;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+/* Delay utilities */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+/* Image Loading Optimization */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* Accessibility Focus Styles */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #FBD216;
+  outline-offset: 2px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2458A4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1d4a8a;
+}
