@@ -5,6 +5,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Garantir altura correta em dispositivos móveis */
+html, body {
+  min-height: 100%;
+  min-height: 100dvh;
+}
+
+@supports not (min-height: 100dvh) {
+  html, body {
+    min-height: -webkit-fill-available;
+  }
+}
+
 /* Mobile Menu Active States */
 #mobile-menu.active {
   opacity: 1;
@@ -37,12 +49,21 @@ html {
 
 /* Mobile Hero Section */
 .hero-mobile {
+  width: 100%;
   max-width: 430px;
   margin: 0 auto;
-  /* Base dimensions from Figma: 430px x 932px */
-  /* Using aspect ratio to maintain proportions */
-  aspect-ratio: 430 / 932;
-  height: auto;
+  /* Usar altura do viewport para garantir que caiba na tela */
+  height: 100dvh; /* dynamic viewport height - considera barras do navegador */
+  min-height: 500px; /* altura mínima para telas muito pequenas */
+  max-height: 932px; /* altura máxima baseada no Figma */
+}
+
+/* Fallback para navegadores que não suportam dvh */
+@supports not (height: 100dvh) {
+  .hero-mobile {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
 }
 
 /* Mobile hero typography - positioned based on Figma: left: -49px, top: 269px, 528x297 */
