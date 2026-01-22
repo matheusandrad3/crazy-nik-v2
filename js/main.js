@@ -24,6 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Close mobile menu with reverse staggered animation
   function closeMenu() {
+    // Clear any existing close timeout to prevent orphaned timeouts
+    // This handles cases where closeMenu is called multiple times (e.g., Escape pressed twice)
+    if (closeMenuTimeoutId !== null) {
+      clearTimeout(closeMenuTimeoutId);
+      closeMenuTimeoutId = null;
+    }
+    
     // Add closing class to trigger reverse animation via CSS
     mobileMenu.classList.add('closing');
     mobileMenuBtn.classList.remove('active');
