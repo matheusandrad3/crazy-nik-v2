@@ -46,6 +46,13 @@ html, body {
   opacity: 0;
   transform: scale(1.02);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none; /* Allow clicks to pass through to overlay */
+}
+
+/* Re-enable pointer events only on actual interactive elements WHEN MENU IS ACTIVE */
+#mobile-menu.active .mobile-menu-content button,
+#mobile-menu.active .mobile-menu-content a {
+  pointer-events: auto;
 }
 
 #mobile-menu.active .mobile-menu-content {
@@ -100,28 +107,54 @@ html, body {
 .mobile-nav-item {
   opacity: 0;
   transform: translateX(-30px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: opacity, transform;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0s;
 }
 
+/* Opening animation - staggered delays */
 #mobile-menu.active .mobile-nav-item {
   opacity: 1;
   transform: translateX(0);
 }
 
 #mobile-menu.active .mobile-nav-item:nth-child(1) {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+  transition-delay: 0.1s;
 }
 
 #mobile-menu.active .mobile-nav-item:nth-child(2) {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
+  transition-delay: 0.15s;
 }
 
 #mobile-menu.active .mobile-nav-item:nth-child(3) {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  transition-delay: 0.2s;
 }
 
 #mobile-menu.active .mobile-nav-item:nth-child(4) {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+  transition-delay: 0.25s;
+}
+
+/* Closing animation - reverse staggered delays */
+#mobile-menu.closing .mobile-nav-item {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+#mobile-menu.closing .mobile-nav-item:nth-child(1) {
+  transition-delay: 0.09s;
+}
+
+#mobile-menu.closing .mobile-nav-item:nth-child(2) {
+  transition-delay: 0.06s;
+}
+
+#mobile-menu.closing .mobile-nav-item:nth-child(3) {
+  transition-delay: 0.03s;
+}
+
+#mobile-menu.closing .mobile-nav-item:nth-child(4) {
+  transition-delay: 0s;
 }
 
 /* Mobile Nav Link */
@@ -243,6 +276,11 @@ html, body {
 /* Active States */
 #mobile-menu.active {
   pointer-events: auto;
+}
+
+/* Closing state - keep pointer events during close animation */
+#mobile-menu.closing {
+  pointer-events: none;
 }
 
 /* Hamburger Menu Animation */
