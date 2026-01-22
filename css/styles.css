@@ -480,3 +480,29 @@ button:focus-visible {
 ::-webkit-scrollbar-thumb:hover {
   background: #1d4a8a;
 }
+
+/* About Section Styles - Art Direction Pattern */
+/* Cada breakpoint tem seu próprio layout otimizado */
+
+/* Mobile: Layout horizontal compacto com texto inline */
+.about-stat-mobile > div:first-child {
+  padding-top: 0;
+}
+
+.about-stat-mobile > div:last-child {
+  padding-bottom: 0;
+}
+
+/* Tablet: Grid 2x2 com cards centralizados */
+.about-stat-tablet {
+  /* Borders são aplicados inline para maior controle */
+}
+
+/* Desktop: Lista vertical com mais detalhes */
+.about-stat-desktop > div:first-child {
+  padding-top: 0;
+}
+
+.about-stat-desktop > div:last-child {
+  padding-bottom: 0;
+}
