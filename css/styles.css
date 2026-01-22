@@ -55,6 +55,12 @@ html, body {
   pointer-events: auto;
 }
 
+/* Disable pointer events during close animation to prevent multiple clicks */
+#mobile-menu.closing .mobile-menu-content button,
+#mobile-menu.closing .mobile-menu-content a {
+  pointer-events: none;
+}
+
 #mobile-menu.active .mobile-menu-content {
   opacity: 1;
   transform: scale(1);

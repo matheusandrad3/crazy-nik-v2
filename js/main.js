@@ -78,6 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
           const target = document.querySelector(href);
           if (target) {
             target.scrollIntoView({ behavior: 'smooth' });
+            // Update URL hash for deep linking, browser history, and bookmarking
+            history.pushState(null, '', href);
           }
         } else {
           window.location.href = href;
