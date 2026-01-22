@@ -45,24 +45,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 400);
   }
 
-  // Get the drawer element for click handling
-  const mobileDrawer = document.getElementById('mobile-drawer');
-
   // Event listeners
   mobileMenuBtn.addEventListener('click', openMenu);
   mobileMenuClose.addEventListener('click', closeMenu);
   mobileMenuOverlay.addEventListener('click', closeMenu);
-  
-  // Close menu when clicking on non-interactive areas of the drawer
-  // This handles clicks that pass through due to pointer-events: none on content
-  mobileDrawer.addEventListener('click', function(e) {
-    // Only close if clicking on the drawer background, not on interactive elements
-    const clickedElement = e.target;
-    const isInteractive = clickedElement.closest('button, a, nav ul');
-    if (!isInteractive) {
-      closeMenu();
-    }
-  });
 
   // Close menu when clicking on a link with smooth transition
   mobileMenuLinks.forEach(link => {
@@ -113,19 +99,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Header scroll effect
   const header = document.querySelector('header');
-  let lastScrollY = window.scrollY;
 
   window.addEventListener('scroll', function() {
-    const currentScrollY = window.scrollY;
-    
-    if (currentScrollY > 100) {
+    if (window.scrollY > 100) {
       header.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
       header.style.backdropFilter = 'blur(10px)';
     } else {
       header.style.backgroundColor = 'transparent';
       header.style.backdropFilter = 'none';
     }
-    
-    lastScrollY = currentScrollY;
   });
 });
