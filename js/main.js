@@ -78,6 +78,11 @@ document.addEventListener('DOMContentLoaded', function() {
     link.addEventListener('touchend', function() {
       this.style.transform = 'scale(1)';
     });
+    
+    // Handle touchcancel (e.g., when user scrolls during touch)
+    link.addEventListener('touchcancel', function() {
+      this.style.transform = 'scale(1)';
+    });
   });
 
   // Header scroll effect
