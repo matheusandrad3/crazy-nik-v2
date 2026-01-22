@@ -6,8 +6,16 @@ document.addEventListener('DOMContentLoaded', function() {
   const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
   const mobileMenuLinks = document.querySelectorAll('#mobile-menu nav a');
 
+  // Track the close animation timeout to prevent race conditions
+  let closeMenuTimeoutId = null;
+
   // Open mobile menu with staggered animations
   function openMenu() {
+    // Cancel any pending close timeout to prevent race condition
+    if (closeMenuTimeoutId !== null) {
+      clearTimeout(closeMenuTimeoutId);
+      closeMenuTimeoutId = null;
+    }
     mobileMenu.classList.remove('closing');
     mobileMenu.classList.add('active');
     mobileMenuBtn.classList.add('active');
@@ -22,10 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Wait for closing animation to complete, then clean up
     // Longest delay (0.09s) + animation duration (0.3s) = ~0.4s
-    setTimeout(() => {
+    closeMenuTimeoutId = setTimeout(() => {
       mobileMenu.classList.remove('active');
       mobileMenu.classList.remove('closing');
       document.body.style.overflow = '';
+      closeMenuTimeoutId = null;
     }, 400);
   }
 
