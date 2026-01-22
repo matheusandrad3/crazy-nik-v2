@@ -280,196 +280,70 @@
         <div class="w-full lg:w-[37.5%]">
           <div class="bg-white border-2 border-[#171717] rounded-[20px] lg:rounded-[30px] p-4 sm:p-6 lg:p-8 h-full">
             
-            <!-- Stats Layout: Art Direction Pattern -->
-            <!-- Mobile: Vertical stack with horizontal items -->
-            <!-- Tablet: 2x2 Grid -->
-            <!-- Desktop: Vertical list -->
-            
-            <!-- Mobile Layout (< 640px) -->
-            <div class="block sm:hidden">
-              <div class="about-stat-mobile divide-y divide-[#d9d9d9]">
-                <!-- Stat 1 -->
-                <div class="flex items-center gap-4 py-4">
-                  <div class="flex-shrink-0 w-[50px] h-[50px] bg-brand-yellow rounded-full flex items-center justify-center">
-                    <svg class="w-5 h-5" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="4" y="6" width="28" height="26" rx="3" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M4 14H32" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M12 4V8" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                      <path d="M24 4V8" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <div class="flex items-baseline gap-2">
-                    <p class="text-[#171717] text-2xl font-bold leading-none">6</p>
-                    <p class="text-[#171717] text-[10px] font-semibold uppercase">anos</p>
-                  </div>
+            <!-- Stats: Single responsive layout -->
+            <!-- Mobile: horizontal rows | Tablet: 2x2 grid | Desktop: vertical list -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 divide-y sm:divide-y-0 lg:divide-y divide-[#d9d9d9]">
+              
+              <!-- Stat 1: Anos -->
+              <div class="flex items-center gap-4 lg:gap-6 py-4 sm:py-5 lg:py-6 sm:flex-col sm:text-center lg:flex-row lg:text-left sm:border-b sm:border-r lg:border-r-0 border-[#d9d9d9]">
+                <div class="flex-shrink-0 w-[50px] h-[50px] sm:w-[65px] sm:h-[65px] lg:w-[85px] lg:h-[85px] bg-brand-yellow rounded-full flex items-center justify-center sm:mb-3 lg:mb-0">
+                  <svg class="w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="6" width="28" height="26" rx="3" stroke="#171717" stroke-width="2.5"/>
+                    <path d="M4 14H32" stroke="#171717" stroke-width="2.5"/>
+                    <path d="M12 4V8" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M24 4V8" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                  </svg>
                 </div>
-                <!-- Stat 2 -->
-                <div class="flex items-center gap-4 py-4">
-                  <div class="flex-shrink-0 w-[50px] h-[50px] bg-brand-yellow rounded-full flex items-center justify-center">
-                    <svg class="w-5 h-5" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="18" cy="10" r="6" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M6 32C6 25.373 11.373 20 18 20C24.627 20 30 25.373 30 32" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <div class="flex items-baseline gap-2">
-                    <p class="text-[#171717] text-2xl font-bold leading-none">20M</p>
-                    <p class="text-[#171717] text-[10px] font-semibold uppercase">seguidores</p>
-                  </div>
-                </div>
-                <!-- Stat 3 -->
-                <div class="flex items-center gap-4 py-4">
-                  <div class="flex-shrink-0 w-[50px] h-[50px] bg-brand-yellow rounded-full flex items-center justify-center">
-                    <svg class="w-5 h-5" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M18 8C18 8 14 12 8 12C8 20 12 28 18 32C24 28 28 20 28 12C22 12 18 8 18 8Z" stroke="#171717" stroke-width="2.5" stroke-linejoin="round"/>
-                      <path d="M12 18L16 22L24 14" stroke="#171717" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
-                  <div class="flex items-baseline gap-2">
-                    <p class="text-[#171717] text-2xl font-bold leading-none">826</p>
-                    <p class="text-[#171717] text-[10px] font-semibold uppercase">emendas</p>
-                  </div>
-                </div>
-                <!-- Stat 4 -->
-                <div class="flex items-center gap-4 py-4">
-                  <div class="flex-shrink-0 w-[50px] h-[50px] bg-brand-yellow rounded-full flex items-center justify-center">
-                    <svg class="w-5 h-5" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="6" y="4" width="24" height="28" rx="3" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M12 12H24" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                      <path d="M12 18H24" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                      <path d="M12 24H20" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <div class="flex items-baseline gap-2">
-                    <p class="text-[#171717] text-2xl font-bold leading-none">8k</p>
-                    <p class="text-[#171717] text-[10px] font-semibold uppercase">projetos</p>
-                  </div>
+                <div class="flex items-baseline gap-2 sm:block lg:block">
+                  <p class="text-[#171717] text-2xl sm:text-4xl lg:text-[48px] font-bold leading-none">6</p>
+                  <p class="text-[#171717] text-[10px] sm:text-xs lg:text-sm font-semibold uppercase sm:mt-1 lg:mt-2">anos</p>
                 </div>
               </div>
-            </div>
-            
-            <!-- Tablet Layout (640px - 1023px) -->
-            <div class="hidden sm:block lg:hidden">
-              <div class="about-stat-tablet grid grid-cols-2 gap-0">
-                <!-- Stat 1 -->
-                <div class="flex flex-col items-center text-center py-5 border-b border-r border-[#d9d9d9]">
-                  <div class="w-[65px] h-[65px] bg-brand-yellow rounded-full flex items-center justify-center mb-3">
-                    <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="4" y="6" width="28" height="26" rx="3" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M4 14H32" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M12 4V8" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                      <path d="M24 4V8" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <p class="text-[#171717] text-4xl font-bold leading-none">6</p>
-                  <p class="text-[#171717] text-xs font-semibold uppercase mt-1">anos</p>
+              
+              <!-- Stat 2: Seguidores -->
+              <div class="flex items-center gap-4 lg:gap-6 py-4 sm:py-5 lg:py-6 sm:flex-col sm:text-center lg:flex-row lg:text-left sm:border-b lg:border-b-0 border-[#d9d9d9]">
+                <div class="flex-shrink-0 w-[50px] h-[50px] sm:w-[65px] sm:h-[65px] lg:w-[85px] lg:h-[85px] bg-brand-yellow rounded-full flex items-center justify-center sm:mb-3 lg:mb-0">
+                  <svg class="w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="18" cy="10" r="6" stroke="#171717" stroke-width="2.5"/>
+                    <path d="M6 32C6 25.373 11.373 20 18 20C24.627 20 30 25.373 30 32" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                  </svg>
                 </div>
-                <!-- Stat 2 -->
-                <div class="flex flex-col items-center text-center py-5 border-b border-[#d9d9d9]">
-                  <div class="w-[65px] h-[65px] bg-brand-yellow rounded-full flex items-center justify-center mb-3">
-                    <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="18" cy="10" r="6" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M6 32C6 25.373 11.373 20 18 20C24.627 20 30 25.373 30 32" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <p class="text-[#171717] text-4xl font-bold leading-none">20M</p>
-                  <p class="text-[#171717] text-xs font-semibold uppercase mt-1">seguidores</p>
-                </div>
-                <!-- Stat 3 -->
-                <div class="flex flex-col items-center text-center py-5 border-r border-[#d9d9d9]">
-                  <div class="w-[65px] h-[65px] bg-brand-yellow rounded-full flex items-center justify-center mb-3">
-                    <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M18 8C18 8 14 12 8 12C8 20 12 28 18 32C24 28 28 20 28 12C22 12 18 8 18 8Z" stroke="#171717" stroke-width="2.5" stroke-linejoin="round"/>
-                      <path d="M12 18L16 22L24 14" stroke="#171717" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
-                  <p class="text-[#171717] text-4xl font-bold leading-none">826</p>
-                  <p class="text-[#171717] text-xs font-semibold uppercase mt-1">emendas</p>
-                </div>
-                <!-- Stat 4 -->
-                <div class="flex flex-col items-center text-center py-5">
-                  <div class="w-[65px] h-[65px] bg-brand-yellow rounded-full flex items-center justify-center mb-3">
-                    <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="6" y="4" width="24" height="28" rx="3" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M12 12H24" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                      <path d="M12 18H24" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                      <path d="M12 24H20" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <p class="text-[#171717] text-4xl font-bold leading-none">8k</p>
-                  <p class="text-[#171717] text-xs font-semibold uppercase mt-1">projetos</p>
+                <div class="flex items-baseline gap-2 sm:block lg:block">
+                  <p class="text-[#171717] text-2xl sm:text-4xl lg:text-[48px] font-bold leading-none">20M</p>
+                  <p class="text-[#171717] text-[10px] sm:text-xs lg:text-sm font-semibold uppercase sm:mt-1 lg:mt-2">seguidores</p>
                 </div>
               </div>
-            </div>
-            
-            <!-- Desktop Layout (>= 1024px) -->
-            <div class="hidden lg:block">
-              <div class="about-stat-desktop divide-y divide-[#d9d9d9]">
-                <!-- Stat 1 -->
-                <div class="flex items-center gap-6 py-6">
-                  <div class="flex-shrink-0 w-[85px] h-[85px] bg-brand-yellow rounded-full flex items-center justify-center">
-                    <svg class="w-9 h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="4" y="6" width="28" height="26" rx="3" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M4 14H32" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M12 4V8" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                      <path d="M24 4V8" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                      <rect x="9" y="19" width="4" height="4" rx="1" fill="#171717"/>
-                      <rect x="16" y="19" width="4" height="4" rx="1" fill="#171717"/>
-                      <rect x="23" y="19" width="4" height="4" rx="1" fill="#171717"/>
-                      <rect x="9" y="25" width="4" height="4" rx="1" fill="#171717"/>
-                      <rect x="16" y="25" width="4" height="4" rx="1" fill="#171717"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="text-[#171717] text-[48px] font-bold leading-none">6</p>
-                    <p class="text-[#171717] text-sm font-semibold uppercase mt-2">anos</p>
-                  </div>
+              
+              <!-- Stat 3: Emendas -->
+              <div class="flex items-center gap-4 lg:gap-6 py-4 sm:py-5 lg:py-6 sm:flex-col sm:text-center lg:flex-row lg:text-left sm:border-r lg:border-r-0 border-[#d9d9d9]">
+                <div class="flex-shrink-0 w-[50px] h-[50px] sm:w-[65px] sm:h-[65px] lg:w-[85px] lg:h-[85px] bg-brand-yellow rounded-full flex items-center justify-center sm:mb-3 lg:mb-0">
+                  <svg class="w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 8C18 8 14 12 8 12C8 20 12 28 18 32C24 28 28 20 28 12C22 12 18 8 18 8Z" stroke="#171717" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M12 18L16 22L24 14" stroke="#171717" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
                 </div>
-                <!-- Stat 2 -->
-                <div class="flex items-center gap-6 py-6">
-                  <div class="flex-shrink-0 w-[85px] h-[85px] bg-brand-yellow rounded-full flex items-center justify-center">
-                    <svg class="w-9 h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="18" cy="10" r="6" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M6 32C6 25.373 11.373 20 18 20C24.627 20 30 25.373 30 32" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                      <circle cx="28" cy="12" r="4" stroke="#171717" stroke-width="2"/>
-                      <path d="M32 26C32 22.134 29.09 19 25.5 19" stroke="#171717" stroke-width="2" stroke-linecap="round"/>
-                      <circle cx="8" cy="12" r="4" stroke="#171717" stroke-width="2"/>
-                      <path d="M4 26C4 22.134 6.91 19 10.5 19" stroke="#171717" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="text-[#171717] text-[48px] font-bold leading-none">20M</p>
-                    <p class="text-[#171717] text-sm font-semibold uppercase mt-2">seguidores</p>
-                  </div>
-                </div>
-                <!-- Stat 3 -->
-                <div class="flex items-center gap-6 py-6">
-                  <div class="flex-shrink-0 w-[85px] h-[85px] bg-brand-yellow rounded-full flex items-center justify-center">
-                    <svg class="w-9 h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M18 8C18 8 14 12 8 12C8 20 12 28 18 32C24 28 28 20 28 12C22 12 18 8 18 8Z" stroke="#171717" stroke-width="2.5" stroke-linejoin="round"/>
-                      <path d="M12 18L16 22L24 14" stroke="#171717" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="text-[#171717] text-[48px] font-bold leading-none">826</p>
-                    <p class="text-[#171717] text-sm font-semibold uppercase mt-2">emendas destinadas</p>
-                  </div>
-                </div>
-                <!-- Stat 4 -->
-                <div class="flex items-center gap-6 py-6">
-                  <div class="flex-shrink-0 w-[85px] h-[85px] bg-brand-yellow rounded-full flex items-center justify-center">
-                    <svg class="w-9 h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="6" y="4" width="24" height="28" rx="3" stroke="#171717" stroke-width="2.5"/>
-                      <path d="M12 12H24" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                      <path d="M12 18H24" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                      <path d="M12 24H20" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="text-[#171717] text-[48px] font-bold leading-none">8k</p>
-                    <p class="text-[#171717] text-sm font-semibold uppercase mt-2">projetos criados</p>
-                  </div>
+                <div class="flex items-baseline gap-2 sm:block lg:block">
+                  <p class="text-[#171717] text-2xl sm:text-4xl lg:text-[48px] font-bold leading-none">826</p>
+                  <p class="text-[#171717] text-[10px] sm:text-xs lg:text-sm font-semibold uppercase sm:mt-1 lg:mt-2"><span class="hidden lg:inline">emendas destinadas</span><span class="lg:hidden">emendas</span></p>
                 </div>
               </div>
+              
+              <!-- Stat 4: Projetos -->
+              <div class="flex items-center gap-4 lg:gap-6 py-4 sm:py-5 lg:py-6 sm:flex-col sm:text-center lg:flex-row lg:text-left">
+                <div class="flex-shrink-0 w-[50px] h-[50px] sm:w-[65px] sm:h-[65px] lg:w-[85px] lg:h-[85px] bg-brand-yellow rounded-full flex items-center justify-center sm:mb-3 lg:mb-0">
+                  <svg class="w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="4" width="24" height="28" rx="3" stroke="#171717" stroke-width="2.5"/>
+                    <path d="M12 12H24" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M12 18H24" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M12 24H20" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="flex items-baseline gap-2 sm:block lg:block">
+                  <p class="text-[#171717] text-2xl sm:text-4xl lg:text-[48px] font-bold leading-none">8k</p>
+                  <p class="text-[#171717] text-[10px] sm:text-xs lg:text-sm font-semibold uppercase sm:mt-1 lg:mt-2"><span class="hidden lg:inline">projetos criados</span><span class="lg:hidden">projetos</span></p>
+                </div>
+              </div>
+              
             </div>
             
           </div>
