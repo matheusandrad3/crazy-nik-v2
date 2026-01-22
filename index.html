@@ -290,6 +290,127 @@
     
   </section>
   
+  <!-- About Section -->
+  <section id="sobre" class="bg-white py-12 lg:py-20">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-[108px]">
+      
+      <!-- Section Header -->
+      <div class="mb-8 lg:mb-16">
+        <!-- Subtitle -->
+        <div class="flex items-center gap-4 mb-6 lg:mb-8">
+          <span class="text-[#171717] text-xs lg:text-sm font-semibold uppercase tracking-wider">Sobre mim</span>
+          <div class="h-px w-24 lg:w-40 bg-[#171717]"></div>
+        </div>
+        
+        <!-- Main Title -->
+        <h2 class="text-[#171717] text-2xl sm:text-3xl lg:text-[48px] font-bold leading-tight lg:leading-[58px]">
+          Um coração inquieto<br>
+          diante de julgamentos e escândalos<br>
+          não pode ficar parado
+        </h2>
+      </div>
+      
+      <!-- Content Grid -->
+      <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+        
+        <!-- Left: Image with Button -->
+        <div class="relative w-full lg:w-[62.5%]">
+          <div class="relative rounded-[24px] lg:rounded-[40px] overflow-hidden">
+            <img 
+              src="assets/images/about-nikolas.jpg" 
+              alt="Nikolas Ferreira no Congresso" 
+              class="w-full h-auto aspect-[807/623] object-cover"
+            >
+          </div>
+          
+          <!-- Button - Mobile: below image, Desktop: overlapping -->
+          <div class="mt-6 lg:mt-0 lg:absolute lg:left-6 lg:bottom-8 flex justify-center lg:justify-start">
+            <a 
+              href="#" 
+              class="inline-flex items-center justify-center w-[200px] lg:w-[220px] h-[52px] lg:h-[58px] bg-brand-yellow border-2 border-[#171717] rounded-full text-[#171717] text-xs lg:text-sm font-bold uppercase shadow-[0px_4px_0px_0px_black] hover:translate-y-[2px] hover:shadow-[0px_2px_0px_0px_black] transition-all duration-200"
+            >
+              Saiba mais
+            </a>
+          </div>
+        </div>
+        
+        <!-- Right: Stats Card -->
+        <div class="w-full lg:w-[37.5%]">
+          <div class="bg-white border-2 border-[#171717] rounded-[20px] lg:rounded-[30px] p-4 sm:p-6 lg:p-8 h-full">
+            
+            <!-- Stats - Single responsive structure -->
+            <!-- Mobile: horizontal list | Tablet: 2x2 grid | Desktop: vertical list -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1">
+              
+              <!-- Stat 1: Anos -->
+              <div class="flex items-center gap-4 lg:gap-6 py-4 sm:py-5 lg:py-6 sm:flex-col lg:flex-row border-b border-[#d9d9d9] sm:border-b sm:border-r lg:border-r-0">
+                <div class="flex-shrink-0 w-[50px] h-[50px] sm:w-[65px] sm:h-[65px] lg:w-[85px] lg:h-[85px] bg-brand-yellow rounded-full flex items-center justify-center sm:mb-3 lg:mb-0">
+                  <svg class="w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="6" width="28" height="26" rx="3" stroke="#171717" stroke-width="2.5"/>
+                    <path d="M4 14H32" stroke="#171717" stroke-width="2.5"/>
+                    <path d="M12 4V8" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M24 4V8" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="flex items-baseline gap-2 sm:flex-col sm:items-center sm:gap-1 lg:flex-col lg:items-start lg:gap-2">
+                  <p class="text-[#171717] text-2xl sm:text-4xl lg:text-[48px] font-bold leading-none">6</p>
+                  <p class="text-[#171717] text-[10px] sm:text-xs lg:text-sm font-semibold uppercase sm:mt-1 lg:mt-2">anos</p>
+                </div>
+              </div>
+              
+              <!-- Stat 2: Seguidores -->
+              <div class="flex items-center gap-4 lg:gap-6 py-4 sm:py-5 lg:py-6 sm:flex-col lg:flex-row border-b border-[#d9d9d9] sm:border-r-0 lg:border-r-0">
+                <div class="flex-shrink-0 w-[50px] h-[50px] sm:w-[65px] sm:h-[65px] lg:w-[85px] lg:h-[85px] bg-brand-yellow rounded-full flex items-center justify-center sm:mb-3 lg:mb-0">
+                  <svg class="w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="18" cy="10" r="6" stroke="#171717" stroke-width="2.5"/>
+                    <path d="M6 32C6 25.373 11.373 20 18 20C24.627 20 30 25.373 30 32" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="flex items-baseline gap-2 sm:flex-col sm:items-center sm:gap-1 lg:flex-col lg:items-start lg:gap-2">
+                  <p class="text-[#171717] text-2xl sm:text-4xl lg:text-[48px] font-bold leading-none">20M</p>
+                  <p class="text-[#171717] text-[10px] sm:text-xs lg:text-sm font-semibold uppercase sm:mt-1 lg:mt-2">seguidores</p>
+                </div>
+              </div>
+              
+              <!-- Stat 3: Emendas -->
+              <div class="flex items-center gap-4 lg:gap-6 py-4 sm:py-5 lg:py-6 sm:flex-col lg:flex-row border-b border-[#d9d9d9] sm:border-b-0 lg:border-b sm:border-r lg:border-r-0">
+                <div class="flex-shrink-0 w-[50px] h-[50px] sm:w-[65px] sm:h-[65px] lg:w-[85px] lg:h-[85px] bg-brand-yellow rounded-full flex items-center justify-center sm:mb-3 lg:mb-0">
+                  <svg class="w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 8C18 8 14 12 8 12C8 20 12 28 18 32C24 28 28 20 28 12C22 12 18 8 18 8Z" stroke="#171717" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M12 18L16 22L24 14" stroke="#171717" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="flex items-baseline gap-2 sm:flex-col sm:items-center sm:gap-1 lg:flex-col lg:items-start lg:gap-2">
+                  <p class="text-[#171717] text-2xl sm:text-4xl lg:text-[48px] font-bold leading-none">826</p>
+                  <p class="text-[#171717] text-[10px] sm:text-xs lg:text-sm font-semibold uppercase sm:mt-1 lg:mt-2"><span class="hidden lg:inline">emendas destinadas</span><span class="lg:hidden">emendas</span></p>
+                </div>
+              </div>
+              
+              <!-- Stat 4: Projetos -->
+              <div class="flex items-center gap-4 lg:gap-6 py-4 sm:py-5 lg:py-6 sm:flex-col lg:flex-row">
+                <div class="flex-shrink-0 w-[50px] h-[50px] sm:w-[65px] sm:h-[65px] lg:w-[85px] lg:h-[85px] bg-brand-yellow rounded-full flex items-center justify-center sm:mb-3 lg:mb-0">
+                  <svg class="w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="4" width="24" height="28" rx="3" stroke="#171717" stroke-width="2.5"/>
+                    <path d="M12 12H24" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M12 18H24" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M12 24H20" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="flex items-baseline gap-2 sm:flex-col sm:items-center sm:gap-1 lg:flex-col lg:items-start lg:gap-2">
+                  <p class="text-[#171717] text-2xl sm:text-4xl lg:text-[48px] font-bold leading-none">8k</p>
+                  <p class="text-[#171717] text-[10px] sm:text-xs lg:text-sm font-semibold uppercase sm:mt-1 lg:mt-2"><span class="hidden lg:inline">projetos criados</span><span class="lg:hidden">projetos</span></p>
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
   <!-- JavaScript -->
   <script src="js/main.js"></script>
 </body>

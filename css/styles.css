@@ -480,3 +480,25 @@ button:focus-visible {
 ::-webkit-scrollbar-thumb:hover {
   background: #1d4a8a;
 }
+
+/* About Section Stats - Remove padding from first/last items */
+/* Mobile (1 column) and Desktop (1 column): first/last only */
+#sobre .grid > div:first-child {
+  padding-top: 0;
+}
+
+#sobre .grid > div:last-child {
+  padding-bottom: 0;
+}
+
+/* Tablet (2 columns, 2x2 grid): adjust top row and bottom row */
+@media (min-width: 640px) and (max-width: 1023px) {
+  /* Top row (items 1 and 2): remove padding-top */
+  #sobre .grid > div:nth-child(-n+2) {
+    padding-top: 0;
+  }
+  /* Bottom row (items 3 and 4): remove padding-bottom */
+  #sobre .grid > div:nth-child(n+3) {
+    padding-bottom: 0;
+  }
+}
