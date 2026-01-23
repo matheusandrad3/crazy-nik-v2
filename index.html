@@ -414,7 +414,7 @@
   </section>
   
   <!-- Emendas Section -->
-  <section id="emendas" class="emendas-section relative overflow-hidden w-full">
+  <section id="emendas" class="emendas-section relative overflow-hidden w-full bg-[#FFDF20] lg:bg-[#FCD116]">
     
     <!-- Mobile Layout (default) -->
     <div class="lg:hidden emendas-mobile relative w-full overflow-hidden">
@@ -454,61 +454,44 @@
     </div>
     
     <!-- Desktop Layout (lg and up) -->
-    <div class="hidden lg:block relative rounded-[80px] overflow-hidden">
+    <div class="hidden lg:block emendas-desktop relative overflow-hidden">
       
-      <!-- Yellow Background -->
-      <div class="absolute inset-0 bg-brand-yellow"></div>
+      <!-- EMENDAS Title - Photo clipped to text -->
+      <h2 class="emendas-title-desktop font-montserrat font-black uppercase">
+        EMENDAS
+      </h2>
       
-      <!-- Large EMENDAS text - Desktop -->
-      <div class="absolute top-4 xl:top-8 left-0 right-0 overflow-hidden z-0">
-        <h2 class="emendas-title-bg text-brand-green font-unbounded font-bold text-[140px] xl:text-[180px] 2xl:text-[220px] leading-none tracking-tight uppercase whitespace-nowrap pl-4">
-          EMENDAS
-        </h2>
+      <!-- Nikolas Photo - Left side -->
+      <div class="emendas-nikolas-photo">
+        <img 
+          src="assets/images/nikolas-lateral.png" 
+          alt="Nikolas Ferreira" 
+          class="w-full h-full object-contain object-bottom"
+        >
       </div>
       
-      <!-- Content Container -->
-      <div class="relative z-10 max-w-[1920px] mx-auto min-h-[800px] xl:min-h-[900px]">
-        
-        <!-- Photo of Nikolas - Positioned absolutely on the left -->
-        <div class="emendas-photo absolute left-0 bottom-0 z-10 w-[45%] xl:w-[40%] max-w-[600px]">
-          <img 
-            src="assets/images/emendas-nikolas.jpg" 
-            alt="Nikolas Ferreira" 
-            class="w-full h-auto object-contain object-bottom"
-          >
-        </div>
-        
-        <!-- Title - Positioned in center-left -->
-        <div class="absolute left-[15%] xl:left-[18%] top-[30%] xl:top-[35%] z-20">
-          <h3 class="text-[#171717] font-unbounded font-bold text-2xl lg:text-3xl xl:text-4xl leading-tight uppercase">
-            Investimentos<br>
-            que geram impacto<br>
-            real
-          </h3>
-        </div>
-        
-        <!-- CTA Button - Positioned at bottom center-left -->
-        <div class="absolute left-[10%] xl:left-[12%] bottom-[15%] xl:bottom-[18%] z-20 w-full max-w-[600px] xl:max-w-[723px]">
-          <a 
-            href="#" 
-            class="emendas-cta inline-flex items-center justify-center w-full px-8 lg:px-10 py-6 lg:py-8 xl:py-10 bg-brand-blue border border-white rounded-[100px] text-brand-yellow text-sm lg:text-base xl:text-[20px] font-unbounded font-normal uppercase leading-relaxed text-center"
-          >
-            Veja para onde foram destinadas as emendas parlamentares e como cada recurso está sendo usado para melhorar a vida da população nas áreas que mais precisam
-          </a>
-        </div>
-        
-        <!-- Map - Positioned on the right -->
-        <div class="absolute right-[2%] xl:right-[4%] top-[15%] xl:top-[12%] z-10 w-[82%] xl:w-[86%]">
-          <div id="minas-map-desktop" class="minas-map-container w-full">
-            <img 
-              src="assets/svg/minas-gerais-map.svg" 
-              alt="Mapa das mesoregiões de Minas Gerais" 
-              class="minas-map-fallback w-full h-auto"
-            >
-          </div>
-        </div>
-        
+      <!-- Impact Text -->
+      <p class="emendas-impact-text font-inter font-bold uppercase">
+        investimentos<br>
+        que geram impacto<br>
+        real
+      </p>
+      
+      <!-- Map Container - Right side -->
+      <div id="minas-map-desktop" class="emendas-map-desktop minas-map-container">
+        <img 
+          src="assets/svg/minas-gerais-map.svg" 
+          alt="Mapa das mesoregiões de Minas Gerais" 
+          class="minas-map-fallback"
+        >
       </div>
+      
+      <!-- CTA Button -->
+      <a href="#" class="emendas-cta-btn">
+        <span class="emendas-cta-btn-text font-unbounded uppercase text-brand-yellow">
+          Veja para onde foram destinadas as emendas parlamentares e como cada recurso está sendo usado para melhorar a vida da população nas áreas que mais precisam/
+        </span>
+      </a>
       
     </div>
     
