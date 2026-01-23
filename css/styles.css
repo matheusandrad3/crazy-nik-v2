@@ -502,3 +502,187 @@ button:focus-visible {
     padding-bottom: 0;
   }
 }
+
+/* ========================================
+   EMENDAS SECTION
+   ======================================== */
+
+/* Section Container */
+.emendas-section {
+  min-height: auto;
+}
+
+/* ========================================
+   MOBILE LAYOUT (Default - Mobile First)
+   ======================================== */
+
+/* Mobile container - full width edge-to-edge */
+.emendas-mobile {
+  /* Figma: 430x932 aspect ratio */
+  aspect-ratio: 430 / 932;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+/* Title container positioning */
+.emendas-title-container {
+  width: 100%;
+  padding: 0;
+}
+
+/* Large EMENDAS text with photo background clipped to text */
+.emendas-photo-text {
+  /* Background image clipped to text - Minas Gerais flag */
+  background-image: url('../assets/images/bandeira-minas-bg.png');
+  /* Scale and position to center the red triangle on the text */
+  background-size: 100% auto;
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  /* Add subtle text stroke for visibility */
+  -webkit-text-stroke: 1px rgba(150, 150, 150, 0.1);
+  /* Ensure text is not selectable */
+  user-select: none;
+  pointer-events: none;
+  /* Font size responsive - scales with viewport width */
+  font-size: clamp(100px, 45vw, 210px);
+  line-height: 0.72;
+  /* Add drop shadow for depth and visibility */
+  filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.1));
+}
+
+/* END line positioning - indented left so D touches right edge */
+.emendas-end-line {
+  /* Push END line to the right with margin-left */
+  /* END has 3 letters, EM has 2 - roughly END needs 35% indent */
+  margin-left: 1%;
+}
+
+/* Map - Large and overflowing container (Figma: 617x491 at left:-142px) */
+.emendas-map-large {
+  /* Position from Figma calculations:
+     Section: 467x1067, Map: 617x491
+     Map top: 441px from section top = 41.3%
+     Map left: -142px on 467px = -30.4%
+     Map width: 617px / 467px = 132%
+  */
+  position: absolute;
+  top: 37%;
+  left: -30%;
+  width: 135%;
+  /* Pointer events for interactivity */
+  pointer-events: auto;
+  /* Enable touch interactions */
+  touch-action: manipulation;
+}
+
+/* CTA Text styling */
+.emendas-cta-text {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ========================================
+   DESKTOP LAYOUT (lg and up)
+   ======================================== */
+
+/* Large background title - Desktop */
+.emendas-title-bg {
+  color: #22A651;
+  opacity: 0.9;
+  text-shadow: 
+    2px 2px 0 rgba(34, 166, 81, 0.2),
+    -1px -1px 0 rgba(34, 166, 81, 0.1);
+  user-select: none;
+  pointer-events: none;
+  /* Mix with yellow stars/pattern effect */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpolygon points='25,5 30,20 45,20 33,30 38,45 25,35 12,45 17,30 5,20 20,20' fill='%23d4a800' opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Photo styling */
+.emendas-photo img {
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
+}
+
+/* CTA Button Hover - Desktop */
+.emendas-cta {
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(36, 88, 164, 0.3);
+}
+
+.emendas-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(36, 88, 164, 0.4);
+  background-color: #1d4a8a;
+}
+
+.emendas-cta:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(36, 88, 164, 0.3);
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .emendas-section {
+    min-height: 800px;
+  }
+  
+  .emendas-title-bg {
+    animation: slideInEmendas 1s ease-out forwards;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1280px) {
+  .emendas-section {
+    min-height: 900px;
+  }
+}
+
+/* Extra Large Desktop */
+@media (min-width: 1536px) {
+  .emendas-section {
+    min-height: 1000px;
+  }
+}
+
+/* Animation for EMENDAS title */
+@keyframes slideInEmendas {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateX(0);
+  }
+}
+
+/* Map container aspect ratio for mobile */
+@media (max-width: 1023px) {
+  .minas-map-container {
+    aspect-ratio: 8 / 7;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .emendas-title-bg {
+    animation: none;
+    opacity: 0.9;
+  }
+  
+  .emendas-cta {
+    transition: none;
+  }
+  
+  .emendas-cta:hover {
+    transform: none;
+  }
+}
