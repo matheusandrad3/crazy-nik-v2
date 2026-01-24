@@ -214,13 +214,11 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
     
-    // Set first dot as active initially
-    if (dots[0]) {
-      dots[0].classList.add('active');
-    }
-    
     // Listen for scroll events
     carousel.addEventListener('scroll', updateActiveDot, { passive: true });
+    
+    // Sync dot state on init (handles browser-restored scroll position)
+    updateActiveDot();
     
     // Click on dot to scroll to card
     dots.forEach((dot, index) => {
