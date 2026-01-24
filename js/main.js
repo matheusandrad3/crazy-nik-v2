@@ -137,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Listen for region clicks (for future navigation)
     document.addEventListener('minas-map:region-click', function(e) {
       const { region, name, selected } = e.detail;
-      console.log('Region clicked:', region, name, selected);
       
       // Future: Navigate to region-specific page
       // Example: window.location.href = `/emendas/${region}`;
