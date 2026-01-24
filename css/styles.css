@@ -1280,6 +1280,7 @@ button:focus-visible {
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  /* Emendas section */
   .emendas-title-desktop,
   .emendas-nikolas-photo,
   .emendas-map-desktop {
@@ -1293,5 +1294,33 @@ button:focus-visible {
   
   .emendas-cta-btn:hover {
     transform: none;
+  }
+  
+  /* Projects section */
+  .projects-title,
+  .projects-subtitle,
+  .projects-description,
+  .project-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .project-card,
+  .project-card-bg,
+  .project-card-title,
+  .project-card-number,
+  .project-card-btn-inner,
+  .carousel-dot {
+    transition: none;
+  }
+  
+  .project-card:hover,
+  .project-card:hover .project-card-number {
+    transform: none;
+  }
+  
+  .project-card:hover .project-card-btn-inner {
+    animation: none;
   }
 }
