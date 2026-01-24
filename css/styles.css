@@ -813,6 +813,247 @@ button:focus-visible {
   }
 }
 
+/* ========================================
+   PROJECTS SECTION (Mobile First)
+   ======================================== */
+
+/* Section container */
+.projects-section {
+  background: rgba(34, 166, 81, 0.98);
+}
+
+/* Background styling */
+.projects-bg {
+  /* Gradient overlay for better text readability */
+  background: linear-gradient(
+    180deg, 
+    rgba(34, 166, 81, 0.98) 0%, 
+    rgba(34, 166, 81, 0.95) 100%
+  );
+}
+
+.projects-bg img {
+  object-position: center 20%;
+}
+
+/* Desktop background positioning */
+@media (min-width: 1024px) {
+  .projects-bg img {
+    object-position: center center;
+  }
+}
+
+/* Title animations */
+.projects-title {
+  animation: fadeInDown 0.6s ease-out forwards;
+}
+
+.projects-subtitle {
+  animation: fadeInDown 0.6s ease-out 0.1s forwards;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.projects-description {
+  animation: fadeInDown 0.6s ease-out 0.2s forwards;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   MOBILE CAROUSEL
+   ======================================== */
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Carousel container */
+.projects-carousel {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Carousel dots */
+.carousel-dot {
+  cursor: pointer;
+}
+
+.carousel-dot.active {
+  background: #FBD216;
+  width: 24px;
+}
+
+/* ========================================
+   PROJECT CARDS - Mobile First
+   ======================================== */
+
+/* Card container */
+.project-card {
+  text-decoration: none;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Card inner container */
+.project-card-inner {
+  position: relative;
+}
+
+/* Card entrance animation */
+.project-card {
+  opacity: 0;
+  animation: cardFadeIn 0.5s ease-out forwards;
+}
+
+.project-card:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.project-card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.project-card:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card title styling */
+.project-card-title {
+  transition: color 0.3s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover .project-card-title {
+  color: #FBD216;
+}
+
+/* Card number styling */
+.project-card-number {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+/* Button hover pulse effect */
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(251, 210, 22, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(251, 210, 22, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(251, 210, 22, 0);
+  }
+}
+
+.project-card:hover .project-card-btn > div {
+  animation: buttonPulse 1.5s ease infinite;
+}
+
+/* Card ripple effect on click */
+.project-card-inner::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(251, 210, 22, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.project-card:active .project-card-inner::after {
+  width: 300%;
+  height: 300%;
+}
+
+/* ========================================
+   PROJECTS SECTION - Desktop (lg)
+   ======================================== */
+
+@media (min-width: 1024px) {
+  .projects-section {
+    min-height: 950px;
+  }
+  
+  .projects-content {
+    padding-top: 60px;
+    padding-bottom: 80px;
+  }
+  
+  .projects-header {
+    margin-bottom: 60px;
+  }
+  
+  /* Enhanced hover effects for desktop */
+  .project-card:hover {
+    transform: translateY(-12px);
+  }
+  
+  .project-card:active {
+    transform: translateY(-4px);
+  }
+  
+  /* Card number hover effect - desktop only */
+  .project-card:hover .project-card-number {
+    transform: translate(15%, 30%) scale(1.05);
+    opacity: 0.6;
+  }
+  
+  /* Card shadow on hover */
+  .project-card:hover .project-card-inner > div:first-child {
+    box-shadow: 0px 8px 60px rgba(0, 0, 0, 0.35), 0 0 30px rgba(251, 210, 22, 0.1);
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1280px) {
+  .projects-content {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+}
+
+/* Extra Large Desktop */
+@media (min-width: 1536px) {
+  .projects-content {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .emendas-title-desktop,

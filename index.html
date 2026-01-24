@@ -12,7 +12,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Dancing+Script:wght@700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Dancing+Script:wght@700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
   
   <!-- Custom Styles -->
   <link rel="stylesheet" href="css/styles.css">
@@ -492,6 +492,237 @@
           Veja para onde foram destinadas as emendas parlamentares e como cada recurso está sendo usado para melhorar a vida da população nas áreas que mais precisam
         </span>
       </a>
+      
+    </div>
+    
+  </section>
+  
+  <!-- Projects Section -->
+  <section id="projetos" class="projects-section relative w-full overflow-hidden">
+    
+    <!-- Background with green overlay and Nikolas image (responsive) -->
+    <div class="projects-bg absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-[rgba(34,166,81,0.98)] to-[rgba(34,166,81,0.98)]"></div>
+      <picture class="absolute inset-0 w-full h-full">
+        <source media="(min-width: 1024px)" srcset="assets/images/nikolas-services.png">
+        <img 
+          src="assets/images/nikolas-service-mobile-bg.avif" 
+          alt="" 
+          class="w-full h-full object-cover opacity-35 mix-blend-overlay"
+        >
+      </picture>
+    </div>
+    
+    <!-- Content Container -->
+    <div class="projects-content relative z-10 w-full max-w-[1920px] mx-auto px-6 lg:px-[108px] py-12 lg:py-16">
+      
+      <!-- Title Section -->
+      <div class="projects-header text-center mb-10 lg:mb-16">
+        
+        <!-- Main Title -->
+        <h2 class="projects-title font-unbounded font-extrabold text-[#FFDF20] text-3xl sm:text-4xl lg:text-[70px] lg:leading-[62px] mb-4 lg:mb-6 tracking-tight" style="text-shadow: 1px 1px 0 #000;">
+          MEUS PROJETOS
+        </h2>
+        
+        <!-- Subtitle -->
+        <p class="projects-subtitle font-unbounded font-semibold text-white text-lg sm:text-2xl lg:text-[45px] lg:leading-[62px] mb-4 lg:mb-6">
+          Propostas que refletem a voz da população
+        </p>
+        
+        <!-- Description -->
+        <p class="projects-description font-unbounded font-normal text-white text-sm sm:text-base lg:text-[30px] lg:leading-[30px] max-w-[1134px] mx-auto opacity-90">
+          Conheça os projetos de lei apresentados e entenda como cada proposta busca transformar a realidade com base nas demandas e necessidades da sociedade
+        </p>
+        
+      </div>
+      
+      <!-- Cards Carousel (Mobile) / Grid (Desktop) -->
+      <div class="projects-carousel-wrapper lg:hidden relative">
+        <!-- Mobile Carousel -->
+        <div class="projects-carousel flex gap-4 overflow-x-auto snap-x snap-mandatory pb-6 -mx-6 px-6 scrollbar-hide">
+          
+          <!-- Card 1 -->
+          <a href="#" class="project-card group relative block flex-shrink-0 w-[85vw] max-w-[320px] snap-center">
+            <div class="project-card-inner relative overflow-hidden rounded-[20px] p-6 min-h-[320px] transition-all duration-300">
+              
+              <!-- Card Background -->
+              <div class="absolute inset-0 bg-[rgba(26,26,26,0.45)] backdrop-blur-[30px] rounded-[20px] border border-[#353535] shadow-[0px_4px_48px_rgba(0,0,0,0.25)] transition-all duration-300 group-hover:bg-[rgba(26,26,26,0.6)] group-hover:border-[#FBD216]"></div>
+              
+              <!-- Title -->
+              <h3 class="project-card-title relative z-10 font-unbounded font-semibold text-white text-base max-w-[200px]">
+                Aumento de penas para atos obcenos em escolas e universidades públicas
+              </h3>
+              
+              <!-- Large Number -->
+              <span class="project-card-number absolute right-[-10px] bottom-[10px] font-unbounded font-semibold text-[140px] leading-[0.76] text-[rgba(34,166,81,0.38)] select-none pointer-events-none z-10">1</span>
+              
+              <!-- Button - Positioned bottom left -->
+              <div class="project-card-btn absolute left-[21px] bottom-[24px] z-20">
+                <div class="w-[50px] h-[50px] rounded-full bg-transparent border-2 border-[#FBD216] flex items-center justify-center transition-all duration-300 group-hover:bg-[#FBD216] group-hover:scale-110 group-active:scale-95">
+                  <svg class="w-6 h-6 text-[#FBD216] transition-colors duration-300 group-hover:text-[#1a1a1a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </div>
+              </div>
+              
+            </div>
+          </a>
+          
+          <!-- Card 2 -->
+          <a href="#" class="project-card group relative block flex-shrink-0 w-[85vw] max-w-[320px] snap-center">
+            <div class="project-card-inner relative overflow-hidden rounded-[20px] p-6 min-h-[320px] transition-all duration-300">
+              
+              <!-- Card Background -->
+              <div class="absolute inset-0 bg-[rgba(26,26,26,0.45)] backdrop-blur-[30px] rounded-[20px] border border-[#353535] shadow-[0px_4px_48px_rgba(0,0,0,0.25)] transition-all duration-300 group-hover:bg-[rgba(26,26,26,0.6)] group-hover:border-[#FBD216]"></div>
+              
+              <!-- Title -->
+              <h3 class="project-card-title relative z-10 font-unbounded font-semibold text-white text-base max-w-[200px]">
+                Isenção do imposto de renda para os professores
+              </h3>
+              
+              <!-- Large Number -->
+              <span class="project-card-number absolute right-[-10px] bottom-[10px] font-unbounded font-semibold text-[140px] leading-[0.76] text-[rgba(34,166,81,0.35)] select-none pointer-events-none z-10">2</span>
+              
+              <!-- Button - Positioned bottom left -->
+              <div class="project-card-btn absolute left-[21px] bottom-[24px] z-20">
+                <div class="w-[50px] h-[50px] rounded-full bg-transparent border-2 border-[#FBD216] flex items-center justify-center transition-all duration-300 group-hover:bg-[#FBD216] group-hover:scale-110 group-active:scale-95">
+                  <svg class="w-6 h-6 text-[#FBD216] transition-colors duration-300 group-hover:text-[#1a1a1a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </div>
+              </div>
+              
+            </div>
+          </a>
+          
+          <!-- Card 3 -->
+          <a href="#" class="project-card group relative block flex-shrink-0 w-[85vw] max-w-[320px] snap-center">
+            <div class="project-card-inner relative overflow-hidden rounded-[20px] p-6 min-h-[320px] transition-all duration-300">
+              
+              <!-- Card Background -->
+              <div class="absolute inset-0 bg-[rgba(26,26,26,0.45)] backdrop-blur-[30px] rounded-[20px] border border-[#353535] shadow-[0px_4px_48px_rgba(0,0,0,0.25)] transition-all duration-300 group-hover:bg-[rgba(26,26,26,0.6)] group-hover:border-[#FBD216]"></div>
+              
+              <!-- Title -->
+              <h3 class="project-card-title relative z-10 font-unbounded font-semibold text-white text-base max-w-[200px]">
+                Curso gratuito de libras para famílias de crianças surdas
+              </h3>
+              
+              <!-- Large Number -->
+              <span class="project-card-number absolute right-[-10px] bottom-[10px] font-unbounded font-semibold text-[140px] leading-[0.76] text-[rgba(34,166,81,0.7)] select-none pointer-events-none z-10">3</span>
+              
+              <!-- Button - Positioned bottom left -->
+              <div class="project-card-btn absolute left-[21px] bottom-[24px] z-20">
+                <div class="w-[50px] h-[50px] rounded-full bg-transparent border-2 border-[#FBD216] flex items-center justify-center transition-all duration-300 group-hover:bg-[#FBD216] group-hover:scale-110 group-active:scale-95">
+                  <svg class="w-6 h-6 text-[#FBD216] transition-colors duration-300 group-hover:text-[#1a1a1a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </div>
+              </div>
+              
+            </div>
+          </a>
+          
+        </div>
+        
+        <!-- Carousel Indicators -->
+        <div class="projects-carousel-dots flex justify-center gap-2 mt-2">
+          <span class="carousel-dot w-2 h-2 rounded-full bg-white/30 transition-all duration-300"></span>
+          <span class="carousel-dot w-2 h-2 rounded-full bg-white/30 transition-all duration-300"></span>
+          <span class="carousel-dot w-2 h-2 rounded-full bg-white/30 transition-all duration-300"></span>
+        </div>
+      </div>
+      
+      <!-- Desktop Grid -->
+      <div class="projects-grid hidden lg:grid lg:grid-cols-3 gap-8">
+        
+        <!-- Card 1 -->
+        <a href="#" class="project-card group relative block">
+          <div class="project-card-inner relative overflow-hidden rounded-[30px] min-h-[416px] transition-all duration-300">
+            
+            <!-- Card Background -->
+            <div class="absolute inset-0 bg-[rgba(26,26,26,0.45)] backdrop-blur-[30px] rounded-[30px] border border-[#353535] shadow-[0px_4px_48px_rgba(0,0,0,0.25)] transition-all duration-300 group-hover:bg-[rgba(26,26,26,0.6)] group-hover:border-[#FBD216]"></div>
+            
+            <!-- Title - Positioned top left with Figma specs -->
+            <h3 class="project-card-title absolute top-[26px] left-[21px] font-unbounded font-semibold text-white text-[24px] leading-[30px] max-w-[300px] z-10">
+              Aumento de penas para atos obcenos em escolas e universidades públicas
+            </h3>
+            
+            <!-- Large Number - Positioned bottom right, partially cropped -->
+            <span class="project-card-number absolute right-[-20px] bottom-[-8px] font-unbounded font-semibold text-[300px] leading-[0.76] text-[rgba(34,166,81,0.38)] select-none pointer-events-none">1</span>
+            
+            <!-- Button - Positioned bottom left (Figma: left=21px, bottom=68px) -->
+            <div class="project-card-btn absolute left-[21px] bottom-[68px] z-20">
+              <div class="w-[73px] h-[71px] rounded-full bg-transparent border-2 border-[#FBD216] flex items-center justify-center transition-all duration-300 group-hover:bg-[#FBD216] group-hover:scale-110 group-active:scale-95">
+                <svg class="w-8 h-8 text-[#FBD216] transition-colors duration-300 group-hover:text-[#1a1a1a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </div>
+            </div>
+            
+          </div>
+        </a>
+        
+        <!-- Card 2 -->
+        <a href="#" class="project-card group relative block">
+          <div class="project-card-inner relative overflow-hidden rounded-[30px] min-h-[416px] transition-all duration-300">
+            
+            <!-- Card Background -->
+            <div class="absolute inset-0 bg-[rgba(26,26,26,0.45)] backdrop-blur-[30px] rounded-[30px] border border-[#353535] shadow-[0px_4px_48px_rgba(0,0,0,0.25)] transition-all duration-300 group-hover:bg-[rgba(26,26,26,0.6)] group-hover:border-[#FBD216]"></div>
+            
+            <!-- Title - Positioned top left with Figma specs -->
+            <h3 class="project-card-title absolute top-[26px] left-[21px] font-unbounded font-semibold text-white text-[24px] leading-[30px] max-w-[300px] z-10">
+              Isenção do imposto de renda para os professores
+            </h3>
+            
+            <!-- Large Number - Positioned bottom right, partially cropped -->
+            <span class="project-card-number absolute right-[-20px] bottom-[-8px] font-unbounded font-semibold text-[300px] leading-[0.76] text-[rgba(34,166,81,0.35)] select-none pointer-events-none">2</span>
+            
+            <!-- Button - Positioned bottom left (Figma: left=21px, bottom=68px) -->
+            <div class="project-card-btn absolute left-[21px] bottom-[68px] z-20">
+              <div class="w-[73px] h-[71px] rounded-full bg-transparent border-2 border-[#FBD216] flex items-center justify-center transition-all duration-300 group-hover:bg-[#FBD216] group-hover:scale-110 group-active:scale-95">
+                <svg class="w-8 h-8 text-[#FBD216] transition-colors duration-300 group-hover:text-[#1a1a1a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </div>
+            </div>
+            
+          </div>
+        </a>
+        
+        <!-- Card 3 -->
+        <a href="#" class="project-card group relative block">
+          <div class="project-card-inner relative overflow-hidden rounded-[30px] min-h-[416px] transition-all duration-300">
+            
+            <!-- Card Background -->
+            <div class="absolute inset-0 bg-[rgba(26,26,26,0.45)] backdrop-blur-[30px] rounded-[30px] border border-[#353535] shadow-[0px_4px_48px_rgba(0,0,0,0.25)] transition-all duration-300 group-hover:bg-[rgba(26,26,26,0.6)] group-hover:border-[#FBD216]"></div>
+            
+            <!-- Title - Positioned top left with Figma specs -->
+            <h3 class="project-card-title absolute top-[26px] left-[21px] font-unbounded font-semibold text-white text-[24px] leading-[30px] max-w-[300px] z-10">
+              Curso gratuito de libras para famílias de crianças surdas
+            </h3>
+            
+            <!-- Large Number - Positioned bottom right, partially cropped -->
+            <span class="project-card-number absolute right-[-20px] bottom-[-8px] font-unbounded font-semibold text-[300px] leading-[0.76] text-[rgba(34,166,81,0.7)] select-none pointer-events-none">3</span>
+            
+            <!-- Button - Positioned bottom left (Figma: left=21px, bottom=68px) -->
+            <div class="project-card-btn absolute left-[21px] bottom-[68px] z-20">
+              <div class="w-[73px] h-[71px] rounded-full bg-transparent border-2 border-[#FBD216] flex items-center justify-center transition-all duration-300 group-hover:bg-[#FBD216] group-hover:scale-110 group-active:scale-95">
+                <svg class="w-8 h-8 text-[#FBD216] transition-colors duration-300 group-hover:text-[#1a1a1a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </div>
+            </div>
+            
+          </div>
+        </a>
+        
+      </div>
       
     </div>
     

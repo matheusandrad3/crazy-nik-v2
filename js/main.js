@@ -186,4 +186,72 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize maps
   initMinasMaps();
+
+  // ========================================
+  // PROJECTS CAROUSEL (Mobile)
+  // ========================================
+  
+  function initProjectsCarousel() {
+    const carousel = document.querySelector('.projects-carousel');
+    const dots = document.querySelectorAll('.carousel-dot');
+    
+    if (!carousel || dots.length === 0) return;
+    
+    // Update active dot based on scroll position
+    function updateActiveDot() {
+      const scrollLeft = carousel.scrollLeft;
+      const cardWidth = carousel.querySelector('.project-card').offsetWidth;
+      const gap = 16; // gap-4 = 16px
+      const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
+      
+      dots.forEach((dot, index) => {
+        if (index === activeIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+    
+    // Set first dot as active initially
+    if (dots[0]) {
+      dots[0].classList.add('active');
+    }
+    
+    // Listen for scroll events
+    carousel.addEventListener('scroll', updateActiveDot, { passive: true });
+    
+    // Click on dot to scroll to card
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        const cards = carousel.querySelectorAll('.project-card');
+        if (cards[index]) {
+          cards[index].scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'nearest',
+            inline: 'center' 
+          });
+        }
+      });
+    });
+    
+    // Touch feedback for cards
+    const cards = carousel.querySelectorAll('.project-card');
+    cards.forEach(card => {
+      card.addEventListener('touchstart', function() {
+        this.style.transform = 'scale(0.98)';
+      }, { passive: true });
+      
+      card.addEventListener('touchend', function() {
+        this.style.transform = 'scale(1)';
+      }, { passive: true });
+      
+      card.addEventListener('touchcancel', function() {
+        this.style.transform = 'scale(1)';
+      }, { passive: true });
+    });
+  }
+  
+  // Initialize carousel
+  initProjectsCarousel();
 });
