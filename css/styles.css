@@ -518,10 +518,14 @@ button:focus-visible {
 
 /* Mobile container - full width edge-to-edge */
 .emendas-mobile {
-  /* Figma: 430x932 aspect ratio */
+  /* CORREÇÃO: Usar aspect-ratio SEM min-height conflitante
+     O problema era que min-height: 100dvh poderia ser maior que a altura do aspect-ratio,
+     causando posições diferentes do mapa entre celular real e emulador */
+  width: 100%;
+  /* Manter aspect-ratio do Figma (430x932) para consistência */
   aspect-ratio: 430 / 932;
-  min-height: 100vh;
-  min-height: 100dvh;
+  /* Garantir altura mínima apenas quando necessário, mas nunca maior que o aspect-ratio permitiria */
+  min-height: min(100svh, 216.7vw); /* 216.7vw = 932/430 * 100 */
   overflow: hidden;
 }
 
@@ -564,13 +568,10 @@ button:focus-visible {
 
 /* Map - Large and overflowing container (Figma: 617x491 at left:-142px) */
 .emendas-map-large {
-  /* Position from Figma calculations:
-     Section: 467x1067, Map: 617x491
-     Map top: 441px from section top = 41.3%
-     Map left: -142px on 467px = -30.4%
-     Map width: 617px / 467px = 132%
-  */
+  /* CORREÇÃO: Agora que o container tem altura consistente via aspect-ratio,
+     podemos usar porcentagens que funcionarão igual em todos os dispositivos */
   position: absolute;
+  /* Posição original do Figma: aproximadamente 37% do topo */
   top: 37%;
   left: -30%;
   width: 135%;
