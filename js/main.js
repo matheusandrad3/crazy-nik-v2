@@ -202,7 +202,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const scrollLeft = carousel.scrollLeft;
       const cardWidth = carousel.querySelector('.project-card').offsetWidth;
       const gap = 16; // gap-4 = 16px
-      const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
+      // Clamp to valid bounds to handle mobile overscroll (iOS bounce / Android elastic)
+      const activeIndex = Math.max(0, Math.min(dots.length - 1, Math.round(scrollLeft / (cardWidth + gap))));
       
       dots.forEach((dot, index) => {
         if (index === activeIndex) {
