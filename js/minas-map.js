@@ -39,6 +39,7 @@ const MinasMap = (function() {
     let container = containerEl;
     let tooltip = null;
     let regions = [];
+    let isDestroyed = false;
     
     const config = {
       tooltipOffset: 15,
@@ -60,6 +61,11 @@ const MinasMap = (function() {
           return response.text();
         })
         .then(svgContent => {
+          // Guard: Check if instance was destroyed while fetch was in progress
+          if (isDestroyed || !container) {
+            return;
+          }
+          
           // Parse and insert SVG
           const parser = new DOMParser();
           const svgDoc = parser.parseFromString(svgContent, 'image/svg+xml');
@@ -130,6 +136,11 @@ const MinasMap = (function() {
      * Setup map after SVG is loaded
      */
     function setupMap() {
+      // Guard: Check if instance was destroyed
+      if (isDestroyed || !container) {
+        return;
+      }
+      
       if (config.showTooltip) {
         createTooltip();
       }
@@ -155,6 +166,10 @@ const MinasMap = (function() {
      * Create tooltip element
      */
     function createTooltip() {
+      if (isDestroyed || !container) {
+        return;
+      }
+      
       tooltip = document.createElement('div');
       tooltip.className = 'minas-map-tooltip';
       tooltip.setAttribute('role', 'tooltip');
@@ -177,6 +192,7 @@ const MinasMap = (function() {
         region.addEventListener('blur', handleBlur);
         region.addEventListener('touchstart', handleTouchStart, { passive: true });
         region.addEventListener('touchend', handleTouchEnd, { passive: false });
+        region.addEventListener('touchcancel', handleTouchCancel, { passive: true });
       });
     }
 
@@ -201,7 +217,7 @@ const MinasMap = (function() {
     }
 
     function handleMouseMove(e) {
-      if (!tooltip || !config.showTooltip) return;
+      if (isDestroyed || !container || !tooltip || !config.showTooltip) return;
 
       const containerRect = container.getBoundingClientRect();
       const tooltipRect = tooltip.getBoundingClientRect();
@@ -253,6 +269,8 @@ const MinasMap = (function() {
     }
 
     function handleFocus(e) {
+      if (isDestroyed || !container) return;
+      
       const region = e.target;
       const regionName = region.dataset.name;
 
@@ -304,7 +322,18 @@ const MinasMap = (function() {
       e.preventDefault();
     }
 
+    function handleTouchCancel(e) {
+      const region = e.target.closest('path');
+      if (region) {
+        region.classList.remove('is-touched');
+      }
+    }
+
     function selectRegion(regionId) {
+      if (isDestroyed || !container) {
+        return false;
+      }
+      
       deselectAll();
       const region = container.querySelector(`[data-region="${regionId}"]`);
       if (region) {
@@ -321,6 +350,10 @@ const MinasMap = (function() {
     }
 
     function dispatchMapEvent(eventName, detail) {
+      if (isDestroyed || !container) {
+        return;
+      }
+      
       const event = new CustomEvent(eventName, {
         bubbles: true,
         detail: detail
@@ -329,6 +362,9 @@ const MinasMap = (function() {
     }
 
     function destroy() {
+      // Mark as destroyed first to prevent async callbacks from proceeding
+      isDestroyed = true;
+      
       regions.forEach(region => {
         region.removeEventListener('mouseenter', handleMouseEnter);
         region.removeEventListener('mousemove', handleMouseMove);
@@ -339,13 +375,16 @@ const MinasMap = (function() {
         region.removeEventListener('blur', handleBlur);
         region.removeEventListener('touchstart', handleTouchStart);
         region.removeEventListener('touchend', handleTouchEnd);
+        region.removeEventListener('touchcancel', handleTouchCancel);
       });
 
       if (tooltip) {
         tooltip.remove();
       }
 
-      container.innerHTML = '';
+      if (container) {
+        container.innerHTML = '';
+      }
       container = null;
       tooltip = null;
       regions = [];
