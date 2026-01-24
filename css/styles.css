@@ -324,11 +324,9 @@ html, body {
   width: 100%;
   max-width: 430px;
   margin: 0 auto;
-  /* Altura com múltiplos fallbacks para garantir cobertura total do viewport */
-  /* Fallback 1: altura básica */
+  /* Fallback para navegadores sem suporte a CSS variables */
   height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
-  /* Fallback 2: usar variável calculada pelo JS com altura exata */
+  /* Altura precisa calculada via JS (com fallback interno para 100vh) */
   height: var(--app-height, 100vh);
 }
 
