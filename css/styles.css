@@ -339,8 +339,8 @@ html, body {
   }
 }
 
-/* Fallback específico para Safari iOS */
-@supports (-webkit-touch-callout: none) {
+/* Fallback específico para Safari iOS antigo que não suporta dvh */
+@supports (-webkit-touch-callout: none) and (not (height: 100dvh)) {
   .hero-mobile {
     height: -webkit-fill-available;
   }
