@@ -5,10 +5,14 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Garantir altura correta em dispositivos móveis */
+/* Garantir altura correta e resetar margens em dispositivos móveis */
 html, body {
+  margin: 0;
+  padding: 0;
   min-height: 100%;
   min-height: 100dvh;
+  /* Evitar scroll horizontal acidental */
+  overflow-x: hidden;
 }
 
 @supports not (min-height: 100dvh) {
@@ -320,10 +324,26 @@ html, body {
   width: 100%;
   max-width: 430px;
   margin: 0 auto;
-  /* Usar variável CSS calculada via JS para altura precisa do viewport */
+  /* Altura com múltiplos fallbacks para garantir cobertura total do viewport */
+  /* Fallback 1: altura básica */
+  height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
-  min-height: 500px; /* altura mínima para telas muito pequenas */
-  max-height: 932px; /* altura máxima baseada no Figma */
+  /* Fallback 2: usar variável calculada pelo JS com altura exata */
+  height: var(--app-height, 100vh);
+}
+
+/* Fallback para navegadores modernos que suportam dvh */
+@supports (height: 100dvh) {
+  .hero-mobile {
+    height: 100dvh;
+  }
+}
+
+/* Fallback específico para Safari iOS */
+@supports (-webkit-touch-callout: none) {
+  .hero-mobile {
+    height: -webkit-fill-available;
+  }
 }
 
 /* Mobile hero typography - positioned based on Figma: left: -49px, top: 269px, 528x297 */
