@@ -516,14 +516,13 @@ button:focus-visible {
 
 /* Mobile container - full width edge-to-edge */
 .emendas-mobile {
-  /* CORREÇÃO: Usar aspect-ratio SEM min-height conflitante
-     O problema era que min-height: 100dvh poderia ser maior que a altura do aspect-ratio,
-     causando posições diferentes do mapa entre celular real e emulador */
+  /* Altura fixa baseada na largura do viewport para consistência total
+     entre celular real e emulador. Não depende de vh/dvh/svh. */
   width: 100%;
-  /* Manter aspect-ratio do Figma (430x932) para consistência */
-  aspect-ratio: 430 / 932;
-  /* Garantir altura mínima apenas quando necessário, mas nunca maior que o aspect-ratio permitiria */
-  min-height: min(100svh, 216.7vw); /* 216.7vw = 932/430 * 100 */
+  /* Altura = largura * (932/430) = largura * 2.167 */
+  height: calc(100vw * 932 / 430);
+  /* Limitar altura máxima para telas largas que ainda são mobile */
+  max-height: 932px;
   overflow: hidden;
 }
 
@@ -536,7 +535,7 @@ button:focus-visible {
 /* Large EMENDAS text with photo background clipped to text */
 .emendas-photo-text {
   /* Background image clipped to text - Minas Gerais flag */
-  background-image: url('../assets/images/bandeira-minas-bg.png');
+  background-image: url('../assets/images/bandeira-minas-bg.avif');
   /* Scale and position to center the red triangle on the text */
   background-size: 100% auto;
   background-position: 50% 0%;
@@ -566,13 +565,14 @@ button:focus-visible {
 
 /* Map - Large and overflowing container (Figma: 617x491 at left:-142px) */
 .emendas-map-large {
-  /* CORREÇÃO: Agora que o container tem altura consistente via aspect-ratio,
-     podemos usar porcentagens que funcionarão igual em todos os dispositivos */
   position: absolute;
-  /* Posição original do Figma: aproximadamente 37% do topo */
-  top: 37%;
-  left: -30%;
-  width: 135%;
+  /* Position scales with viewport. Left is capped at -129px to prevent
+     excessive left offset on wider screens. Width scales freely with vw
+     to ensure the map always covers the container's right edge. */
+  top: min(80vw, 344px);
+  left: max(-30vw, -129px);
+  width: 135vw;
+  /* No max-width - allows map to cover full container width on screens 430-1023px */
   /* Pointer events for interactivity */
   pointer-events: auto;
   /* Enable touch interactions */
