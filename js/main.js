@@ -1,5 +1,27 @@
+// ========================================
+// VIEWPORT HEIGHT FIX
+// Resolve o bug de 100vh não pegar a altura correta no carregamento inicial
+// ========================================
+function setViewportHeight() {
+  // Calcula a altura real do viewport e define como variável CSS
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Executar imediatamente para evitar flash de layout incorreto
+setViewportHeight();
+
+// Atualizar em resize e orientação
+window.addEventListener('resize', setViewportHeight);
+window.addEventListener('orientationchange', () => {
+  // Pequeno delay para garantir que o navegador terminou de ajustar
+  setTimeout(setViewportHeight, 100);
+});
+
 // Mobile Menu Functionality
 document.addEventListener('DOMContentLoaded', function() {
+  // Recalcular após DOM carregado para garantir valor correto
+  setViewportHeight();
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileMenuClose = document.getElementById('mobile-menu-close');
