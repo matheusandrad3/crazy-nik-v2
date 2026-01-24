@@ -568,13 +568,13 @@ button:focus-visible {
 /* Map - Large and overflowing container (Figma: 617x491 at left:-142px) */
 .emendas-map-large {
   position: absolute;
-  /* Posição fixa em vw para garantir consistência absoluta entre dispositivos
-     No Figma: mapa top = 345px em container de 430px largura = 80% da largura */
-  top: 80vw;
-  left: -30vw;
+  /* Position scales with viewport. Left is capped at -129px to prevent
+     excessive left offset on wider screens. Width scales freely with vw
+     to ensure the map always covers the container's right edge. */
+  top: min(80vw, 344px);
+  left: max(-30vw, -129px);
   width: 135vw;
-  /* Limitar para telas maiores que 430px */
-  max-width: 580.5px; /* 135% de 430px */
+  /* No max-width - allows map to cover full container width on screens 430-1023px */
   /* Pointer events for interactivity */
   pointer-events: auto;
   /* Enable touch interactions */
