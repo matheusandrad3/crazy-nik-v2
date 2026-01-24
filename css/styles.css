@@ -502,3 +502,314 @@ button:focus-visible {
     padding-bottom: 0;
   }
 }
+
+/* ========================================
+   EMENDAS SECTION
+   ======================================== */
+
+/* Section Container */
+.emendas-section {
+  min-height: auto;
+}
+
+/* ========================================
+   MOBILE LAYOUT (Default - Mobile First)
+   ======================================== */
+
+/* Mobile container - full width edge-to-edge */
+.emendas-mobile {
+  /* Figma: 430x932 aspect ratio */
+  aspect-ratio: 430 / 932;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+/* Title container positioning */
+.emendas-title-container {
+  width: 100%;
+  padding: 0;
+}
+
+/* Large EMENDAS text with photo background clipped to text */
+.emendas-photo-text {
+  /* Background image clipped to text - Minas Gerais flag */
+  background-image: url('../assets/images/bandeira-minas-bg.png');
+  /* Scale and position to center the red triangle on the text */
+  background-size: 100% auto;
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  /* Add subtle text stroke for visibility */
+  -webkit-text-stroke: 1px rgba(150, 150, 150, 0.1);
+  /* Ensure text is not selectable */
+  user-select: none;
+  pointer-events: none;
+  /* Font size responsive - scales with viewport width */
+  font-size: clamp(100px, 45vw, 210px);
+  line-height: 0.72;
+  /* Add drop shadow for depth and visibility */
+  filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.1));
+}
+
+/* END line positioning - indented left so D touches right edge */
+.emendas-end-line {
+  /* Push END line to the right with margin-left */
+  /* END has 3 letters, EM has 2 - roughly END needs 35% indent */
+  margin-left: 1%;
+}
+
+/* Map - Large and overflowing container (Figma: 617x491 at left:-142px) */
+.emendas-map-large {
+  /* Position from Figma calculations:
+     Section: 467x1067, Map: 617x491
+     Map top: 441px from section top = 41.3%
+     Map left: -142px on 467px = -30.4%
+     Map width: 617px / 467px = 132%
+  */
+  position: absolute;
+  top: 37%;
+  left: -30%;
+  width: 135%;
+  /* Pointer events for interactivity */
+  pointer-events: auto;
+  /* Enable touch interactions */
+  touch-action: manipulation;
+}
+
+/* CTA Text styling */
+.emendas-cta-text {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ========================================
+   DESKTOP LAYOUT (lg and up)
+   ======================================== */
+
+/* Desktop container */
+.emendas-desktop {
+  position: relative;
+  width: 100%;
+  max-width: 1927px;
+  margin: 0 auto;
+  min-height: 800px;
+  /* Figma: aspect-ratio 1927/1059 */
+  aspect-ratio: 1927 / 1059;
+  /* Overflow hidden to cut off the S */
+  overflow: hidden;
+}
+
+/* EMENDAS Title - Large text with photo background clipped */
+.emendas-title-desktop {
+  position: absolute;
+  top: -1%;
+  left: -3%;
+  width: 110%; /* Wider than container so S gets cut off */
+  font-size: clamp(140px, 20vw, 390px);
+  line-height: 0.75; /* Tight line height for large text */
+  letter-spacing: -0.02em;
+  /* Photo background clipped to text with green tint overlay */
+  background-image: 
+    linear-gradient(to right, rgba(21, 87, 36, 0.5), rgba(21, 87, 36, 0.5)),
+    url('../assets/images/emendas-text-bg.png');
+  background-size: 100% 503.45%;
+  background-position: 0% 78.04%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  /* Ensure text is not selectable */
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Nikolas Photo - Left side */
+.emendas-nikolas-photo {
+  position: absolute;
+  left: -0.26%; /* 5px / 1927px */
+  top: 11.1%; /* 107px / 1059px */
+  width: 87.35%; /* 1683.18px / 1927px */
+  height: 89.42%; /* 947px / 1059px */
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Impact Text - Desktop */
+.emendas-impact-text {
+  position: absolute;
+  /* Figma specs: 475x129 at left: 592px, top: 345px (2432 - 2087) in 1927x1059 container */
+  left: 30.72%; /* 592px / 1927px */
+  top: 32.58%; /* 345px / 1059px */
+  width: 24.65%; /* 475px / 1927px */
+  font-size: clamp(24px, 2.1vw, 40px);
+  line-height: 1.2; /* 48px / 40px */
+  color: #003B00;
+  z-index: 15;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* Desktop Map - Positioned on the right */
+.emendas-map-desktop {
+  position: absolute;
+  /* Figma specs: 974x765 at left: calc(41.67% + 43px), top: 159px in 1927x1059 container */
+  left: 43.75%; /* 843px / 1927px */
+  top: 15.01%; /* 159px / 1059px */
+  width: 50.54%; /* 974px / 1927px */
+  height: 72.24%; /* 765px / 1059px */
+  z-index: 10;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emendas-map-desktop .minas-map {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+.emendas-map-desktop .minas-map-fallback {
+  width: 100%;
+  height: auto;
+}
+
+/* CTA Button - Desktop */
+.emendas-cta-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Figma specs: 723x236 at left: calc(8.33% + 235px) = ~395px, top: 747px */
+  left: 20.5%; /* 395px / 1927px */
+  top: 70.54%; /* 747px / 1059px */
+  width: 37.52%; /* 723px / 1927px */
+  max-width: 723px;
+  height: 22.28%; /* 236px / 1059px */
+  max-height: 236px;
+  background: #2458A4;
+  border: 1px solid #FFFFFF;
+  border-radius: 100px;
+  z-index: 20;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(36, 88, 164, 0.3);
+  padding: 20px 40px;
+}
+
+.emendas-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(36, 88, 164, 0.4);
+  background-color: #1d4a8a;
+}
+
+.emendas-cta-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(36, 88, 164, 0.3);
+}
+
+.emendas-cta-btn-text {
+  font-size: clamp(14px, 1.3vw, 25px);
+  line-height: 1.24;
+  text-align: center;
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .emendas-section {
+    min-height: auto;
+  }
+  
+  .emendas-title-desktop {
+    animation: fadeInEmendas 0.8s ease-out forwards;
+  }
+  
+  .emendas-nikolas-photo {
+    animation: slideInFromLeft 1s ease-out forwards;
+  }
+  
+  .emendas-map-desktop {
+    animation: slideInFromRight 1s ease-out forwards;
+  }
+}
+
+/* Large Desktop - Adjust for wider screens */
+@media (min-width: 1280px) {
+  .emendas-cta-btn-text {
+    font-size: 20px;
+  }
+}
+
+/* Extra Large Desktop */
+@media (min-width: 1536px) {
+  .emendas-cta-btn-text {
+    font-size: 25px;
+  }
+}
+
+/* Animation for EMENDAS title */
+@keyframes fadeInEmendas {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation for Nikolas photo */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation for Map */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Map container aspect ratio for mobile */
+@media (max-width: 1023px) {
+  .minas-map-container {
+    aspect-ratio: 8 / 7;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .emendas-title-desktop,
+  .emendas-nikolas-photo,
+  .emendas-map-desktop {
+    animation: none;
+    opacity: 1;
+  }
+  
+  .emendas-cta-btn {
+    transition: none;
+  }
+  
+  .emendas-cta-btn:hover {
+    transform: none;
+  }
+}

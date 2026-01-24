@@ -12,10 +12,11 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Dancing+Script:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Dancing+Script:wght@700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
   
   <!-- Custom Styles -->
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/minas-map.css">
   
   <!-- Tailwind Config -->
   <script>
@@ -31,6 +32,7 @@
             'unbounded': ['Unbounded', 'sans-serif'],
             'script': ['Dancing Script', 'cursive'],
             'inter': ['Inter', 'sans-serif'],
+            'montserrat': ['Montserrat', 'sans-serif'],
           },
         }
       }
@@ -411,7 +413,92 @@
     </div>
   </section>
   
+  <!-- Emendas Section -->
+  <section id="emendas" class="emendas-section relative overflow-hidden w-full bg-[#FFDF20] lg:bg-[#FCD116]">
+    
+    <!-- Mobile Layout (default) -->
+    <div class="lg:hidden emendas-mobile relative w-full overflow-hidden">
+      
+      <!-- Background: Brazil Flag Image -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="assets/images/emendas-mobile-bg.jpg" 
+          alt="" 
+          class="w-full h-full object-cover"
+        >
+      </div>
+      
+      <!-- Large EMENDAS Text with photo background clipped to text -->
+      <div class="emendas-title-container absolute top-0 left-0 right-0 z-10 w-full">
+        <h2 class="emendas-photo-text font-montserrat font-extrabold uppercase tracking-[-0.02em] w-full">
+          <span class="block">EM</span>
+          <span class="block emendas-end-line">END</span>
+          <span class="block">AS</span>
+        </h2>
+      </div>
+      
+      <!-- Map Container - Mobile - Large and overflowing -->
+      <div id="minas-map-mobile" class="emendas-map-large absolute z-20 minas-map-container">
+        <img 
+          src="assets/svg/minas-gerais-map.svg" 
+          alt="Mapa das mesoregiões de Minas Gerais" 
+          class="minas-map-fallback w-full h-auto"
+        >
+      </div>
+      
+      <!-- CTA Text - Mobile - Positioned at bottom -->
+      <p class="emendas-cta-text absolute bottom-[40px] left-0 right-0 z-30 font-inter font-semibold text-[15px] leading-[22px] text-brand-yellow text-center uppercase px-4">
+        Veja para onde foram destinadas as emendas parlamentares e como cada recurso está sendo usado para melhorar a vida da população nas áreas que mais precisam
+      </p>
+      
+    </div>
+    
+    <!-- Desktop Layout (lg and up) -->
+    <div class="hidden lg:block emendas-desktop relative overflow-hidden">
+      
+      <!-- EMENDAS Title - Photo clipped to text -->
+      <h2 class="emendas-title-desktop font-montserrat font-black uppercase">
+        EMENDAS
+      </h2>
+      
+      <!-- Nikolas Photo - Left side -->
+      <div class="emendas-nikolas-photo">
+        <img 
+          src="assets/images/nikolas-lateral.png" 
+          alt="Nikolas Ferreira" 
+          class="w-full h-full object-contain object-bottom"
+        >
+      </div>
+      
+      <!-- Impact Text -->
+      <p class="emendas-impact-text font-inter font-bold uppercase">
+        investimentos<br>
+        que geram impacto<br>
+        real
+      </p>
+      
+      <!-- Map Container - Right side -->
+      <div id="minas-map-desktop" class="emendas-map-desktop minas-map-container">
+        <img 
+          src="assets/svg/minas-gerais-map.svg" 
+          alt="Mapa das mesoregiões de Minas Gerais" 
+          class="minas-map-fallback"
+        >
+      </div>
+      
+      <!-- CTA Button -->
+      <a href="#" class="emendas-cta-btn">
+        <span class="emendas-cta-btn-text font-unbounded uppercase text-brand-yellow">
+          Veja para onde foram destinadas as emendas parlamentares e como cada recurso está sendo usado para melhorar a vida da população nas áreas que mais precisam
+        </span>
+      </a>
+      
+    </div>
+    
+  </section>
+  
   <!-- JavaScript -->
+  <script src="js/minas-map.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

@@ -109,4 +109,47 @@ document.addEventListener('DOMContentLoaded', function() {
       header.style.backdropFilter = 'none';
     }
   });
+
+  // ========================================
+  // MINAS GERAIS MAP INITIALIZATION
+  // ========================================
+  
+  // Initialize map for mobile and desktop containers
+  function initMinasMaps() {
+    // Check if MinasMap is available
+    if (typeof MinasMap === 'undefined') {
+      console.warn('MinasMap module not loaded');
+      return;
+    }
+
+    // Mobile map
+    const mobileMapContainer = document.getElementById('minas-map-mobile');
+    if (mobileMapContainer) {
+      MinasMap.init(mobileMapContainer);
+    }
+
+    // Desktop map
+    const desktopMapContainer = document.getElementById('minas-map-desktop');
+    if (desktopMapContainer) {
+      MinasMap.init(desktopMapContainer);
+    }
+
+    // Listen for region clicks (for future navigation)
+    document.addEventListener('minas-map:region-click', function(e) {
+      const { region, name, selected } = e.detail;
+      
+      // Future: Navigate to region-specific page
+      // Example: window.location.href = `/emendas/${region}`;
+    });
+
+    // Listen for region hovers (for analytics or other features)
+    document.addEventListener('minas-map:region-hover', function(e) {
+      const { region, name } = e.detail;
+      // Optional: Track hover events for analytics
+      // console.log('Region hovered:', region, name);
+    });
+  }
+
+  // Initialize maps
+  initMinasMaps();
 });
