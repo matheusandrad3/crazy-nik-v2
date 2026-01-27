@@ -306,6 +306,77 @@ html, body {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
+/* ========================================
+   STICKY HEADER STYLES
+   ======================================== */
+
+/* Base header state - transparent at top */
+#main-header {
+  background: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  box-shadow: none;
+}
+
+/* Scrolled header state - glass morphism effect */
+#main-header.scrolled {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.3),
+    0 1px 0 rgba(255, 255, 255, 0.05) inset;
+}
+
+/* Reduce padding when scrolled */
+#main-header.scrolled .header-inner {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+/* Reduce logo size when scrolled */
+#main-header.scrolled .header-logo {
+  height: 60px;
+}
+
+@media (min-width: 1024px) {
+  #main-header.scrolled .header-logo {
+    height: 80px;
+  }
+}
+
+/* Subtle bottom border when scrolled */
+#main-header.scrolled::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(251, 210, 22, 0.3) 20%,
+    rgba(251, 210, 22, 0.5) 50%,
+    rgba(251, 210, 22, 0.3) 80%,
+    transparent 100%
+  );
+  opacity: 0;
+  animation: headerBorderFadeIn 0.3s ease forwards;
+}
+
+@keyframes headerBorderFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hide the original separator when scrolled */
+#main-header.scrolled + .mobile-menu ~ .hero-desktop,
+#main-header.scrolled .w-full.h-px {
+  opacity: 0;
+}
+
 /* Hero Section Enhancements */
 
 /* Desktop Hero - usa variável CSS calculada via JS */

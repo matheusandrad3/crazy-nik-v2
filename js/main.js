@@ -131,18 +131,36 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Header scroll effect
-  const header = document.querySelector('header');
+  // ========================================
+  // STICKY HEADER SCROLL EFFECT
+  // ========================================
+  const header = document.getElementById('main-header');
+  const scrollThreshold = 50; // pixels before header changes
+  let lastScrollY = 0;
+  let ticking = false;
+
+  function updateHeader() {
+    const scrollY = window.scrollY;
+    
+    if (scrollY > scrollThreshold) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+    
+    lastScrollY = scrollY;
+    ticking = false;
+  }
 
   window.addEventListener('scroll', function() {
-    if (window.scrollY > 100) {
-      header.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-      header.style.backdropFilter = 'blur(10px)';
-    } else {
-      header.style.backgroundColor = 'transparent';
-      header.style.backdropFilter = 'none';
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeader);
+      ticking = true;
     }
-  });
+  }, { passive: true });
+
+  // Initial check in case page loads already scrolled
+  updateHeader();
 
   // ========================================
   // MINAS GERAIS MAP INITIALIZATION
