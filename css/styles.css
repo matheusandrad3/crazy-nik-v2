@@ -362,19 +362,34 @@ html, body {
     transparent 100%
   );
   opacity: 0;
-  animation: headerBorderFadeIn 0.3s ease forwards;
-}
-
-@keyframes headerBorderFadeIn {
-  to {
-    opacity: 1;
-  }
+  animation: fadeIn 0.3s ease forwards;
 }
 
 /* Hide the original separator when scrolled */
-#main-header.scrolled + #mobile-menu ~ .hero-desktop,
 #main-header.scrolled .w-full.h-px {
   opacity: 0;
+}
+
+/* ========================================
+   ANCHOR SCROLL OFFSET
+   Compensate for fixed header height when navigating to anchors
+   ======================================== */
+
+/* Target sections with IDs - add scroll margin to prevent header overlap */
+#sobre,
+#emendas,
+#projetos,
+#noticias {
+  scroll-margin-top: 100px; /* Mobile: header ~85px + buffer */
+}
+
+@media (min-width: 1024px) {
+  #sobre,
+  #emendas,
+  #projetos,
+  #noticias {
+    scroll-margin-top: 130px; /* Desktop: header ~105px + buffer */
+  }
 }
 
 /* Hero Section Enhancements */

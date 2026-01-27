@@ -97,7 +97,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (href.startsWith('#')) {
           const target = document.querySelector(href);
           if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+            // Get header height for offset calculation
+            const headerHeight = header ? header.offsetHeight : 0;
+            const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+            const offsetPosition = targetPosition - headerHeight - 20; // 20px extra buffer
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
             // Update URL hash for deep linking, browser history, and bookmarking
             history.pushState(null, '', href);
           }
