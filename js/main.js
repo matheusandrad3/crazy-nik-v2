@@ -97,7 +97,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (href.startsWith('#')) {
           const target = document.querySelector(href);
           if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+            // Get header height for offset calculation
+            const headerHeight = header ? header.offsetHeight : 0;
+            const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+            const offsetPosition = targetPosition - headerHeight - 20; // 20px extra buffer
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
             // Update URL hash for deep linking, browser history, and bookmarking
             history.pushState(null, '', href);
           }
@@ -131,18 +139,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Header scroll effect
-  const header = document.querySelector('header');
+  // ========================================
+  // STICKY HEADER SCROLL EFFECT
+  // ========================================
+  const header = document.getElementById('main-header');
+  const scrollThreshold = 50; // pixels before header changes
+  let ticking = false;
+
+  function updateHeader() {
+    const scrollY = window.scrollY;
+    
+    if (scrollY > scrollThreshold) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+    
+    ticking = false;
+  }
 
   window.addEventListener('scroll', function() {
-    if (window.scrollY > 100) {
-      header.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-      header.style.backdropFilter = 'blur(10px)';
-    } else {
-      header.style.backgroundColor = 'transparent';
-      header.style.backdropFilter = 'none';
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeader);
+      ticking = true;
     }
-  });
+  }, { passive: true });
+
+  // Initial check in case page loads already scrolled
+  updateHeader();
 
   // ========================================
   // MINAS GERAIS MAP INITIALIZATION
