@@ -136,7 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // ========================================
   const header = document.getElementById('main-header');
   const scrollThreshold = 50; // pixels before header changes
-  let lastScrollY = 0;
   let ticking = false;
 
   function updateHeader() {
@@ -148,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
       header.classList.remove('scrolled');
     }
     
-    lastScrollY = scrollY;
     ticking = false;
   }
 

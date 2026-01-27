@@ -372,7 +372,7 @@ html, body {
 }
 
 /* Hide the original separator when scrolled */
-#main-header.scrolled + .mobile-menu ~ .hero-desktop,
+#main-header.scrolled + #mobile-menu ~ .hero-desktop,
 #main-header.scrolled .w-full.h-px {
   opacity: 0;
 }
