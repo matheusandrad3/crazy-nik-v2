@@ -1748,9 +1748,26 @@ button:focus-visible {
   /* Emendas section */
   .emendas-title-desktop,
   .emendas-nikolas-photo,
-  .emendas-map-desktop {
+  .emendas-map-desktop,
+  .emendas-impact-text,
+  .emendas-cta-btn {
     animation: none;
     opacity: 1;
+    transform: none;
+  }
+  
+  /* Emendas pseudo-element animations */
+  .emendas-title-desktop::after {
+    animation: none;
+  }
+  
+  .emendas-cta-btn::before,
+  .emendas-cta-btn::after {
+    transition: none;
+  }
+  
+  .emendas-cta-btn:hover::after {
+    animation: none;
   }
   
   .emendas-cta-btn {
