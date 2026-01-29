@@ -1324,3 +1324,197 @@ button:focus-visible {
     animation: none;
   }
 }
+
+/* ========================================
+   FOOTER SECTION (Mobile First)
+   ======================================== */
+
+/* Footer container */
+.footer-section {
+  position: relative;
+}
+
+/* Logo filter to match the design */
+.footer-logo-filter {
+  filter: drop-shadow(0 4px 8px rgba(0, 51, 0, 0.15));
+  transition: filter 0.3s ease;
+}
+
+.footer-logo-filter:hover {
+  filter: drop-shadow(0 6px 12px rgba(0, 51, 0, 0.2));
+}
+
+/* Slogan styling - Mobile */
+.footer-slogan {
+  font-weight: 700;
+  text-shadow: 2px 2px 0 rgba(245, 208, 0, 0.4);
+  letter-spacing: -0.02em;
+}
+
+/* Slogan styling - Desktop with rotation */
+.footer-slogan-container {
+  padding-top: 20px;
+  padding-left: 10px;
+}
+
+.footer-slogan-desktop {
+  font-weight: 700;
+  text-shadow: 3px 3px 0 rgba(245, 208, 0, 0.3);
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+
+/* Navigation links */
+.footer-nav-link {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #1E4A8C, #2458A4);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-nav-link:hover::after {
+  width: 100%;
+}
+
+/* Social media card */
+.footer-social-card {
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-social-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 32px 64px rgba(0, 0, 0, 0.25),
+    0 16px 32px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Social link styles */
+.footer-social-link {
+  position: relative;
+}
+
+/* Back to top button */
+.footer-back-top {
+  box-shadow: 0 4px 12px rgba(0, 51, 0, 0.2);
+}
+
+.footer-back-top:hover {
+  box-shadow: 0 6px 20px rgba(0, 51, 0, 0.3);
+}
+
+/* Footer animations */
+@keyframes footerFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes footerFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.footer-section .footer-slogan,
+.footer-section .footer-slogan-desktop {
+  animation: footerFadeInUp 0.8s ease-out forwards;
+}
+
+.footer-section nav {
+  animation: footerFadeInUp 0.8s ease-out 0.1s forwards;
+  opacity: 0;
+}
+
+.footer-section .footer-social-card {
+  animation: footerFadeInUp 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.footer-section .footer-back-top {
+  animation: footerFadeIn 0.6s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+/* Desktop adjustments */
+@media (min-width: 1024px) {
+  .footer-section {
+    min-height: auto;
+  }
+  
+  .footer-slogan-container {
+    padding-top: 30px;
+    padding-left: 0;
+  }
+}
+
+/* Large desktop adjustments */
+@media (min-width: 1280px) {
+  .footer-slogan-desktop {
+    font-size: 80px;
+  }
+  
+  .footer-slogan-container {
+    padding-top: 40px;
+  }
+}
+
+/* Extra large desktop */
+@media (min-width: 1536px) {
+  .footer-slogan-desktop {
+    font-size: 100px;
+  }
+  
+  .footer-slogan-container {
+    padding-top: 50px;
+  }
+}
+
+/* Reduced motion for footer */
+@media (prefers-reduced-motion: reduce) {
+  .footer-section .footer-slogan,
+  .footer-section .footer-slogan-desktop,
+  .footer-section nav,
+  .footer-section .footer-social-card,
+  .footer-section .footer-back-top {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .footer-social-card,
+  .footer-nav-link,
+  .footer-social-link,
+  .footer-back-top,
+  .footer-logo-filter {
+    transition: none;
+  }
+  
+  .footer-social-card:hover,
+  .footer-back-top:hover {
+    transform: none;
+  }
+}
