@@ -1065,14 +1065,17 @@ button:focus-visible {
   z-index: 1;
   /* Enhanced shadow for more visibility and depth */
   filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.25)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-  /* Initial state for scroll animation */
+}
+
+/* Initial hidden state for scroll animation - only when JS is enabled */
+.js .emendas-title-desktop {
   opacity: 0;
   transform: translateY(-30px);
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Animated reveal state */
-.emendas-title-desktop.revealed {
+.js .emendas-title-desktop.revealed {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1202,13 +1205,16 @@ button:focus-visible {
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
   padding: 24px 36px;
   overflow: hidden;
-  /* Initial state for scroll animation */
+}
+
+/* Initial hidden state for scroll animation - only when JS is enabled */
+.js .emendas-cta-btn {
   opacity: 0;
   transform: translateY(40px);
 }
 
 /* Animated reveal state */
-.emendas-cta-btn.revealed {
+.js .emendas-cta-btn.revealed {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1309,44 +1315,44 @@ button:focus-visible {
     min-height: auto;
   }
   
-  /* Remove default animations - now using scroll-triggered reveals */
-  .emendas-nikolas-photo {
+  /* Initial hidden state for scroll-triggered reveals - only when JS is enabled */
+  .js .emendas-nikolas-photo {
     opacity: 0;
     transform: translateX(-50px);
     transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     transition-delay: 0.2s;
   }
   
-  .emendas-nikolas-photo.revealed {
+  .js .emendas-nikolas-photo.revealed {
     opacity: 1;
     transform: translateX(0);
   }
   
-  .emendas-map-desktop {
+  .js .emendas-map-desktop {
     opacity: 0;
     transform: translateX(50px);
     transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     transition-delay: 0.3s;
   }
   
-  .emendas-map-desktop.revealed {
+  .js .emendas-map-desktop.revealed {
     opacity: 1;
     transform: translateX(0);
   }
   
-  .emendas-impact-text {
+  .js .emendas-impact-text {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     transition-delay: 0.4s;
   }
   
-  .emendas-impact-text.revealed {
+  .js .emendas-impact-text.revealed {
     opacity: 1;
     transform: translateY(0);
   }
   
-  .emendas-cta-btn {
+  .js .emendas-cta-btn {
     transition-delay: 0.5s;
   }
 }
@@ -1745,12 +1751,12 @@ button:focus-visible {
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  /* Emendas section */
-  .emendas-title-desktop,
-  .emendas-nikolas-photo,
-  .emendas-map-desktop,
-  .emendas-impact-text,
-  .emendas-cta-btn {
+  /* Emendas section - use .js for specificity to override hidden states */
+  .js .emendas-title-desktop,
+  .js .emendas-nikolas-photo,
+  .js .emendas-map-desktop,
+  .js .emendas-impact-text,
+  .js .emendas-cta-btn {
     animation: none;
     opacity: 1;
     transform: none;

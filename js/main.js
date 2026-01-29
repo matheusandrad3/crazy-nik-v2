@@ -172,7 +172,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // EMENDAS SECTION SCROLL REVEAL
   // ========================================
   
+  // Store observer reference to prevent accumulation on resize
+  let emendasRevealObserver = null;
+  let emendasRevealed = false;
+  
   function initEmendasScrollReveal() {
+    // Skip if already revealed
+    if (emendasRevealed) return;
+    
     // Only apply on desktop (lg and up)
     if (window.innerWidth < 1024) return;
     
@@ -187,6 +194,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const elements = [title, photo, map, impactText, ctaBtn].filter(Boolean);
     
+    // Disconnect any existing observer before creating a new one
+    if (emendasRevealObserver) {
+      emendasRevealObserver.disconnect();
+      emendasRevealObserver = null;
+    }
+    
     // Intersection Observer for reveal animation
     const observerOptions = {
       root: null,
@@ -194,20 +207,22 @@ document.addEventListener('DOMContentLoaded', function() {
       threshold: 0.1
     };
     
-    const revealObserver = new IntersectionObserver((entries) => {
+    emendasRevealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           // Reveal all elements when section comes into view
           elements.forEach(el => {
             el.classList.add('revealed');
           });
-          // Stop observing after reveal
-          revealObserver.disconnect();
+          // Mark as revealed and stop observing
+          emendasRevealed = true;
+          emendasRevealObserver.disconnect();
+          emendasRevealObserver = null;
         }
       });
     }, observerOptions);
     
-    revealObserver.observe(emendasSection);
+    emendasRevealObserver.observe(emendasSection);
   }
   
   // Initialize emendas scroll reveal
