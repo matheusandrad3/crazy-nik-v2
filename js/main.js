@@ -169,6 +169,60 @@ document.addEventListener('DOMContentLoaded', function() {
   updateHeader();
 
   // ========================================
+  // EMENDAS SECTION SCROLL REVEAL
+  // ========================================
+  
+  function initEmendasScrollReveal() {
+    // Only apply on desktop (lg and up)
+    if (window.innerWidth < 1024) return;
+    
+    const emendasSection = document.getElementById('emendas');
+    if (!emendasSection) return;
+    
+    const title = emendasSection.querySelector('.emendas-title-desktop');
+    const photo = emendasSection.querySelector('.emendas-nikolas-photo');
+    const map = emendasSection.querySelector('.emendas-map-desktop');
+    const impactText = emendasSection.querySelector('.emendas-impact-text');
+    const ctaBtn = emendasSection.querySelector('.emendas-cta-btn');
+    
+    const elements = [title, photo, map, impactText, ctaBtn].filter(Boolean);
+    
+    // Intersection Observer for reveal animation
+    const observerOptions = {
+      root: null,
+      rootMargin: '-10% 0px -10% 0px',
+      threshold: 0.1
+    };
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Reveal all elements when section comes into view
+          elements.forEach(el => {
+            el.classList.add('revealed');
+          });
+          // Stop observing after reveal
+          revealObserver.disconnect();
+        }
+      });
+    }, observerOptions);
+    
+    revealObserver.observe(emendasSection);
+  }
+  
+  // Initialize emendas scroll reveal
+  initEmendasScrollReveal();
+  
+  // Re-initialize on resize (in case switching between mobile/desktop)
+  let emendasResizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(emendasResizeTimeout);
+    emendasResizeTimeout = setTimeout(() => {
+      initEmendasScrollReveal();
+    }, 250);
+  });
+
+  // ========================================
   // MINAS GERAIS MAP INITIALIZATION
   // ========================================
   

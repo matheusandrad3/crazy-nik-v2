@@ -627,6 +627,7 @@ button:focus-visible {
 /* Section Header animations */
 .about-header {
   animation: aboutFadeInUp 0.8s ease-out forwards;
+  opacity: 0;
 }
 
 .about-subtitle {
@@ -877,6 +878,7 @@ button:focus-visible {
   
   .about-image-wrapper,
   .about-btn,
+  .about-btn::before,
   .about-stats-card,
   .about-stat-icon,
   .about-stat-item {
@@ -1047,10 +1049,11 @@ button:focus-visible {
   letter-spacing: -0.02em;
   /* Photo background clipped to text with refined green tint overlay */
   background-image: 
-    linear-gradient(135deg, rgba(15, 70, 30, 0.55) 0%, rgba(21, 87, 36, 0.45) 50%, rgba(15, 70, 30, 0.55) 100%),
+    linear-gradient(135deg, rgba(15, 70, 30, 0.25) 0%, rgba(21, 87, 36, 0.15) 50%, rgba(15, 70, 30, 0.25) 100%),
     url('../assets/images/emendas-text-bg.png');
-  background-size: 100% 503.45%;
-  background-position: 0% 78.04%;
+  /* Adjusted size and position to move blue/green parts onto E and S letters */
+  background-size: 140% 503.45%;
+  background-position: 50% 70%;
   background-repeat: no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
@@ -1060,8 +1063,46 @@ button:focus-visible {
   user-select: none;
   pointer-events: none;
   z-index: 1;
-  /* Subtle depth with filter */
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  /* Enhanced shadow for more visibility and depth */
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.25)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  /* Initial state for scroll animation */
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animated reveal state */
+.emendas-title-desktop.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Subtle shimmer effect on the title */
+.emendas-title-desktop::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  animation: titleShimmer 4s ease-in-out infinite;
+  animation-delay: 1s;
+  pointer-events: none;
+}
+
+@keyframes titleShimmer {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 150%;
+  }
 }
 
 /* Nikolas Photo - Left side */
@@ -1126,39 +1167,83 @@ button:focus-visible {
   height: auto;
 }
 
-/* CTA Button - Desktop - Refined glass-morphism style */
+/* CTA Button - Desktop - Refined compact glass-morphism style */
 .emendas-cta-btn {
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Figma specs: 723x236 at left: calc(8.33% + 235px) = ~395px, top: 747px */
-  left: 20.5%; /* 395px / 1927px */
-  top: 70.54%; /* 747px / 1059px */
-  width: 37.52%; /* 723px / 1927px */
-  max-width: 723px;
-  height: 22.28%; /* 236px / 1059px */
-  max-height: 236px;
-  /* Sophisticated blue gradient */
+  /* Repositioned and resized for elegance - more compact */
+  left: 22%; 
+  top: 72%;
+  width: 32%;
+  max-width: 580px;
+  height: auto;
+  min-height: 100px;
+  max-height: 160px;
+  /* Sophisticated blue gradient with depth */
   background: linear-gradient(
     145deg,
-    #2d65b5 0%,
-    #2458A4 40%,
-    #1e4c92 100%
+    rgba(45, 101, 181, 0.95) 0%,
+    rgba(36, 88, 164, 0.98) 40%,
+    rgba(30, 76, 146, 0.95) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 100px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 60px;
   z-index: 20;
   text-decoration: none;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Refined multi-layer shadow */
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Refined shadow - lighter and more elegant */
   box-shadow: 
-    0 4px 20px rgba(36, 88, 164, 0.25),
-    0 8px 40px rgba(30, 76, 146, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  padding: 20px 40px;
-  /* Subtle inner glow */
+    0 4px 24px rgba(36, 88, 164, 0.2),
+    0 8px 32px rgba(30, 76, 146, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  padding: 24px 36px;
   overflow: hidden;
+  /* Initial state for scroll animation */
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Animated reveal state */
+.emendas-cta-btn.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Continuous subtle pulse glow animation */
+.emendas-cta-btn::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 62px;
+  background: linear-gradient(
+    135deg,
+    rgba(251, 210, 22, 0.3) 0%,
+    rgba(247, 202, 69, 0.1) 50%,
+    rgba(251, 210, 22, 0.3) 100%
+  );
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.emendas-cta-btn:hover::after {
+  opacity: 1;
+  animation: btnPulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes btnPulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
 }
 
 /* Shine effect overlay */
@@ -1167,51 +1252,53 @@ button:focus-visible {
   position: absolute;
   top: 0;
   left: -100%;
-  width: 60%;
+  width: 50%;
   height: 100%;
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.12),
     transparent
   );
-  transition: left 0.6s ease;
-  border-radius: 100px;
+  transition: left 0.7s ease;
+  border-radius: 60px;
 }
 
 .emendas-cta-btn:hover::before {
-  left: 120%;
+  left: 150%;
 }
 
 .emendas-cta-btn:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px) scale(1.02);
   box-shadow: 
-    0 8px 30px rgba(36, 88, 164, 0.35),
-    0 16px 50px rgba(30, 76, 146, 0.2),
+    0 12px 40px rgba(36, 88, 164, 0.3),
+    0 20px 50px rgba(30, 76, 146, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   background: linear-gradient(
     145deg,
-    #3572c4 0%,
-    #2d65b5 40%,
-    #2458A4 100%
+    rgba(53, 114, 196, 0.98) 0%,
+    rgba(45, 101, 181, 0.98) 40%,
+    rgba(36, 88, 164, 0.98) 100%
   );
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(251, 210, 22, 0.4);
 }
 
 .emendas-cta-btn:active {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.01);
   box-shadow: 
-    0 4px 15px rgba(36, 88, 164, 0.3),
-    0 8px 25px rgba(30, 76, 146, 0.15),
+    0 6px 20px rgba(36, 88, 164, 0.25),
+    0 10px 30px rgba(30, 76, 146, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .emendas-cta-btn-text {
-  font-size: clamp(14px, 1.3vw, 25px);
-  line-height: 1.24;
+  font-size: clamp(11px, 1vw, 16px);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
   text-align: center;
   /* Subtle text shadow for depth */
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   position: relative;
   z-index: 1;
 }
@@ -1222,68 +1309,74 @@ button:focus-visible {
     min-height: auto;
   }
   
-  .emendas-title-desktop {
-    animation: fadeInEmendas 0.8s ease-out forwards;
+  /* Remove default animations - now using scroll-triggered reveals */
+  .emendas-nikolas-photo {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.2s;
   }
   
-  .emendas-nikolas-photo {
-    animation: slideInFromLeft 1s ease-out forwards;
+  .emendas-nikolas-photo.revealed {
+    opacity: 1;
+    transform: translateX(0);
   }
   
   .emendas-map-desktop {
-    animation: slideInFromRight 1s ease-out forwards;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.3s;
+  }
+  
+  .emendas-map-desktop.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .emendas-impact-text {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.4s;
+  }
+  
+  .emendas-impact-text.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .emendas-cta-btn {
+    transition-delay: 0.5s;
   }
 }
 
 /* Large Desktop - Adjust for wider screens */
 @media (min-width: 1280px) {
   .emendas-cta-btn-text {
-    font-size: 20px;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+  }
+  
+  .emendas-cta-btn {
+    padding: 28px 44px;
   }
 }
 
 /* Extra Large Desktop */
 @media (min-width: 1536px) {
   .emendas-cta-btn-text {
-    font-size: 25px;
+    font-size: 16px;
+  }
+  
+  .emendas-cta-btn {
+    padding: 32px 50px;
+    max-width: 620px;
   }
 }
 
-/* Animation for EMENDAS title */
-@keyframes fadeInEmendas {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animation for Nikolas photo */
-@keyframes slideInFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Animation for Map */
-@keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+/* Scroll reveal animations are now handled via CSS transitions + .revealed class
+   See the @media (min-width: 1024px) block above for the transition definitions */
 
 /* Map container aspect ratio for mobile */
 @media (max-width: 1023px) {
