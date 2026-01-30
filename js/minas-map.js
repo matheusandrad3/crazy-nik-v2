@@ -88,6 +88,26 @@ const MinasMap = (function() {
   let activeOverlay = null;
 
   /**
+   * Dismiss the map interaction hint (PIN)
+   * Called when user first interacts with the map
+   */
+  function dismissMapHint(container) {
+    if (!container) return;
+    
+    const hint = container.querySelector('.map-hint-pin');
+    if (hint && !hint.classList.contains('is-hidden')) {
+      hint.classList.add('is-hidden');
+      
+      // Remove from DOM after animation
+      setTimeout(() => {
+        if (hint.parentNode) {
+          hint.remove();
+        }
+      }, 500);
+    }
+  }
+
+  /**
    * Create and show the region info card
    */
   function showRegionCard(regionId, regionElement) {
@@ -394,6 +414,9 @@ const MinasMap = (function() {
 
       if (!regionName) return;
 
+      // Dismiss the map hint on first hover
+      dismissMapHint(container);
+
       if (tooltip && config.showTooltip) {
         tooltip.textContent = regionName;
         tooltip.classList.add('is-visible');
@@ -436,6 +459,9 @@ const MinasMap = (function() {
       const regionName = region.dataset.name;
 
       if (!regionId) return;
+
+      // Dismiss the map hint on first interaction
+      dismissMapHint(container);
 
       const wasSelected = region.classList.contains('is-selected');
       deselectAll();
@@ -499,6 +525,8 @@ const MinasMap = (function() {
       const region = e.target.closest('path');
       if (region) {
         region.classList.add('is-touched');
+        // Dismiss the map hint on first touch
+        dismissMapHint(container);
       }
     }
 
