@@ -83,9 +83,10 @@ const MinasMap = (function() {
     regionNames[key] = regionData[key].name;
   });
 
-  // Reference to the currently open card
+  // Reference to the currently open card and associated region
   let activeCard = null;
   let activeOverlay = null;
+  let activeRegionElement = null;
 
   /**
    * Dismiss the map interaction hint (PIN)
@@ -116,6 +117,9 @@ const MinasMap = (function() {
 
     // Close any existing card first
     closeRegionCard();
+
+    // Store reference to the active region for deselection on close
+    activeRegionElement = regionElement;
 
     // Create overlay
     activeOverlay = document.createElement('div');
@@ -191,10 +195,21 @@ const MinasMap = (function() {
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
 
+    // Capture references for the animation frame callback
+    // If destroy() is called before the callback fires, the module-level
+    // variables will be null, but these local references remain valid
+    const overlayToAnimate = activeOverlay;
+    const cardToAnimate = activeCard;
+
     // Trigger animation
     requestAnimationFrame(() => {
-      activeOverlay.classList.add('is-visible');
-      activeCard.classList.add('is-visible');
+      // Use captured references to avoid TypeError if destroy() was called
+      if (overlayToAnimate) {
+        overlayToAnimate.classList.add('is-visible');
+      }
+      if (cardToAnimate) {
+        cardToAnimate.classList.add('is-visible');
+      }
     });
 
     // Handle escape key
@@ -212,10 +227,17 @@ const MinasMap = (function() {
     // variables will point to the new card, but we need to remove the old one
     const cardToClose = activeCard;
     const overlayToClose = activeOverlay;
+    const regionToDeselect = activeRegionElement;
 
     // Clear module-level references immediately
     activeCard = null;
     activeOverlay = null;
+    activeRegionElement = null;
+
+    // Deselect the region so clicking it again will reopen the card
+    if (regionToDeselect) {
+      regionToDeselect.classList.remove('is-selected');
+    }
 
     if (cardToClose) {
       cardToClose.classList.remove('is-visible');
@@ -602,7 +624,7 @@ const MinasMap = (function() {
       isDestroyed = true;
       
       // Clean up any open region card (immediate removal, no animation)
-      if (activeCard || activeOverlay) {
+      if (activeCard || activeOverlay || activeRegionElement) {
         if (activeCard && activeCard.parentNode) {
           activeCard.remove();
         }
@@ -611,6 +633,7 @@ const MinasMap = (function() {
         }
         activeCard = null;
         activeOverlay = null;
+        activeRegionElement = null;
         document.body.style.overflow = '';
         document.removeEventListener('keydown', handleCardEscape);
       }
