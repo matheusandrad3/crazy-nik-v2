@@ -13,21 +13,265 @@
 const MinasMap = (function() {
   'use strict';
 
-  // Region names mapping (path id to display name)
-  const regionNames = {
-    'path3030': 'Sul/Sudoeste de Minas',
-    'path3032': 'Zona da Mata',
-    'path3034': 'Campo das Vertentes',
-    'path3036': 'Vale do Rio Doce',
-    'path3038': 'Metropolitana de Belo Horizonte',
-    'path3040': 'Central Mineira',
-    'path3042': 'Vale do Mucuri',
-    'path3044': 'Jequitinhonha',
-    'path3050': 'Norte de Minas',
-    'path3052': 'Noroeste de Minas',
-    'path3054': 'Triângulo Mineiro/Alto Paranaíba',
-    'path3056': 'Oeste de Minas'
+  // Region data mapping (path id to display name and description)
+  const regionData = {
+    'path3030': {
+      name: 'Sul/Sudoeste de Minas',
+      description: 'Região conhecida pela produção de café de alta qualidade e polo industrial diversificado.',
+      color: '#1A7D3C'
+    },
+    'path3032': {
+      name: 'Zona da Mata',
+      description: 'Importante centro histórico e cultural, com destaque para o turismo e a indústria têxtil.',
+      color: '#156B32'
+    },
+    'path3034': {
+      name: 'Campo das Vertentes',
+      description: 'Rica em patrimônio histórico, abriga cidades coloniais e tradição artesanal.',
+      color: '#105928'
+    },
+    'path3036': {
+      name: 'Vale do Rio Doce',
+      description: 'Região de grande importância mineral e siderúrgica para o estado.',
+      color: '#228B47'
+    },
+    'path3038': {
+      name: 'Metropolitana de Belo Horizonte',
+      description: 'Principal centro econômico e populacional de Minas Gerais, sede da capital.',
+      color: '#1E8F45'
+    },
+    'path3040': {
+      name: 'Central Mineira',
+      description: 'Região de transição com vocação agropecuária e potencial turístico.',
+      color: '#1A7D3C'
+    },
+    'path3042': {
+      name: 'Vale do Mucuri',
+      description: 'Área de desenvolvimento com foco em agricultura familiar e pecuária.',
+      color: '#1E8F45'
+    },
+    'path3044': {
+      name: 'Jequitinhonha',
+      description: 'Reconhecida pela riqueza cultural, artesanato e belezas naturais.',
+      color: '#1A7D3C'
+    },
+    'path3050': {
+      name: 'Norte de Minas',
+      description: 'Região de clima semiárido com forte tradição cultural sertaneja.',
+      color: '#2A9B52'
+    },
+    'path3052': {
+      name: 'Noroeste de Minas',
+      description: 'Fronteira agrícola com grande produção de grãos e pecuária extensiva.',
+      color: '#156B32'
+    },
+    'path3054': {
+      name: 'Triângulo Mineiro/Alto Paranaíba',
+      description: 'Polo agroindustrial moderno e importante centro logístico do país.',
+      color: '#1E8F45'
+    },
+    'path3056': {
+      name: 'Oeste de Minas',
+      description: 'Região com vocação agropecuária e turismo rural em crescimento.',
+      color: '#156B32'
+    }
   };
+
+  // Legacy region names mapping for backward compatibility
+  const regionNames = {};
+  Object.keys(regionData).forEach(key => {
+    regionNames[key] = regionData[key].name;
+  });
+
+  // Reference to the currently open card and associated region
+  let activeCard = null;
+  let activeOverlay = null;
+  let activeRegionElement = null;
+
+  /**
+   * Dismiss the map interaction hint (PIN)
+   * Called when user first interacts with the map
+   */
+  function dismissMapHint(container) {
+    if (!container) return;
+    
+    const hint = container.querySelector('.map-hint-pin');
+    if (hint && !hint.classList.contains('is-hidden')) {
+      hint.classList.add('is-hidden');
+      
+      // Remove from DOM after animation
+      setTimeout(() => {
+        if (hint.parentNode) {
+          hint.remove();
+        }
+      }, 500);
+    }
+  }
+
+  /**
+   * Create and show the region info card
+   */
+  function showRegionCard(regionId, regionElement) {
+    const data = regionData[regionId];
+    if (!data) return;
+
+    // Close any existing card first
+    closeRegionCard();
+
+    // Store reference to the active region for deselection on close
+    activeRegionElement = regionElement;
+
+    // Create overlay
+    activeOverlay = document.createElement('div');
+    activeOverlay.className = 'region-card-overlay';
+    activeOverlay.addEventListener('click', closeRegionCard);
+
+    // Create card
+    activeCard = document.createElement('div');
+    activeCard.className = 'region-card';
+    activeCard.setAttribute('role', 'dialog');
+    activeCard.setAttribute('aria-modal', 'true');
+    activeCard.setAttribute('aria-labelledby', 'region-card-title');
+
+    // Get the SVG path data for the region shape
+    const pathData = regionElement.getAttribute('d');
+    const originalFill = data.color || regionElement.getAttribute('data-original-fill') || '#1E8F45';
+
+    // Get bounding box from the original element (already transformed in the map)
+    let viewBoxStr = '0 0 854 661'; // fallback
+    try {
+      const bbox = regionElement.getBBox();
+      // The bbox is in local coordinates, we need to account for the transform
+      // Transform is translate(935.77919,-281.37865)
+      const tx = 935.77919;
+      const ty = -281.37865;
+      const transformedX = bbox.x + tx;
+      const transformedY = bbox.y + ty;
+      // Add 10% padding
+      const padding = Math.max(bbox.width, bbox.height) * 0.1;
+      viewBoxStr = `${transformedX - padding} ${transformedY - padding} ${bbox.width + padding * 2} ${bbox.height + padding * 2}`;
+    } catch (e) {
+      console.warn('Could not calculate bounding box', e);
+    }
+
+    // Create card HTML
+    activeCard.innerHTML = `
+      <div class="region-card__handle" aria-hidden="true"></div>
+      <button class="region-card__close" aria-label="Fechar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="region-card__image">
+        <svg class="region-card__svg" viewBox="${viewBoxStr}" preserveAspectRatio="xMidYMid meet">
+          <g transform="translate(935.77919,-281.37865)">
+            <path d="${pathData}" fill="${originalFill}" />
+          </g>
+        </svg>
+      </div>
+      <div class="region-card__content">
+        <h3 class="region-card__title" id="region-card-title">${data.name}</h3>
+        <p class="region-card__description">${data.description}</p>
+      </div>
+      <a href="emendas-regiao.html?regiao=${encodeURIComponent(regionId)}" class="region-card__btn">
+        <span>Emendas para essa região</span>
+        <span class="region-card__btn-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </a>
+    `;
+
+    // Add to DOM
+    document.body.appendChild(activeOverlay);
+    document.body.appendChild(activeCard);
+
+    // Bind close button
+    const closeBtn = activeCard.querySelector('.region-card__close');
+    closeBtn.addEventListener('click', closeRegionCard);
+
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+
+    // Capture references for the animation frame callback
+    // If destroy() is called before the callback fires, the module-level
+    // variables will be null, but these local references remain valid
+    const overlayToAnimate = activeOverlay;
+    const cardToAnimate = activeCard;
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+      // Use captured references to avoid TypeError if destroy() was called
+      if (overlayToAnimate) {
+        overlayToAnimate.classList.add('is-visible');
+      }
+      if (cardToAnimate) {
+        cardToAnimate.classList.add('is-visible');
+      }
+    });
+
+    // Handle escape key
+    document.addEventListener('keydown', handleCardEscape);
+  }
+
+  /**
+   * Close the region info card
+   */
+  function closeRegionCard() {
+    if (!activeCard && !activeOverlay) return;
+
+    // Capture references at call time to avoid race condition
+    // If showRegionCard is called before the timeout fires, the module-level
+    // variables will point to the new card, but we need to remove the old one
+    const cardToClose = activeCard;
+    const overlayToClose = activeOverlay;
+    const regionToDeselect = activeRegionElement;
+
+    // Clear module-level references immediately
+    activeCard = null;
+    activeOverlay = null;
+    activeRegionElement = null;
+
+    // Deselect the region so clicking it again will reopen the card
+    if (regionToDeselect) {
+      regionToDeselect.classList.remove('is-selected');
+    }
+
+    if (cardToClose) {
+      cardToClose.classList.remove('is-visible');
+    }
+    if (overlayToClose) {
+      overlayToClose.classList.remove('is-visible');
+    }
+
+    // Remove after animation using captured references
+    // Must match CSS --rc-duration (400ms) to avoid cutting off the transition
+    setTimeout(() => {
+      if (cardToClose && cardToClose.parentNode) {
+        cardToClose.remove();
+      }
+      if (overlayToClose && overlayToClose.parentNode) {
+        overlayToClose.remove();
+      }
+      // Only restore scroll if no other card is open
+      if (!activeCard) {
+        document.body.style.overflow = '';
+      }
+    }, 400);
+
+    document.removeEventListener('keydown', handleCardEscape);
+  }
+
+  /**
+   * Handle escape key for card
+   */
+  function handleCardEscape(e) {
+    if (e.key === 'Escape') {
+      closeRegionCard();
+    }
+  }
 
   /**
    * Create a new map instance
@@ -44,6 +288,7 @@ const MinasMap = (function() {
     const config = {
       tooltipOffset: 15,
       showTooltip: true,
+      showCard: true,
       ...options
     };
 
@@ -203,6 +448,9 @@ const MinasMap = (function() {
 
       if (!regionName) return;
 
+      // Dismiss the map hint on first hover
+      dismissMapHint(container);
+
       if (tooltip && config.showTooltip) {
         tooltip.textContent = regionName;
         tooltip.classList.add('is-visible');
@@ -246,11 +494,19 @@ const MinasMap = (function() {
 
       if (!regionId) return;
 
+      // Dismiss the map hint on first interaction
+      dismissMapHint(container);
+
       const wasSelected = region.classList.contains('is-selected');
       deselectAll();
       
       if (!wasSelected) {
         region.classList.add('is-selected');
+      }
+
+      // Show region info card only when selecting (not deselecting)
+      if (config.showCard && !wasSelected) {
+        showRegionCard(regionId, region);
       }
 
       dispatchMapEvent('minas-map:region-click', {
@@ -303,6 +559,8 @@ const MinasMap = (function() {
       const region = e.target.closest('path');
       if (region) {
         region.classList.add('is-touched');
+        // Dismiss the map hint on first touch
+        dismissMapHint(container);
       }
     }
 
@@ -364,6 +622,21 @@ const MinasMap = (function() {
     function destroy() {
       // Mark as destroyed first to prevent async callbacks from proceeding
       isDestroyed = true;
+      
+      // Clean up any open region card (immediate removal, no animation)
+      if (activeCard || activeOverlay || activeRegionElement) {
+        if (activeCard && activeCard.parentNode) {
+          activeCard.remove();
+        }
+        if (activeOverlay && activeOverlay.parentNode) {
+          activeOverlay.remove();
+        }
+        activeCard = null;
+        activeOverlay = null;
+        activeRegionElement = null;
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', handleCardEscape);
+      }
       
       regions.forEach(region => {
         region.removeEventListener('mouseenter', handleMouseEnter);

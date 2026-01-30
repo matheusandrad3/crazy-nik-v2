@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Emendas Parlamentares por Região - Nikolas Ferreira">
+  <title>Emendas por Região - Nikolas Ferreira</title>
+  
+  <!-- JS detection -->
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-blue': '#2458A4',
+            'brand-yellow': '#FBD216',
+            'brand-green': '#22A651',
+          },
+          fontFamily: {
+            'unbounded': ['Unbounded', 'sans-serif'],
+            'inter': ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    .region-hero {
+      background: linear-gradient(
+        165deg,
+        #f5d76e 0%,
+        #f7ca45 15%,
+        #fcd116 35%,
+        #f9c925 55%,
+        #e8b923 75%,
+        #d4a017 100%
+      );
+    }
+    
+    .region-content {
+      background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f8f9fc 50%,
+        #f0f4f8 100%
+      );
+    }
+    
+    .emenda-card {
+      background: white;
+      border: 1px solid rgba(36, 88, 164, 0.1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .emenda-card:hover {
+      box-shadow: 0 10px 40px rgba(36, 88, 164, 0.15);
+      transform: translateY(-4px);
+    }
+    
+    .coming-soon-badge {
+      background: linear-gradient(135deg, #2458A4 0%, #1e4c92 100%);
+    }
+  </style>
+</head>
+<body class="bg-white font-unbounded">
+  
+  <!-- Header -->
+  <header class="bg-black py-4">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-[108px]">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 text-white hover:text-brand-yellow transition-colors">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          <span class="font-inter font-medium text-sm">Voltar</span>
+        </a>
+        <img 
+          src="assets/images/logo.png" 
+          alt="Nikolas Ferreira" 
+          class="h-[60px] lg:h-[80px] w-auto"
+        >
+      </div>
+    </div>
+  </header>
+  
+  <!-- Hero Section -->
+  <section class="region-hero py-16 lg:py-24">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-[108px] text-center">
+      
+      <!-- Region Name (dynamically populated) -->
+      <p class="text-[#003300]/60 font-inter font-semibold text-sm uppercase tracking-wider mb-4">
+        Emendas Parlamentares
+      </p>
+      
+      <h1 id="region-title" class="text-[#003300] font-bold text-3xl lg:text-5xl leading-tight mb-6">
+        Carregando região...
+      </h1>
+      
+      <p id="region-description" class="text-[#003300]/80 font-inter font-normal text-base lg:text-lg max-w-2xl mx-auto">
+        Confira os recursos destinados para esta região e como eles estão impactando a vida da população local.
+      </p>
+      
+    </div>
+  </section>
+  
+  <!-- Content Section -->
+  <section class="region-content py-16 lg:py-24 min-h-[50vh]">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-[108px]">
+      
+      <!-- Coming Soon Message -->
+      <div class="text-center py-16">
+        <div class="coming-soon-badge inline-flex items-center gap-2 px-4 py-2 rounded-full text-white font-inter font-medium text-sm mb-6">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12,6 12,12 16,14"></polyline>
+          </svg>
+          Em breve
+        </div>
+        
+        <h2 class="text-[#171717] font-bold text-2xl lg:text-3xl mb-4">
+          Conteúdo em desenvolvimento
+        </h2>
+        
+        <p class="text-[#171717]/60 font-inter font-normal text-base lg:text-lg max-w-xl mx-auto mb-8">
+          Estamos preparando informações detalhadas sobre as emendas parlamentares destinadas a esta região. Volte em breve!
+        </p>
+        
+        <a 
+          href="index.html#emendas" 
+          class="inline-flex items-center gap-2 px-8 py-4 bg-brand-blue text-white font-inter font-semibold text-sm rounded-full hover:bg-brand-blue/90 transition-colors"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Voltar ao mapa
+        </a>
+      </div>
+      
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="bg-[#171717] py-8">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-[108px] text-center">
+      <p class="text-white/40 font-inter font-normal text-sm">
+        © 2026 Deputado Nikolas Ferreira. Todos os direitos reservados.
+      </p>
+    </div>
+  </footer>
+  
+  <script>
+    // Parse URL parameters to get region
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const regionId = urlParams.get('regiao');
+      
+      // Region data
+      const regionData = {
+        'path3030': {
+          name: 'Sul/Sudoeste de Minas',
+          description: 'Região conhecida pela produção de café de alta qualidade e polo industrial diversificado.'
+        },
+        'path3032': {
+          name: 'Zona da Mata',
+          description: 'Importante centro histórico e cultural, com destaque para o turismo e a indústria têxtil.'
+        },
+        'path3034': {
+          name: 'Campo das Vertentes',
+          description: 'Rica em patrimônio histórico, abriga cidades coloniais e tradição artesanal.'
+        },
+        'path3036': {
+          name: 'Vale do Rio Doce',
+          description: 'Região de grande importância mineral e siderúrgica para o estado.'
+        },
+        'path3038': {
+          name: 'Metropolitana de Belo Horizonte',
+          description: 'Principal centro econômico e populacional de Minas Gerais, sede da capital.'
+        },
+        'path3040': {
+          name: 'Central Mineira',
+          description: 'Região de transição com vocação agropecuária e potencial turístico.'
+        },
+        'path3042': {
+          name: 'Vale do Mucuri',
+          description: 'Área de desenvolvimento com foco em agricultura familiar e pecuária.'
+        },
+        'path3044': {
+          name: 'Jequitinhonha',
+          description: 'Reconhecida pela riqueza cultural, artesanato e belezas naturais.'
+        },
+        'path3050': {
+          name: 'Norte de Minas',
+          description: 'Região de clima semiárido com forte tradição cultural sertaneja.'
+        },
+        'path3052': {
+          name: 'Noroeste de Minas',
+          description: 'Fronteira agrícola com grande produção de grãos e pecuária extensiva.'
+        },
+        'path3054': {
+          name: 'Triângulo Mineiro/Alto Paranaíba',
+          description: 'Polo agroindustrial moderno e importante centro logístico do país.'
+        },
+        'path3056': {
+          name: 'Oeste de Minas',
+          description: 'Região com vocação agropecuária e turismo rural em crescimento.'
+        }
+      };
+      
+      if (regionId && regionData[regionId]) {
+        const data = regionData[regionId];
+        document.getElementById('region-title').textContent = data.name;
+        document.getElementById('region-description').textContent = data.description + ' Confira os recursos destinados para esta região.';
+        document.title = `Emendas - ${data.name} - Nikolas Ferreira`;
+      } else {
+        document.getElementById('region-title').textContent = 'Região não encontrada';
+        document.getElementById('region-description').textContent = 'Por favor, selecione uma região válida no mapa.';
+      }
+    });
+  </script>
+  
+</body>
+</html>

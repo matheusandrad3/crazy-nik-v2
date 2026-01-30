@@ -171,3 +171,810 @@
     transform: none;
   }
 }
+
+/* ========================================
+   INTERACTIVE MAP HINT - PIN Style
+   Mobile First
+   ======================================== */
+
+/* Container - centered on the map */
+.map-hint-pin {
+  position: absolute;
+  z-index: 50;
+  
+  /* Centered on map */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Pointer events - allow clicks to pass through to map */
+  pointer-events: none;
+  
+  /* Entry animation */
+  opacity: 0;
+  animation: mapPinEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s forwards;
+  
+  /* Will change for performance */
+  will-change: opacity, transform;
+}
+
+/* Hidden state - triggered by JS after interaction */
+.map-hint-pin.is-hidden {
+  animation: mapPinExit 0.5s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+/* PIN marker */
+.map-hint-pin__marker {
+  position: relative;
+  z-index: 2;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 40px;
+  height: 52px;
+  
+  color: #ffffff;
+  
+  filter: 
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))
+    drop-shadow(0 4px 12px rgba(36, 88, 164, 0.4));
+  
+  /* Bounce animation */
+  animation: mapPinBounce 2s ease-in-out infinite;
+}
+
+.map-hint-pin__marker svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Pulse rings - circular waves emanating from pin base */
+.map-hint-pin__pulse {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 16px;
+  height: 16px;
+  
+  background: rgba(251, 210, 22, 0.7);
+  border-radius: 50%;
+  
+  animation: mapPinPulse 2s ease-out infinite;
+}
+
+.map-hint-pin__pulse--delayed {
+  animation-delay: 0.6s;
+}
+
+/* Entry animation - drop from above */
+@keyframes mapPinEntry {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -150%);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -45%);
+  }
+  80% {
+    transform: translate(-50%, -55%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Exit animation */
+@keyframes mapPinExit {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+}
+
+/* Pin bounce */
+@keyframes mapPinBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  15% {
+    transform: translateY(-12px);
+  }
+  30% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(-6px);
+  }
+  60% {
+    transform: translateY(0);
+  }
+}
+
+/* Pulse ring expansion */
+@keyframes mapPinPulse {
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(-50%) scale(4);
+    opacity: 0;
+  }
+}
+
+/* ----------------------------------------
+   TABLET (min-width: 640px)
+   ---------------------------------------- */
+@media (min-width: 640px) {
+  .map-hint-pin__marker {
+    width: 48px;
+    height: 62px;
+  }
+  
+  .map-hint-pin__pulse {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* ----------------------------------------
+   DESKTOP (min-width: 1024px)
+   ---------------------------------------- */
+@media (min-width: 1024px) {
+  .map-hint-pin__marker {
+    width: 56px;
+    height: 72px;
+    filter: 
+      drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25))
+      drop-shadow(0 6px 20px rgba(36, 88, 164, 0.5));
+  }
+  
+  .map-hint-pin__pulse {
+    width: 24px;
+    height: 24px;
+  }
+  
+  @keyframes mapPinPulse {
+    0% {
+      transform: translateX(-50%) scale(1);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateX(-50%) scale(5);
+      opacity: 0;
+    }
+  }
+}
+
+/* ----------------------------------------
+   REDUCED MOTION
+   ---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .map-hint-pin {
+    animation: none;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  
+  .map-hint-pin.is-hidden {
+    animation: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .map-hint-pin__marker {
+    animation: none;
+  }
+  
+  .map-hint-pin__pulse {
+    animation: none;
+    opacity: 0.4;
+  }
+}
+
+/* ----------------------------------------
+   NO-JS FALLBACK
+   ---------------------------------------- */
+.no-js .map-hint-pin {
+  opacity: 1;
+  animation: none;
+  transform: translate(-50%, -50%);
+}
+
+/* ========================================
+   REGION INFO CARD - Mobile First
+   ======================================== */
+
+/* Design Tokens */
+:root {
+  /* Card Colors */
+  --rc-bg: #0f0f0f;
+  --rc-bg-elevated: #1a1a1a;
+  --rc-surface: rgba(255, 255, 255, 0.03);
+  --rc-border: rgba(255, 255, 255, 0.08);
+  --rc-border-hover: rgba(255, 255, 255, 0.15);
+  
+  /* Brand Colors */
+  --rc-primary: #2458A4;
+  --rc-primary-light: #3572c4;
+  --rc-primary-dark: #1a4380;
+  --rc-accent: #FBD216;
+  --rc-green: #22A651;
+  
+  /* Text Colors */
+  --rc-text: #fafafa;
+  --rc-text-secondary: #a1a1a1;
+  --rc-text-muted: #737373;
+  
+  /* Spacing */
+  --rc-space-xs: 0.5rem;
+  --rc-space-sm: 0.75rem;
+  --rc-space-md: 1rem;
+  --rc-space-lg: 1.25rem;
+  --rc-space-xl: 1.5rem;
+  
+  /* Animation */
+  --rc-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --rc-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --rc-duration: 400ms;
+  --rc-duration-fast: 200ms;
+  
+  /* Radius */
+  --rc-radius-sm: 0.625rem;
+  --rc-radius-md: 1rem;
+  --rc-radius-lg: 1.5rem;
+  --rc-radius-full: 9999px;
+  
+  /* Safe area */
+  --rc-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Overlay - Glass Effect */
+.region-card-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  
+  opacity: 0;
+  visibility: hidden;
+  transition: 
+    opacity var(--rc-duration) var(--rc-ease-out),
+    visibility var(--rc-duration) var(--rc-ease-out),
+    background var(--rc-duration) var(--rc-ease-out),
+    backdrop-filter var(--rc-duration) var(--rc-ease-out);
+}
+
+.region-card-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+/* Card Container - Bottom Sheet on Mobile */
+.region-card {
+  position: fixed;
+  z-index: 1001;
+  
+  /* Mobile: Bottom sheet */
+  inset-inline: 0;
+  bottom: 0;
+  top: auto;
+  
+  display: flex;
+  flex-direction: column;
+  gap: var(--rc-space-md);
+  
+  padding: var(--rc-space-lg);
+  padding-bottom: calc(var(--rc-space-xl) + var(--rc-safe-bottom));
+  width: 100%;
+  max-width: 100%;
+  max-height: 85dvh;
+  
+  background: linear-gradient(
+    180deg,
+    var(--rc-bg-elevated) 0%,
+    var(--rc-bg) 100%
+  );
+  
+  border-radius: var(--rc-radius-lg) var(--rc-radius-lg) 0 0;
+  border: 1px solid var(--rc-border);
+  border-bottom: none;
+  
+  box-shadow: 
+    0 -20px 60px rgba(0, 0, 0, 0.5),
+    0 -8px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  
+  /* Animation */
+  opacity: 0;
+  transform: translateY(100%);
+  transition: 
+    opacity var(--rc-duration) var(--rc-ease-out),
+    transform var(--rc-duration) var(--rc-ease-out);
+  
+  /* Overflow handling */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.region-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Drag Handle - Mobile */
+.region-card__handle {
+  position: absolute;
+  top: var(--rc-space-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 36px;
+  height: 4px;
+  
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--rc-radius-full);
+  
+  transition: background var(--rc-duration-fast) ease;
+}
+
+.region-card:hover .region-card__handle {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Close Button */
+.region-card__close {
+  position: absolute;
+  top: var(--rc-space-md);
+  right: var(--rc-space-md);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 40px;
+  height: 40px;
+  min-width: 44px;
+  min-height: 44px;
+  
+  background: var(--rc-surface);
+  border: 1px solid var(--rc-border);
+  border-radius: var(--rc-radius-full);
+  
+  color: var(--rc-text);
+  cursor: pointer;
+  
+  transition: 
+    background var(--rc-duration-fast) ease,
+    border-color var(--rc-duration-fast) ease,
+    transform var(--rc-duration) var(--rc-ease-spring);
+  
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.region-card__close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--rc-border-hover);
+}
+
+.region-card__close:active {
+  transform: scale(0.92);
+}
+
+.region-card__close:focus-visible {
+  outline: 2px solid var(--rc-accent);
+  outline-offset: 2px;
+}
+
+/* Image Container */
+.region-card__image {
+  position: relative;
+  overflow: hidden;
+  
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 120px;
+  margin-top: var(--rc-space-sm);
+  
+  background: linear-gradient(
+    135deg,
+    var(--rc-primary-dark) 0%,
+    var(--rc-primary) 50%,
+    var(--rc-primary-light) 100%
+  );
+  
+  border-radius: var(--rc-radius-md);
+  
+  /* Subtle inner glow */
+  box-shadow: 
+    inset 0 0 40px rgba(255, 255, 255, 0.05),
+    inset 0 2px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Grid pattern overlay */
+.region-card__image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.08) 1px, transparent 0);
+  background-size: 20px 20px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.region-card__svg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 12%;
+  box-sizing: border-box;
+  
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+  
+  /* Entry animation */
+  opacity: 0;
+  transform: scale(0.9);
+  transition: 
+    opacity var(--rc-duration) var(--rc-ease-out) 100ms,
+    transform var(--rc-duration) var(--rc-ease-spring) 100ms;
+}
+
+.region-card.is-visible .region-card__svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.region-card__svg path {
+  transition: none;
+  transform: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Content Area */
+.region-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rc-space-xs);
+}
+
+/* Card Title - Fluid Typography */
+.region-card__title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(1.125rem, 4vw, 1.375rem);
+  font-weight: 600;
+  color: var(--rc-text);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0;
+  padding-right: 3rem;
+  
+  /* Entry animation */
+  opacity: 0;
+  transform: translateY(8px);
+  transition: 
+    opacity var(--rc-duration) var(--rc-ease-out) 150ms,
+    transform var(--rc-duration) var(--rc-ease-out) 150ms;
+}
+
+.region-card.is-visible .region-card__title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card Description */
+.region-card__description {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.875rem, 3vw, 0.9375rem);
+  font-weight: 400;
+  color: var(--rc-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  
+  /* Entry animation */
+  opacity: 0;
+  transform: translateY(8px);
+  transition: 
+    opacity var(--rc-duration) var(--rc-ease-out) 200ms,
+    transform var(--rc-duration) var(--rc-ease-out) 200ms;
+}
+
+.region-card.is-visible .region-card__description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* CTA Button */
+.region-card__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--rc-space-sm);
+  
+  margin-top: var(--rc-space-sm);
+  padding: var(--rc-space-md) var(--rc-space-lg);
+  min-height: 52px;
+  width: 100%;
+  
+  background: var(--rc-primary);
+  
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: 0.01em;
+  
+  border: none;
+  border-radius: var(--rc-radius-sm);
+  
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  
+  /* Subtle gradient and glow */
+  background: linear-gradient(
+    180deg,
+    var(--rc-primary-light) 0%,
+    var(--rc-primary) 100%
+  );
+  box-shadow: 
+    0 2px 8px rgba(36, 88, 164, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  
+  transition: 
+    background var(--rc-duration-fast) ease,
+    box-shadow var(--rc-duration) var(--rc-ease-out),
+    transform var(--rc-duration-fast) ease;
+  
+  /* Entry animation */
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.region-card.is-visible .region-card__btn {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 
+    opacity var(--rc-duration) var(--rc-ease-out) 250ms,
+    transform var(--rc-duration) var(--rc-ease-out) 250ms,
+    background var(--rc-duration-fast) ease,
+    box-shadow var(--rc-duration) var(--rc-ease-out);
+}
+
+.region-card__btn:hover {
+  background: linear-gradient(
+    180deg,
+    #4080d0 0%,
+    var(--rc-primary-light) 100%
+  );
+  box-shadow: 
+    0 6px 20px rgba(36, 88, 164, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(251, 210, 22, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.region-card__btn:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 
+    0 2px 8px rgba(36, 88, 164, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.region-card__btn:focus-visible {
+  outline: 2px solid var(--rc-accent);
+  outline-offset: 2px;
+}
+
+.region-card__btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  
+  transition: transform var(--rc-duration) var(--rc-ease-spring);
+}
+
+.region-card__btn:hover .region-card__btn-icon {
+  transform: translateX(4px);
+}
+
+/* ========================================
+   TABLET & DESKTOP (min-width: 640px)
+   ======================================== */
+@media (min-width: 640px) {
+  .region-card {
+    /* Center modal on larger screens */
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    bottom: auto;
+    
+    width: 90%;
+    max-width: 380px;
+    max-height: 90vh;
+    
+    padding: var(--rc-space-xl);
+    padding-bottom: var(--rc-space-xl);
+    gap: var(--rc-space-lg);
+    
+    border-radius: var(--rc-radius-lg);
+    border-bottom: 1px solid var(--rc-border);
+    
+    /* Animation: scale from center */
+    transform: translate(-50%, -50%) scale(0.92);
+    opacity: 0;
+    
+    box-shadow: 
+      0 32px 64px rgba(0, 0, 0, 0.5),
+      0 16px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  
+  .region-card.is-visible {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  
+  /* Hide drag handle on desktop */
+  .region-card__handle {
+    display: none;
+  }
+  
+  .region-card__image {
+    aspect-ratio: 2 / 1;
+    min-height: 140px;
+    margin-top: 0;
+  }
+  
+  .region-card__close {
+    top: var(--rc-space-lg);
+    right: var(--rc-space-lg);
+  }
+  
+  .region-card__title {
+    padding-right: 3.5rem;
+  }
+}
+
+/* ========================================
+   LARGE SCREENS (min-width: 1024px)
+   ======================================== */
+@media (min-width: 1024px) {
+  .region-card {
+    max-width: 420px;
+    padding: var(--rc-space-xl) calc(var(--rc-space-xl) + 0.25rem);
+  }
+  
+  .region-card__image {
+    min-height: 160px;
+  }
+  
+  .region-card__btn {
+    min-height: 56px;
+    font-size: 1rem;
+  }
+}
+
+/* ========================================
+   HOVER CAPABLE DEVICES
+   ======================================== */
+@media (hover: hover) and (pointer: fine) {
+  .region-card__close:hover {
+    transform: rotate(90deg);
+  }
+  
+  .region-card__close:active {
+    transform: rotate(90deg) scale(0.92);
+  }
+}
+
+/* ========================================
+   TOUCH DEVICES
+   ======================================== */
+@media (hover: none) {
+  .region-card__btn:hover {
+    background: linear-gradient(
+      180deg,
+      var(--rc-primary-light) 0%,
+      var(--rc-primary) 100%
+    );
+    box-shadow: 
+      0 2px 8px rgba(36, 88, 164, 0.35),
+      0 1px 2px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+  
+  .region-card__btn:hover .region-card__btn-icon {
+    transform: none;
+  }
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .region-card-overlay {
+    transition: opacity var(--rc-duration-fast) ease;
+  }
+  
+  .region-card,
+  .region-card__close,
+  .region-card__btn,
+  .region-card__svg,
+  .region-card__title,
+  .region-card__description,
+  .region-card__btn-icon {
+    transition: none !important;
+    transform: none !important;
+  }
+  
+  .region-card.is-visible {
+    opacity: 1;
+  }
+  
+  @media (min-width: 640px) {
+    .region-card.is-visible {
+      transform: translate(-50%, -50%) !important;
+    }
+  }
+  
+  .region-card.is-visible .region-card__svg,
+  .region-card.is-visible .region-card__title,
+  .region-card.is-visible .region-card__description,
+  .region-card.is-visible .region-card__btn {
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   HIGH CONTRAST MODE
+   ======================================== */
+@media (prefers-contrast: high) {
+  .region-card {
+    border-width: 2px;
+    border-color: white;
+  }
+  
+  .region-card__close {
+    border-width: 2px;
+  }
+  
+  .region-card__btn {
+    border: 2px solid white;
+  }
+}
+
+/* ========================================
+   DARK MODE ADJUSTMENTS (if needed)
+   ======================================== */
+@media (prefers-color-scheme: light) {
+  /* Card already has dark theme, but could add light mode here */
+}
