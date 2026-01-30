@@ -225,6 +225,7 @@ const MinasMap = (function() {
     }
 
     // Remove after animation using captured references
+    // Must match CSS --rc-duration (400ms) to avoid cutting off the transition
     setTimeout(() => {
       if (cardToClose && cardToClose.parentNode) {
         cardToClose.remove();
@@ -236,7 +237,7 @@ const MinasMap = (function() {
       if (!activeCard) {
         document.body.style.overflow = '';
       }
-    }, 300);
+    }, 400);
 
     document.removeEventListener('keydown', handleCardEscape);
   }
