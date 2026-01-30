@@ -1219,6 +1219,15 @@ button:focus-visible {
   transform: translateY(0);
 }
 
+/* Override revealed transform for hover/active states (specificity 0,4,0 > 0,3,0) */
+.js .emendas-cta-btn.revealed:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.js .emendas-cta-btn.revealed:active {
+  transform: translateY(-3px) scale(1.01);
+}
+
 /* Continuous subtle pulse glow animation */
 .emendas-cta-btn::after {
   content: '';
