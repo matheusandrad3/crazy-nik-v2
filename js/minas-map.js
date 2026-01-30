@@ -207,24 +207,35 @@ const MinasMap = (function() {
   function closeRegionCard() {
     if (!activeCard && !activeOverlay) return;
 
-    if (activeCard) {
-      activeCard.classList.remove('is-visible');
+    // Capture references at call time to avoid race condition
+    // If showRegionCard is called before the timeout fires, the module-level
+    // variables will point to the new card, but we need to remove the old one
+    const cardToClose = activeCard;
+    const overlayToClose = activeOverlay;
+
+    // Clear module-level references immediately
+    activeCard = null;
+    activeOverlay = null;
+
+    if (cardToClose) {
+      cardToClose.classList.remove('is-visible');
     }
-    if (activeOverlay) {
-      activeOverlay.classList.remove('is-visible');
+    if (overlayToClose) {
+      overlayToClose.classList.remove('is-visible');
     }
 
-    // Remove after animation
+    // Remove after animation using captured references
     setTimeout(() => {
-      if (activeCard) {
-        activeCard.remove();
-        activeCard = null;
+      if (cardToClose && cardToClose.parentNode) {
+        cardToClose.remove();
       }
-      if (activeOverlay) {
-        activeOverlay.remove();
-        activeOverlay = null;
+      if (overlayToClose && overlayToClose.parentNode) {
+        overlayToClose.remove();
       }
-      document.body.style.overflow = '';
+      // Only restore scroll if no other card is open
+      if (!activeCard) {
+        document.body.style.overflow = '';
+      }
     }, 300);
 
     document.removeEventListener('keydown', handleCardEscape);
@@ -470,8 +481,8 @@ const MinasMap = (function() {
         region.classList.add('is-selected');
       }
 
-      // Show region info card
-      if (config.showCard) {
+      // Show region info card only when selecting (not deselecting)
+      if (config.showCard && !wasSelected) {
         showRegionCard(regionId, region);
       }
 
@@ -588,6 +599,20 @@ const MinasMap = (function() {
     function destroy() {
       // Mark as destroyed first to prevent async callbacks from proceeding
       isDestroyed = true;
+      
+      // Clean up any open region card (immediate removal, no animation)
+      if (activeCard || activeOverlay) {
+        if (activeCard && activeCard.parentNode) {
+          activeCard.remove();
+        }
+        if (activeOverlay && activeOverlay.parentNode) {
+          activeOverlay.remove();
+        }
+        activeCard = null;
+        activeOverlay = null;
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', handleCardEscape);
+      }
       
       regions.forEach(region => {
         region.removeEventListener('mouseenter', handleMouseEnter);
