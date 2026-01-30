@@ -169,6 +169,75 @@ document.addEventListener('DOMContentLoaded', function() {
   updateHeader();
 
   // ========================================
+  // EMENDAS SECTION SCROLL REVEAL
+  // ========================================
+  
+  // Store observer reference to prevent accumulation on resize
+  let emendasRevealObserver = null;
+  let emendasRevealed = false;
+  
+  function initEmendasScrollReveal() {
+    // Skip if already revealed
+    if (emendasRevealed) return;
+    
+    // Only apply on desktop (lg and up)
+    if (window.innerWidth < 1024) return;
+    
+    const emendasSection = document.getElementById('emendas');
+    if (!emendasSection) return;
+    
+    const title = emendasSection.querySelector('.emendas-title-desktop');
+    const photo = emendasSection.querySelector('.emendas-nikolas-photo');
+    const map = emendasSection.querySelector('.emendas-map-desktop');
+    const impactText = emendasSection.querySelector('.emendas-impact-text');
+    const ctaBtn = emendasSection.querySelector('.emendas-cta-btn');
+    
+    const elements = [title, photo, map, impactText, ctaBtn].filter(Boolean);
+    
+    // Disconnect any existing observer before creating a new one
+    if (emendasRevealObserver) {
+      emendasRevealObserver.disconnect();
+      emendasRevealObserver = null;
+    }
+    
+    // Intersection Observer for reveal animation
+    const observerOptions = {
+      root: null,
+      rootMargin: '-10% 0px -10% 0px',
+      threshold: 0.1
+    };
+    
+    emendasRevealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Reveal all elements when section comes into view
+          elements.forEach(el => {
+            el.classList.add('revealed');
+          });
+          // Mark as revealed and stop observing
+          emendasRevealed = true;
+          emendasRevealObserver.disconnect();
+          emendasRevealObserver = null;
+        }
+      });
+    }, observerOptions);
+    
+    emendasRevealObserver.observe(emendasSection);
+  }
+  
+  // Initialize emendas scroll reveal
+  initEmendasScrollReveal();
+  
+  // Re-initialize on resize (in case switching between mobile/desktop)
+  let emendasResizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(emendasResizeTimeout);
+    emendasResizeTimeout = setTimeout(() => {
+      initEmendasScrollReveal();
+    }, 250);
+  });
+
+  // ========================================
   // MINAS GERAIS MAP INITIALIZATION
   // ========================================
   
