@@ -613,6 +613,10 @@ const MinasMap = (function() {
         isDrag = deltaX > DRAG_THRESHOLD || deltaY > DRAG_THRESHOLD || touchDuration > TAP_TIMEOUT;
       }
       
+      // Always prevent default to stop browser from generating synthetic click
+      // We handle the click ourselves when appropriate
+      e.preventDefault();
+      
       // Only trigger click if it was a tap, not a drag
       if (!isDrag) {
         const syntheticEvent = {
@@ -622,7 +626,6 @@ const MinasMap = (function() {
         };
         
         handleClick(syntheticEvent);
-        e.preventDefault();
       }
     }
 
