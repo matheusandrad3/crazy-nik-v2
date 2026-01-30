@@ -239,15 +239,20 @@ const MinasMap = (function() {
       regionToDeselect.classList.remove('is-selected');
     }
 
+    // Add closing class to trigger X rotation animation
     if (cardToClose) {
-      cardToClose.classList.remove('is-visible');
+      cardToClose.classList.add('is-closing');
+      // Small delay to let X rotate before card slides away
+      setTimeout(() => {
+        cardToClose.classList.remove('is-visible');
+      }, 150);
     }
     if (overlayToClose) {
       overlayToClose.classList.remove('is-visible');
     }
 
     // Remove after animation using captured references
-    // Must match CSS --rc-duration (400ms) to avoid cutting off the transition
+    // Must match CSS exit duration (800ms) + closing delay (150ms)
     setTimeout(() => {
       if (cardToClose && cardToClose.parentNode) {
         cardToClose.remove();
@@ -259,7 +264,7 @@ const MinasMap = (function() {
       if (!activeCard) {
         document.body.style.overflow = '';
       }
-    }, 400);
+    }, 950);
 
     document.removeEventListener('keydown', handleCardEscape);
   }
