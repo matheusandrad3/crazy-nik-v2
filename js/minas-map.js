@@ -124,7 +124,12 @@ const MinasMap = (function() {
     // Create overlay
     activeOverlay = document.createElement('div');
     activeOverlay.className = 'region-card-overlay';
+    // Use both click and touchend for reliable mobile closing
     activeOverlay.addEventListener('click', closeRegionCard);
+    activeOverlay.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      closeRegionCard();
+    }, { passive: false });
 
     // Create card
     activeCard = document.createElement('div');
@@ -188,9 +193,14 @@ const MinasMap = (function() {
     document.body.appendChild(activeOverlay);
     document.body.appendChild(activeCard);
 
-    // Bind close button
+    // Bind close button - use both click and touchend for reliable mobile closing
     const closeBtn = activeCard.querySelector('.region-card__close');
     closeBtn.addEventListener('click', closeRegionCard);
+    closeBtn.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeRegionCard();
+    }, { passive: false });
 
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
@@ -289,6 +299,13 @@ const MinasMap = (function() {
     let tooltip = null;
     let regions = [];
     let isDestroyed = false;
+    
+    // Touch tracking for drag detection
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    const DRAG_THRESHOLD = 10; // pixels - movement beyond this is considered a drag
+    const TAP_TIMEOUT = 300; // ms - taps longer than this are not considered taps
     
     const config = {
       tooltipOffset: 15,
@@ -566,6 +583,13 @@ const MinasMap = (function() {
         region.classList.add('is-touched');
         // Dismiss the map hint on first touch
         dismissMapHint(container);
+        
+        // Record touch start position and time for drag detection
+        if (e.touches && e.touches.length > 0) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          touchStartTime = Date.now();
+        }
       }
     }
 
@@ -575,14 +599,31 @@ const MinasMap = (function() {
       
       region.classList.remove('is-touched');
       
-      const syntheticEvent = {
-        target: region,
-        preventDefault: () => {},
-        stopPropagation: () => {}
-      };
+      // Check if this was a drag or a tap
+      let isDrag = false;
+      if (e.changedTouches && e.changedTouches.length > 0) {
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchDuration = Date.now() - touchStartTime;
+        
+        const deltaX = Math.abs(touchEndX - touchStartX);
+        const deltaY = Math.abs(touchEndY - touchStartY);
+        
+        // Consider it a drag if moved beyond threshold OR if touch was too long
+        isDrag = deltaX > DRAG_THRESHOLD || deltaY > DRAG_THRESHOLD || touchDuration > TAP_TIMEOUT;
+      }
       
-      handleClick(syntheticEvent);
-      e.preventDefault();
+      // Only trigger click if it was a tap, not a drag
+      if (!isDrag) {
+        const syntheticEvent = {
+          target: region,
+          preventDefault: () => {},
+          stopPropagation: () => {}
+        };
+        
+        handleClick(syntheticEvent);
+        e.preventDefault();
+      }
     }
 
     function handleTouchCancel(e) {
@@ -590,6 +631,10 @@ const MinasMap = (function() {
       if (region) {
         region.classList.remove('is-touched');
       }
+      // Reset touch tracking
+      touchStartX = 0;
+      touchStartY = 0;
+      touchStartTime = 0;
     }
 
     function selectRegion(regionId) {
