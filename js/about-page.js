@@ -287,16 +287,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ========================================
-  // INITIALIZE ON LOAD
-  // ========================================
-  console.log('About page scripts loaded successfully');
-});
-
 // ========================================
 // OPTIONAL: GSAP Animations (if GSAP is loaded)
 // ========================================
-if (typeof gsap !== 'undefined') {
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
   
   // Title animations
