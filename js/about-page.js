@@ -130,41 +130,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // ========================================
   // STATS MARQUEE ANIMATION
   // ========================================
-  function initMarquee() {
-    const marqueeContainers = document.querySelectorAll('.stats .swiper-wrapper, .project-title .swiper-wrapper');
-    
-    marqueeContainers.forEach(function(container) {
-      if (!container) return;
-      
-      // Clone slides for infinite effect
-      const slides = container.querySelectorAll('.swiper-slide');
-      slides.forEach(function(slide) {
-        const clone = slide.cloneNode(true);
-        container.appendChild(clone);
-      });
-      
-      // Animate with CSS
-      container.style.display = 'flex';
-      container.style.animation = 'marquee 30s linear infinite';
-    });
-  }
-  
-  // Add marquee keyframes dynamically
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    
-    @keyframes marquee-reverse {
-      0% { transform: translateX(-50%); }
-      100% { transform: translateX(0); }
-    }
-  `;
-  document.head.appendChild(style);
-  
-  initMarquee();
+  // Note: Marquee animation is handled via CSS (.animate-marquee class)
+  // defined in about-page.css with @keyframes marquee
 
   // ========================================
   // SMOOTH SCROLL FOR ANCHOR LINKS

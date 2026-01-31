@@ -521,19 +521,12 @@
 }
 
 /* Fix for Experience accordion content visibility */
-.about-page .exp-body,
-.about-page .experience-item .exp-body {
-  display: block !important;
-  overflow: visible !important;
-}
-
-.about-page .exp-body.collapse.show,
-.about-page .experience-item .collapse.show {
-  display: block !important;
-  overflow: visible !important;
-  height: auto !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+.about-page .exp-body.collapse.show {
+  display: block;
+  overflow: visible;
+  height: auto;
+  visibility: visible;
+  opacity: 1;
 }
 
 .about-page .single-experience {
