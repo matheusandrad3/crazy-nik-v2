@@ -527,7 +527,14 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
     // Parse hash fragment like "#regiao=path3038"
     const match = hash.match(/regiao=([^&]+)/);
     if (match && match[1]) {
-      return decodeURIComponent(match[1]);
+      try {
+        return decodeURIComponent(match[1]);
+      } catch (e) {
+        // Handle malformed percent-encoded URLs (e.g., #regiao=%E0 or #regiao=%)
+        // Log error and return null to prevent dashboard initialization crash
+        console.warn('Invalid URL-encoded region parameter:', match[1], e);
+        return null;
+      }
     }
     return null;
   }
