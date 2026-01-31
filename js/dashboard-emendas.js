@@ -701,6 +701,11 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && currentRegion) {
+        // Don't clear filter if mobile menu is open (let mobile menu handler take priority)
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+          return;
+        }
         clearRegionFilter();
       }
     });
