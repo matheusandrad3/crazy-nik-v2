@@ -463,12 +463,6 @@
   }
 }
 
-/* Dynamic progress bar for filtered data */
-#areas-grid .dashboard-progress-fill {
-  width: 0;
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 /* Teal color for new area types */
 .dashboard-progress-fill--teal {
   background: linear-gradient(90deg, #14B8A6 0%, #2DD4BF 100%);
