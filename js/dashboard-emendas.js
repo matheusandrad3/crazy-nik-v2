@@ -422,7 +422,7 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
 
     if (show && regionId) {
       elements.regionCtaContainer.classList.remove('hidden');
-      elements.regionCtaLink.href = `dashboard-emendas.html#regiao=${encodeURIComponent(regionId)}`;
+      elements.regionCtaLink.href = `emendas-regiao.html?regiao=${encodeURIComponent(regionId)}`;
       
       requestAnimationFrame(() => {
         elements.regionCtaContainer.classList.add('is-visible');

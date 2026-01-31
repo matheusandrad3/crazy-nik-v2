@@ -113,14 +113,14 @@ export function initMobileMenu() {
   // Handle menu link clicks
   mobileMenuLinks.forEach(link => {
     link.addEventListener('click', function(e) {
+      e.preventDefault();
       const href = this.getAttribute('href');
       
-      if (href.startsWith('#')) {
-        e.preventDefault();
-        closeMenu();
-        
-        // Navigate after menu closes
-        setTimeout(() => {
+      closeMenu();
+      
+      // Navigate after menu closes
+      setTimeout(() => {
+        if (href.startsWith('#')) {
           const target = document.querySelector(href);
           if (target) {
             const headerHeight = header ? header.offsetHeight : 0;
@@ -133,10 +133,10 @@ export function initMobileMenu() {
             });
             history.pushState(null, '', href);
           }
-        }, 400);
-      } else {
-        closeMenu();
-      }
+        } else {
+          window.location.href = href;
+        }
+      }, 400);
     });
     
     // Add touch feedback for mobile nav links
