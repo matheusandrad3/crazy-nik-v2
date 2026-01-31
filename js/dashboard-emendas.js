@@ -225,6 +225,7 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
   let mapInstance = null;
   let currentRegion = null;
   let currentRegionElement = null;
+  let regionCtaHideTimeout = null;
 
   // ========================================
   // DOM ELEMENTS
@@ -395,6 +396,12 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
   function updateRegionCTA(regionId, show = true) {
     if (!elements.regionCtaContainer || !elements.regionCtaLink) return;
 
+    // Cancel any pending hide timeout to prevent race conditions
+    if (regionCtaHideTimeout !== null) {
+      clearTimeout(regionCtaHideTimeout);
+      regionCtaHideTimeout = null;
+    }
+
     if (show && regionId) {
       elements.regionCtaContainer.classList.remove('hidden');
       elements.regionCtaLink.href = `dashboard-emendas.html#regiao=${encodeURIComponent(regionId)}`;
@@ -405,16 +412,20 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
     } else {
       elements.regionCtaContainer.classList.remove('is-visible');
       
-      setTimeout(() => {
+      regionCtaHideTimeout = setTimeout(() => {
         elements.regionCtaContainer.classList.add('hidden');
+        regionCtaHideTimeout = null;
       }, 300);
     }
   }
 
   /**
    * Select a region and update the dashboard
+   * @param {string} regionId - The region identifier
+   * @param {Element|null} regionElement - The map region element (can be null)
+   * @param {boolean} shouldScroll - Whether to scroll to stats section (default: true)
    */
-  function selectRegion(regionId, regionElement) {
+  function selectRegion(regionId, regionElement, shouldScroll = true) {
     const data = emendasData[regionId];
     if (!data) return;
 
@@ -427,8 +438,8 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
       elements.statsSection.classList.add('is-filtered');
     }
 
-    // Scroll to stats section smoothly
-    if (elements.statsSection) {
+    // Scroll to stats section smoothly if requested
+    if (shouldScroll && elements.statsSection) {
       const header = document.getElementById('main-header');
       const headerHeight = header ? header.offsetHeight : 0;
       const targetPosition = elements.statsSection.getBoundingClientRect().top + window.scrollY;
@@ -575,8 +586,8 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
           if (mapInstance) {
             mapInstance.selectRegion(regionId);
           }
-          // Update the dashboard with region data
-          selectRegionFromURL(regionId, regionElement);
+          // Update the dashboard with region data (no scroll since user came directly to this page)
+          selectRegion(regionId, regionElement, false);
         }, 100); // Small delay to ensure everything is rendered
       } else if (waited < maxWait) {
         // Keep waiting
@@ -600,29 +611,6 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
     }
 
     checkAndSelect();
-  }
-
-  /**
-   * Select a region that came from URL (no scroll, immediate update)
-   */
-  function selectRegionFromURL(regionId, regionElement) {
-    const data = emendasData[regionId];
-    if (!data) return;
-
-    currentRegion = regionId;
-    currentRegionElement = regionElement;
-    
-    // Update section data attribute
-    if (elements.statsSection) {
-      elements.statsSection.dataset.region = regionId;
-      elements.statsSection.classList.add('is-filtered');
-    }
-
-    // Update all dashboard components (no scroll since user came directly to this page)
-    updateStatsHeader(data, regionId, regionElement);
-    updateStatsCards(data, true);
-    updateAreasGrid(data, true);
-    updateRegionCTA(regionId, true);
   }
 
   // ========================================
