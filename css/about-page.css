@@ -288,7 +288,7 @@
   transform: translateY(0);
 }
 
-.about-page .go-to-top:hover {
+.about-page .go-to-top.active:hover {
   box-shadow: 0 6px 30px rgba(251, 210, 22, 0.5);
   transform: translateY(-4px);
 }
