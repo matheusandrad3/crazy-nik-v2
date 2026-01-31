@@ -490,44 +490,6 @@
   .dashboard-stat-mini-label {
     font-size: 0.75rem;
   }
-  
-  /* Region Panel - Modal on tablet */
-  .region-panel {
-    inset: auto;
-    top: 50%;
-    left: 50%;
-    bottom: auto;
-    width: 90%;
-    max-width: 420px;
-    max-height: 85vh;
-    padding: 1.75rem;
-    padding-bottom: 1.75rem;
-    border-radius: 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transform: translate(-50%, -50%) scale(0.95);
-    opacity: 0;
-  }
-  
-  .region-panel[aria-hidden="false"] {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-  
-  .region-panel-handle {
-    display: none;
-  }
-  
-  .region-panel-header {
-    padding-right: 3.5rem;
-  }
-  
-  .region-panel-title {
-    font-size: 1.375rem;
-  }
-  
-  .region-panel-stat-value {
-    font-size: 1.25rem;
-  }
 }
 
 /* ----------------------------------------
@@ -563,30 +525,6 @@
   
   .dashboard-stat-card-value {
     font-size: 1.75rem;
-  }
-  
-  /* Region Panel - Larger modal */
-  .region-panel {
-    max-width: 480px;
-    padding: 2rem;
-  }
-  
-  .region-panel-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 14px;
-  }
-  
-  .region-panel-title {
-    font-size: 1.5rem;
-  }
-  
-  .region-panel-stats {
-    padding: 1.25rem 0;
-  }
-  
-  .region-panel-stat-value {
-    font-size: 1.375rem;
   }
 }
 
@@ -679,14 +617,7 @@
     width: var(--progress-width) !important;
   }
   
-  .region-panel,
-  .region-panel-overlay {
-    transition: none;
-  }
-  
-  .dashboard-stat-card:hover,
-  .region-panel-close:hover,
-  .region-panel-cta:hover {
+  .dashboard-stat-card:hover {
     transform: none;
   }
 }

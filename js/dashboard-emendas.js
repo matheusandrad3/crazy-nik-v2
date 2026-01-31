@@ -225,6 +225,7 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
   let mapInstance = null;
   let currentRegion = null;
   let regionCtaHideTimeout = null;
+  let userHasInteracted = false; // Track if user has clicked on a region
 
   // ========================================
   // DOM ELEMENTS
@@ -290,8 +291,26 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
       // Update region icon with SVG
       if (elements.statsRegionIcon && regionElement) {
         const pathData = regionElement.getAttribute('d');
+        
+        // Calculate proper viewBox for this region's bounding box
+        let viewBoxStr = '0 0 854 661'; // fallback
+        try {
+          const bbox = regionElement.getBBox();
+          // The bbox is in local coordinates, account for the transform
+          // Transform is translate(935.77919,-281.37865)
+          const tx = 935.77919;
+          const ty = -281.37865;
+          const transformedX = bbox.x + tx;
+          const transformedY = bbox.y + ty;
+          // Add 10% padding
+          const padding = Math.max(bbox.width, bbox.height) * 0.1;
+          viewBoxStr = `${transformedX - padding} ${transformedY - padding} ${bbox.width + padding * 2} ${bbox.height + padding * 2}`;
+        } catch (e) {
+          console.warn('Could not calculate bounding box for region icon:', e);
+        }
+        
         elements.statsRegionIcon.innerHTML = `
-          <svg viewBox="0 0 854 661" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="${viewBoxStr}" preserveAspectRatio="xMidYMid meet">
             <g transform="translate(935.77919,-281.37865)">
               <path d="${pathData}" fill="${data.color || '#1E8F45'}" />
             </g>
@@ -538,6 +557,9 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
     mapContainer.addEventListener('minas-map:region-click', function(e) {
       const { region, element, selected } = e.detail;
       
+      // Mark that user has explicitly interacted with the map
+      userHasInteracted = true;
+      
       if (selected && emendasData[region]) {
         selectRegion(region, element);
         updateURLWithRegion(region);
@@ -577,8 +599,20 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
       const isMapReady = regionElement && regionElement.hasAttribute('data-region');
       
       if (isMapReady) {
+        // Check if user has already interacted before applying URL selection
+        if (userHasInteracted) {
+          console.log('User already selected a region, skipping URL-based selection');
+          return;
+        }
+        
         // Found the region and map is ready, select it
         setTimeout(() => {
+          // Double-check user hasn't interacted during this delay
+          if (userHasInteracted) {
+            console.log('User interacted during delay, skipping URL-based selection');
+            return;
+          }
+          
           // Use the mapInstance to select the region visually
           if (mapInstance) {
             mapInstance.selectRegion(regionId);
