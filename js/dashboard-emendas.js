@@ -224,7 +224,6 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
   
   let mapInstance = null;
   let currentRegion = null;
-  let currentRegionElement = null;
   let regionCtaHideTimeout = null;
 
   // ========================================
@@ -430,7 +429,6 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
     if (!data) return;
 
     currentRegion = regionId;
-    currentRegionElement = regionElement;
     
     // Update section data attribute
     if (elements.statsSection) {
@@ -463,7 +461,6 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
    */
   function clearRegionFilter() {
     currentRegion = null;
-    currentRegionElement = null;
     
     // Update section data attribute
     if (elements.statsSection) {
