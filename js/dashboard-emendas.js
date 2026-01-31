@@ -444,6 +444,12 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
    * @param {boolean} shouldScroll - Whether to scroll to stats section (default: true)
    */
   function selectRegion(regionId, regionElement, shouldScroll = true) {
+    // Validate that regionId is a direct property of emendasData (prevent prototype pollution)
+    if (!Object.hasOwn(emendasData, regionId)) {
+      console.warn(`Invalid region ID: ${regionId}`);
+      return;
+    }
+    
     const data = emendasData[regionId];
     if (!data) return;
 
@@ -509,6 +515,10 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
   /**
    * Get region ID from URL hash fragment
    * Supports format: #regiao=path3038
+   * 
+   * Security Note: This function extracts user input from the URL hash.
+   * The returned value MUST be validated with Object.hasOwn() before
+   * accessing emendasData to prevent prototype pollution attacks.
    */
   function getRegionFromURL() {
     const hash = window.location.hash;
@@ -560,7 +570,7 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
       // Mark that user has explicitly interacted with the map
       userHasInteracted = true;
       
-      if (selected && emendasData[region]) {
+      if (selected && Object.hasOwn(emendasData, region)) {
         selectRegion(region, element);
         updateURLWithRegion(region);
       } else {
@@ -571,7 +581,7 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
 
     // Check if we have a region in the URL and select it after map loads
     const urlRegion = getRegionFromURL();
-    if (urlRegion && emendasData[urlRegion]) {
+    if (urlRegion && Object.hasOwn(emendasData, urlRegion)) {
       // Wait for the SVG map to load, then select the region
       waitForMapAndSelectRegion(mapContainer, urlRegion);
     }
@@ -627,7 +637,7 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
       } else {
         // Timeout - try to at least update the dashboard without map selection
         console.warn('Map did not fully load in time, updating dashboard only');
-        const data = emendasData[regionId];
+        const data = Object.hasOwn(emendasData, regionId) ? emendasData[regionId] : null;
         if (data) {
           updateStatsHeader(data, regionId, null);
           updateStatsCards(data, true);
