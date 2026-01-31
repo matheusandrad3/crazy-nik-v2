@@ -60,7 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
       
       const targetSelector = this.getAttribute('data-bs-target');
       const target = document.querySelector(targetSelector);
-      const parent = this.getAttribute('data-bs-parent');
+      // Read data-bs-parent from either toggle or target element
+      const parent = this.getAttribute('data-bs-parent') || (target ? target.getAttribute('data-bs-parent') : null);
       
       if (!target) return;
       
@@ -289,69 +290,3 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 }); // Close DOMContentLoaded
-
-// ========================================
-// OPTIONAL: GSAP Animations (if GSAP is loaded)
-// ========================================
-if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-  
-  // Title animations
-  gsap.utils.toArray('.title-anim').forEach(function(title) {
-    gsap.from(title, {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: title,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse'
-      }
-    });
-  });
-}
-
-// ========================================
-// OPTIONAL: Swiper initialization (if Swiper is loaded)
-// ========================================
-if (typeof Swiper !== 'undefined') {
-  // Stats slider
-  const statSlider = new Swiper('.stat-slider', {
-    slidesPerView: 'auto',
-    spaceBetween: 30,
-    loop: true,
-    speed: 5000,
-    autoplay: {
-      delay: 0,
-      disableOnInteraction: false,
-    },
-    allowTouchMove: false,
-  });
-  
-  // Brand slider
-  const brandSlider = new Swiper('.brand-slider', {
-    slidesPerView: 'auto',
-    spaceBetween: 30,
-    loop: true,
-    speed: 3000,
-    autoplay: {
-      delay: 0,
-      disableOnInteraction: false,
-    },
-    allowTouchMove: true,
-  });
-  
-  // Project title slider
-  const projectTitleSlider = new Swiper('.project-title', {
-    slidesPerView: 'auto',
-    spaceBetween: 0,
-    loop: true,
-    speed: 8000,
-    autoplay: {
-      delay: 0,
-      disableOnInteraction: false,
-    },
-    allowTouchMove: false,
-  });
-}
