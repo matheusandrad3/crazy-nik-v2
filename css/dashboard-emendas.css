@@ -423,10 +423,6 @@
 }
 
 /* Stats section filtered state */
-.dashboard-stats-section.is-filtered {
-  /* subtle indicator that filter is active */
-}
-
 .dashboard-stats-section.is-filtered .dashboard-stat-card {
   border-color: rgba(36, 88, 164, 0.15);
 }

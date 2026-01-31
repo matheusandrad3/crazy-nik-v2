@@ -11,7 +11,7 @@
  * Sets CSS custom properties for viewport height to handle mobile browser bars
  * Provides --vh (1% of viewport) and --app-height (full viewport height)
  */
-export function setViewportHeight() {
+function setViewportHeight() {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
   document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
