@@ -5,9 +5,11 @@
  * - Map initialization and interaction
  * - Region selection and dashboard filtering
  * - Dynamic stats and area updates
- * - Mobile menu functionality
- * - Header scroll effects
+ * - Mobile menu functionality (imported from shared-utils.js)
+ * - Header scroll effects (imported from shared-utils.js)
  */
+
+import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-utils.js';
 
 (function() {
   'use strict';
@@ -248,138 +250,6 @@
   };
 
   // ========================================
-  // VIEWPORT HEIGHT FIX
-  // ========================================
-  
-  function setViewportHeight() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-    document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
-  }
-
-  // ========================================
-  // MOBILE MENU FUNCTIONALITY
-  // ========================================
-  
-  function initMobileMenu() {
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
-    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-    const mobileMenuLinks = document.querySelectorAll('#mobile-menu nav a');
-    const header = document.getElementById('main-header');
-    
-    let closeMenuTimeoutId = null;
-
-    function openMenu() {
-      if (closeMenuTimeoutId !== null) {
-        clearTimeout(closeMenuTimeoutId);
-        closeMenuTimeoutId = null;
-      }
-      mobileMenu.classList.remove('closing');
-      mobileMenu.classList.add('active');
-      mobileMenuBtn.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeMenu() {
-      if (closeMenuTimeoutId !== null) {
-        clearTimeout(closeMenuTimeoutId);
-        closeMenuTimeoutId = null;
-      }
-      
-      mobileMenu.classList.add('closing');
-      mobileMenuBtn.classList.remove('active');
-      
-      closeMenuTimeoutId = setTimeout(() => {
-        mobileMenu.classList.remove('active');
-        mobileMenu.classList.remove('closing');
-        document.body.style.overflow = '';
-        closeMenuTimeoutId = null;
-      }, 400);
-    }
-
-    if (mobileMenuBtn) {
-      mobileMenuBtn.addEventListener('click', openMenu);
-    }
-    
-    if (mobileMenuClose) {
-      mobileMenuClose.addEventListener('click', closeMenu);
-    }
-    
-    if (mobileMenuOverlay) {
-      mobileMenuOverlay.addEventListener('click', closeMenu);
-    }
-
-    mobileMenuLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        
-        if (href.startsWith('#')) {
-          e.preventDefault();
-          closeMenu();
-          
-          setTimeout(() => {
-            const target = document.querySelector(href);
-            if (target) {
-              const headerHeight = header ? header.offsetHeight : 0;
-              const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-              const offsetPosition = targetPosition - headerHeight - 20;
-              
-              window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-              });
-              history.pushState(null, '', href);
-            }
-          }, 400);
-        } else {
-          closeMenu();
-        }
-      });
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
-        closeMenu();
-      }
-    });
-  }
-
-  // ========================================
-  // STICKY HEADER
-  // ========================================
-  
-  function initStickyHeader() {
-    const header = document.getElementById('main-header');
-    if (!header) return;
-    
-    const scrollThreshold = 50;
-    let ticking = false;
-
-    function updateHeader() {
-      const scrollY = window.scrollY;
-      
-      if (scrollY > scrollThreshold) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-      
-      ticking = false;
-    }
-
-    window.addEventListener('scroll', function() {
-      if (!ticking) {
-        window.requestAnimationFrame(updateHeader);
-        ticking = true;
-      }
-    }, { passive: true });
-
-    updateHeader();
-  }
-
-  // ========================================
   // DASHBOARD UPDATE FUNCTIONS
   // ========================================
 
@@ -527,7 +397,7 @@
 
     if (show && regionId) {
       elements.regionCtaContainer.classList.remove('hidden');
-      elements.regionCtaLink.href = `emendas-regiao.html?regiao=${encodeURIComponent(regionId)}`;
+      elements.regionCtaLink.href = `dashboard-emendas.html#regiao=${encodeURIComponent(regionId)}`;
       
       requestAnimationFrame(() => {
         elements.regionCtaContainer.classList.add('is-visible');
@@ -822,21 +692,15 @@
   // ========================================
   
   function init() {
-    // Viewport height fix
-    setViewportHeight();
-    window.addEventListener('resize', setViewportHeight);
-    window.addEventListener('orientationchange', () => {
-      setTimeout(setViewportHeight, 100);
-      setTimeout(setViewportHeight, 300);
-    });
-    window.addEventListener('load', setViewportHeight);
+    // Initialize viewport height handling (from shared-utils)
+    initViewportHeight();
 
     // Cache DOM elements
     cacheElements();
 
     // Initialize components
-    initMobileMenu();
-    initStickyHeader();
+    initMobileMenu();      // from shared-utils.js
+    initStickyHeader();    // from shared-utils.js
     initDashboardMap();
     initProgressBars();
     bindEvents();

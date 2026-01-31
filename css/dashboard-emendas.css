@@ -680,7 +680,6 @@
   
   .dashboard-progress-fill {
     animation: none;
-    width: auto !important;
   }
   
   .region-panel,
