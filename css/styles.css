@@ -376,7 +376,6 @@ html, body {
    ======================================== */
 
 /* Target sections with IDs - add scroll margin to prevent header overlap */
-sobre.html,
 #emendas,
 #projetos,
 #noticias {
@@ -384,7 +383,6 @@ sobre.html,
 }
 
 @media (min-width: 1024px) {
-  sobre.html,
   #emendas,
   #projetos,
   #noticias {

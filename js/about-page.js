@@ -3,25 +3,26 @@
  * Adapted from uniqeme template
  */
 
-document.addEventListener('DOMContentLoaded', function() {
-  'use strict';
-
-  // ========================================
-  // PAGE LOADER
-  // ========================================
+// ========================================
+// PAGE LOADER
+// ========================================
+// Must be outside DOMContentLoaded to ensure it works correctly
+window.addEventListener('load', function() {
   const loaderWrapper = document.querySelector('.loader-wrapper');
   if (loaderWrapper) {
-    window.addEventListener('load', function() {
+    setTimeout(function() {
+      loaderWrapper.style.opacity = '0';
+      loaderWrapper.style.visibility = 'hidden';
       setTimeout(function() {
-        loaderWrapper.style.opacity = '0';
-        loaderWrapper.style.visibility = 'hidden';
-        setTimeout(function() {
-          loaderWrapper.style.display = 'none';
-          document.body.style.overflowY = 'auto';
-        }, 500);
+        loaderWrapper.style.display = 'none';
+        document.body.style.overflowY = 'auto';
       }, 500);
-    });
+    }, 500);
   }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  'use strict';
 
   // ========================================
   // GO TO TOP BUTTON
@@ -286,6 +287,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+
+}); // Close DOMContentLoaded
 
 // ========================================
 // OPTIONAL: GSAP Animations (if GSAP is loaded)
