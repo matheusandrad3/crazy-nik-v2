@@ -644,18 +644,10 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
       } else {
         // Timeout - try to at least update the dashboard without map selection
         console.warn('Map did not fully load in time, updating dashboard only');
-        const data = Object.hasOwn(emendasData, regionId) ? emendasData[regionId] : null;
-        if (data) {
-          // Set currentRegion so Escape key handler works correctly
-          currentRegion = regionId;
-          updateStatsHeader(data, regionId, null);
-          updateStatsCards(data, true);
-          updateAreasGrid(data, true);
-          updateRegionCTA(regionId, true);
-          if (elements.statsSection) {
-            elements.statsSection.dataset.region = regionId;
-            elements.statsSection.classList.add('is-filtered');
-          }
+        // Use selectRegion() to ensure currentRegion is set and all state is consistent
+        // Pass null for regionElement since map isn't ready, and false for shouldScroll
+        if (Object.hasOwn(emendasData, regionId)) {
+          selectRegion(regionId, null, false);
         }
       }
     }
