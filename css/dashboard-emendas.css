@@ -439,7 +439,7 @@
 }
 
 #areas-grid.is-updated .dashboard-area-card {
-  animation: areaCardEnter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   animation-delay: var(--delay, 0s);
   opacity: 0;
   transform: translateY(15px);
@@ -456,7 +456,7 @@
   }
 }
 
-@keyframes areaCardEnter {
+@keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
@@ -539,7 +539,7 @@
 .dashboard-stat-card {
   opacity: 0;
   transform: translateY(20px);
-  animation: dashboardCardFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .dashboard-stat-card:nth-child(1) { animation-delay: 0.1s; }
@@ -547,18 +547,11 @@
 .dashboard-stat-card:nth-child(3) { animation-delay: 0.3s; }
 .dashboard-stat-card:nth-child(4) { animation-delay: 0.4s; }
 
-@keyframes dashboardCardFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Area cards entrance */
 .dashboard-area-card {
   opacity: 0;
   transform: translateY(15px);
-  animation: dashboardAreaFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .dashboard-area-card:nth-child(1) { animation-delay: 0.3s; }
@@ -567,13 +560,6 @@
 .dashboard-area-card:nth-child(4) { animation-delay: 0.6s; }
 .dashboard-area-card:nth-child(5) { animation-delay: 0.7s; }
 .dashboard-area-card:nth-child(6) { animation-delay: 0.8s; }
-
-@keyframes dashboardAreaFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* Progress bar animation */
 .dashboard-progress-fill {

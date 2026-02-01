@@ -646,6 +646,8 @@ import { initViewportHeight, initMobileMenu, initStickyHeader } from './shared-u
         console.warn('Map did not fully load in time, updating dashboard only');
         const data = Object.hasOwn(emendasData, regionId) ? emendasData[regionId] : null;
         if (data) {
+          // Set currentRegion so Escape key handler works correctly
+          currentRegion = regionId;
           updateStatsHeader(data, regionId, null);
           updateStatsCards(data, true);
           updateAreasGrid(data, true);
