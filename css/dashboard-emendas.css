@@ -1,0 +1,603 @@
+/* ========================================
+   DASHBOARD EMENDAS - Mobile First Styles
+   ======================================== */
+
+/* ----------------------------------------
+   HERO SECTION
+   ---------------------------------------- */
+
+.dashboard-hero {
+  background: linear-gradient(
+    165deg,
+    #0a0a0a 0%,
+    #121212 50%,
+    #1a1a1a 100%
+  );
+}
+
+.dashboard-hero-bg {
+  background: 
+    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(36, 88, 164, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(251, 210, 22, 0.05) 0%, transparent 40%);
+}
+
+.dashboard-badge {
+  background: rgba(36, 88, 164, 0.2);
+  border: 1px solid rgba(36, 88, 164, 0.3);
+  color: #7BA8E0;
+}
+
+.dashboard-title {
+  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Stats Summary - Mini */
+.dashboard-stats-summary {
+  display: flex;
+  gap: 1rem;
+}
+
+.dashboard-stat-mini {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.dashboard-stat-mini-value {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #FBD216;
+  line-height: 1.2;
+}
+
+.dashboard-stat-mini-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+/* ----------------------------------------
+   MAP SECTION
+   ---------------------------------------- */
+
+.dashboard-map-section {
+  background: linear-gradient(
+    180deg,
+    #1a1a1a 0%,
+    #0f0f0f 100%
+  );
+}
+
+.dashboard-map-bg {
+  background: 
+    radial-gradient(ellipse 100% 80% at 50% 30%, rgba(34, 166, 81, 0.04) 0%, transparent 50%);
+}
+
+.dashboard-map-wrapper {
+  max-width: 800px;
+}
+
+.dashboard-map-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 854 / 661;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Map Legend */
+.dashboard-map-legend {
+  display: flex;
+  justify-content: center;
+}
+
+/* ----------------------------------------
+   STATS SECTION
+   ---------------------------------------- */
+
+.dashboard-stats-section {
+  background: linear-gradient(
+    180deg,
+    #f8f9fc 0%,
+    #ffffff 50%,
+    #f0f4f8 100%
+  );
+}
+
+.dashboard-stats-bg {
+  background: 
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(36, 88, 164, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(34, 166, 81, 0.02) 0%, transparent 40%);
+}
+
+/* Stat Cards */
+.dashboard-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid rgba(36, 88, 164, 0.08);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 40px rgba(36, 88, 164, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-stat-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(36, 88, 164, 0.1) 0%, rgba(36, 88, 164, 0.05) 100%);
+  color: #2458A4;
+  flex-shrink: 0;
+}
+
+.dashboard-stat-card-icon--green {
+  background: linear-gradient(145deg, rgba(34, 166, 81, 0.1) 0%, rgba(34, 166, 81, 0.05) 100%);
+  color: #22A651;
+}
+
+.dashboard-stat-card-icon--yellow {
+  background: linear-gradient(145deg, rgba(251, 210, 22, 0.15) 0%, rgba(251, 210, 22, 0.08) 100%);
+  color: #B8930A;
+}
+
+.dashboard-stat-card-icon--purple {
+  background: linear-gradient(145deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+  color: #8B5CF6;
+}
+
+.dashboard-stat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.dashboard-stat-card-value {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #171717;
+  line-height: 1.2;
+}
+
+.dashboard-stat-card-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #6B7280;
+}
+
+/* Area Cards */
+.dashboard-area-card {
+  padding: 1.25rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(36, 88, 164, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+.dashboard-area-card:hover {
+  border-color: rgba(36, 88, 164, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Progress Bar */
+.dashboard-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #E5E7EB;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dashboard-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-progress-fill--blue {
+  background: linear-gradient(90deg, #2458A4 0%, #3572C4 100%);
+}
+
+.dashboard-progress-fill--green {
+  background: linear-gradient(90deg, #22A651 0%, #2CC265 100%);
+}
+
+.dashboard-progress-fill--yellow {
+  background: linear-gradient(90deg, #E8B923 0%, #FBD216 100%);
+}
+
+.dashboard-progress-fill--purple {
+  background: linear-gradient(90deg, #8B5CF6 0%, #A78BFA 100%);
+}
+
+.dashboard-progress-fill--pink {
+  background: linear-gradient(90deg, #EC4899 0%, #F472B6 100%);
+}
+
+.dashboard-progress-fill--gray {
+  background: linear-gradient(90deg, #6B7280 0%, #9CA3AF 100%);
+}
+
+/* ----------------------------------------
+   REGION FILTER HEADER
+   ---------------------------------------- */
+
+.stats-header-state {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.stats-header-state.hidden {
+  display: none;
+}
+
+#stats-header-region {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+#stats-header-region.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Region Badge Icon */
+.stats-region-badge-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(36, 88, 164, 0.15) 0%, rgba(36, 88, 164, 0.08) 100%);
+  border: 1px solid rgba(36, 88, 164, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.stats-region-badge-icon svg {
+  width: 100%;
+  height: 100%;
+  padding: 6px;
+}
+
+/* Clear Filter Button */
+.stats-clear-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: rgba(36, 88, 164, 0.1);
+  border: 1px solid rgba(36, 88, 164, 0.2);
+  border-radius: 9999px;
+  color: #2458A4;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.stats-clear-filter:hover {
+  background: rgba(36, 88, 164, 0.15);
+  border-color: rgba(36, 88, 164, 0.3);
+  transform: translateY(-1px);
+}
+
+.stats-clear-filter:active {
+  transform: translateY(0);
+}
+
+.stats-clear-filter svg {
+  transition: transform 0.3s ease;
+}
+
+.stats-clear-filter:hover svg {
+  transform: rotate(90deg);
+}
+
+/* ----------------------------------------
+   REGION CTA BUTTON
+   ---------------------------------------- */
+
+.region-cta-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(36, 88, 164, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.region-cta-container.hidden {
+  display: none;
+}
+
+.region-cta-container.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.region-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(145deg, #2458A4 0%, #1e4c92 100%);
+  border-radius: 12px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 16px rgba(36, 88, 164, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.region-cta-button:hover {
+  background: linear-gradient(145deg, #3572C4 0%, #2458A4 100%);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 8px 24px rgba(36, 88, 164, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.region-cta-button:active {
+  transform: translateY(-1px);
+}
+
+.region-cta-button svg {
+  transition: transform 0.3s ease;
+}
+
+.region-cta-button:hover svg {
+  transform: translateX(4px);
+}
+
+/* ----------------------------------------
+   STATS UPDATE ANIMATIONS
+   ---------------------------------------- */
+
+/* Value update animation */
+.dashboard-stat-card-value.is-updating {
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.dashboard-stat-card-value.is-updated {
+  animation: valuePopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes valuePopIn {
+  0% {
+    opacity: 0;
+    transform: translateY(5px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Stats section filtered state */
+.dashboard-stats-section.is-filtered .dashboard-stat-card {
+  border-color: rgba(36, 88, 164, 0.15);
+}
+
+/* Areas grid update animation */
+#areas-grid.is-updating {
+  opacity: 0.5;
+  transform: scale(0.98);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#areas-grid.is-updated {
+  animation: gridFadeIn 0.4s ease;
+}
+
+#areas-grid.is-updated .dashboard-area-card {
+  animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: var(--delay, 0s);
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+@keyframes gridFadeIn {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Teal color for new area types */
+.dashboard-progress-fill--teal {
+  background: linear-gradient(90deg, #14B8A6 0%, #2DD4BF 100%);
+}
+
+/* ----------------------------------------
+   TABLET STYLES (min-width: 640px)
+   ---------------------------------------- */
+@media (min-width: 640px) {
+  .dashboard-stat-mini {
+    padding: 1rem 1.25rem;
+    min-width: 100px;
+  }
+  
+  .dashboard-stat-mini-value {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-stat-mini-label {
+    font-size: 0.75rem;
+  }
+}
+
+/* ----------------------------------------
+   DESKTOP STYLES (min-width: 1024px)
+   ---------------------------------------- */
+@media (min-width: 1024px) {
+  .dashboard-stats-summary {
+    gap: 1.5rem;
+  }
+  
+  .dashboard-stat-mini {
+    padding: 1.25rem 1.5rem;
+    min-width: 120px;
+  }
+  
+  .dashboard-stat-mini-value {
+    font-size: 1.75rem;
+  }
+  
+  .dashboard-map-container {
+    border-radius: 24px;
+  }
+  
+  .dashboard-stat-card {
+    padding: 1.5rem;
+  }
+  
+  .dashboard-stat-card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+  
+  .dashboard-stat-card-value {
+    font-size: 1.75rem;
+  }
+}
+
+/* ----------------------------------------
+   LARGE DESKTOP (min-width: 1280px)
+   ---------------------------------------- */
+@media (min-width: 1280px) {
+  .dashboard-stat-card-value {
+    font-size: 2rem;
+  }
+}
+
+/* ----------------------------------------
+   ANIMATIONS
+   ---------------------------------------- */
+
+/* Stats cards entrance */
+.dashboard-stat-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.dashboard-stat-card:nth-child(1) { animation-delay: 0.1s; }
+.dashboard-stat-card:nth-child(2) { animation-delay: 0.2s; }
+.dashboard-stat-card:nth-child(3) { animation-delay: 0.3s; }
+.dashboard-stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Area cards entrance */
+.dashboard-area-card {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.dashboard-area-card:nth-child(1) { animation-delay: 0.3s; }
+.dashboard-area-card:nth-child(2) { animation-delay: 0.4s; }
+.dashboard-area-card:nth-child(3) { animation-delay: 0.5s; }
+.dashboard-area-card:nth-child(4) { animation-delay: 0.6s; }
+.dashboard-area-card:nth-child(5) { animation-delay: 0.7s; }
+.dashboard-area-card:nth-child(6) { animation-delay: 0.8s; }
+
+/* Progress bar animation */
+.dashboard-progress-fill {
+  width: 0 !important;
+  animation: dashboardProgressGrow 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+.dashboard-area-card:nth-child(1) .dashboard-progress-fill { animation-delay: 0.5s; }
+.dashboard-area-card:nth-child(2) .dashboard-progress-fill { animation-delay: 0.6s; }
+.dashboard-area-card:nth-child(3) .dashboard-progress-fill { animation-delay: 0.7s; }
+.dashboard-area-card:nth-child(4) .dashboard-progress-fill { animation-delay: 0.8s; }
+.dashboard-area-card:nth-child(5) .dashboard-progress-fill { animation-delay: 0.9s; }
+.dashboard-area-card:nth-child(6) .dashboard-progress-fill { animation-delay: 1.0s; }
+
+/* Store the target width in a CSS variable and animate to it */
+@keyframes dashboardProgressGrow {
+  to {
+    width: var(--progress-width) !important;
+  }
+}
+
+/* ----------------------------------------
+   REDUCED MOTION
+   ---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-stat-card,
+  .dashboard-area-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .dashboard-progress-fill {
+    animation: none;
+    width: var(--progress-width) !important;
+  }
+  
+  .dashboard-stat-card:hover {
+    transform: none;
+  }
+}
