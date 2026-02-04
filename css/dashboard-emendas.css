@@ -520,6 +520,140 @@
   .dashboard-stat-card-value {
     font-size: 1.75rem;
   }
+  
+  /* ----------------------------------------
+     DESKTOP SPLIT LAYOUT - Map Fixed Left, Dashboard Scrolls
+     ---------------------------------------- */
+  
+  .dashboard-layout-desktop {
+    display: grid;
+    grid-template-columns: 55% 45%; /* Map larger: 55% / Dashboard: 45% */
+    gap: 0;
+    align-items: start; /* Critical for sticky to work */
+  }
+  
+  /* Map Section - Sticky: stays fixed until dashboard content ends */
+  .dashboard-layout-desktop .dashboard-map-section {
+    position: sticky;
+    top: 160px; /* Header height */
+    /* Use max-height instead of height to allow natural sizing and proper unstick behavior */
+    max-height: calc(100vh - 160px);
+    align-self: start; /* Critical for sticky to work in CSS Grid */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    /* Divider between columns */
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 4px 0 20px -5px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Override inner container constraints for desktop layout */
+  .dashboard-layout-desktop .dashboard-map-section > .relative {
+    max-width: 100% !important;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 0; /* Allow flex item to shrink */
+  }
+  
+  /* Map wrapper - centered, respects available space */
+  .dashboard-layout-desktop .dashboard-map-wrapper {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 0;
+  }
+  
+  /* Map container - fit within available space, prioritize showing full map */
+  .dashboard-layout-desktop .dashboard-map-container {
+    width: 100%;
+    height: auto;
+    max-width: calc(100% - 1rem);
+    max-height: calc(100vh - 260px); /* Leave room for header, title, legend - less aggressive */
+    aspect-ratio: 854 / 661;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+  
+  /* Ensure the SVG inside scales properly */
+  .dashboard-layout-desktop .dashboard-map-container svg,
+  .dashboard-layout-desktop .dashboard-map-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  /* Stats Section - Normal flow */
+  .dashboard-layout-desktop .dashboard-stats-section > .relative {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  /* Adjust map header for desktop split layout */
+  .dashboard-layout-desktop .dashboard-map-section .text-center {
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+  }
+  
+  .dashboard-layout-desktop .dashboard-map-section h2 {
+    font-size: 0.875rem;
+    margin-bottom: 0.125rem;
+  }
+  
+  .dashboard-layout-desktop .dashboard-map-section p {
+    font-size: 0.6875rem;
+  }
+  
+  /* Legend adjustments */
+  .dashboard-layout-desktop .dashboard-map-legend {
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+  }
+  
+  .dashboard-layout-desktop .dashboard-map-legend span {
+    font-size: 0.6875rem;
+  }
+  
+  /* Stats cards - optimized for smaller column */
+  .dashboard-layout-desktop .dashboard-stat-card {
+    padding: 1rem 1.25rem;
+  }
+  
+  .dashboard-layout-desktop .dashboard-stat-card-value {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-layout-desktop .dashboard-stat-card-label {
+    font-size: 0.75rem;
+    line-height: 1.3;
+  }
+  
+  /* Stats grid - 2 columns to fit smaller space */
+  .dashboard-layout-desktop #stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  /* Area cards - adjusted spacing */
+  .dashboard-layout-desktop #areas-grid {
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+  
+  .dashboard-layout-desktop .dashboard-area-card {
+    padding: 1rem;
+  }
 }
 
 /* ----------------------------------------
@@ -528,6 +662,54 @@
 @media (min-width: 1280px) {
   .dashboard-stat-card-value {
     font-size: 2rem;
+  }
+  
+  /* Adjust grid proportions for larger screens - map even larger */
+  .dashboard-layout-desktop {
+    grid-template-columns: 58% 42%;
+  }
+  
+  /* More space for map on larger screens */
+  .dashboard-layout-desktop .dashboard-map-container {
+    max-height: calc(100vh - 250px);
+  }
+  
+  .dashboard-layout-desktop .dashboard-stats-section > .relative {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  /* Stat cards can be slightly larger */
+  .dashboard-layout-desktop .dashboard-stat-card-value {
+    font-size: 1.625rem;
+  }
+  
+  /* Area cards - 2 columns on larger screens */
+  .dashboard-layout-desktop #areas-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* ----------------------------------------
+   EXTRA LARGE DESKTOP (min-width: 1536px)
+   ---------------------------------------- */
+@media (min-width: 1536px) {
+  .dashboard-layout-desktop {
+    grid-template-columns: 60% 40%;
+  }
+  
+  .dashboard-layout-desktop .dashboard-stats-section > .relative {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  
+  .dashboard-layout-desktop .dashboard-stat-card-value {
+    font-size: 1.75rem;
+  }
+  
+  .dashboard-layout-desktop .dashboard-map-container {
+    max-height: calc(100vh - 240px);
   }
 }
 
